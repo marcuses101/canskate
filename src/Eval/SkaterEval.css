@@ -1,0 +1,54 @@
+header {
+  display: flex;
+  align-items: stretch;
+  border:2px solid black;
+}
+header * {
+  flex:1;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+header h2 {
+  flex:2;
+  margin:0;
+}
+
+.filterOptions ul {
+  margin: 0;
+  display: flex;
+  list-style: none;
+  padding-inline-start: 0;
+}
+.filterOptions ul li {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid red;
+  text-align: center;
+}
+.active {
+  background-color: lightcoral;
+}
+.balance{
+  background-color: green;
+}
+.control{
+  background-color: red;
+}
+.agility{
+  background-color:blue;
+}
+
+.ElementButton {
+  display: flex;
+  border: 2px solid black;
+  margin: 2px;
+  padding: 10px;
+  justify-content: space-between;
+}
+.ElementList ul {
+  padding-inline-start: 0;
+}
+.ElementButton > div {
+  flex-grow: 1;
+}

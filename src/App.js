@@ -1,42 +1,49 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
-import Form from "./Form";
-import StudentList from "./StudentList";
+import React, { useReducer } from "react";
+import SkaterEval from "./Eval/SkaterEval";
 import Context from "./Context";
-const URL = "http://localhost:9090/students";
-const elementsURL =
-  "https://spreadsheets.google.com/feeds/cells/11GWEopfEDcKGqxiGMAOQuAwupvUYXYhhGVrGQIfD8sM/1/public/basic?alt=json";
+import { SKATER_ACTIONS, skatersReducer } from "./services/SkaterReducer";
+import {
+  skaters as skatersStore,
+  skaterGroupEntries,
+  groups as groupStore,
+} from "./store/skaterStore.json";
+import { elements, checkmarks, ribbons } from "./store/elementStore.json";
+import "./App.css";
 
-function App() {
-  const [students, setStudents] = useState([]);
-  const [elements, setElements] = useState([]);
-
-  async function getData(url, setFunc) {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Fetch failed");
-    const data = await response.json();
-    const entries = data.feed.entry;
-    const elements = [];
-    for (let i = 5; i < entries.length; i += 5) {
-      elements.push({
-        badge: entries[i].content.$t,
-        category: entries[i + 1].content.$t,
-        elementNumber:
-          entries[i + 2].content.$t + "-" + entries[i + 3].content.$t,
-        description: entries[i + 4].content.$t,
-      });
-    }
-    setFunc(elements);
-  }
-  useEffect(() => {
-    getData(elementsURL, setElements).catch((e) => console.log(e));
+function createSkater(skater) {
+  const groups = skaterGroupEntries.reduce((acc, cur) => {
+    if (cur.skater_id === skater.id)
+      return [...acc, groupStore.find((group) => group.id === cur.group_id)];
+    return [...acc];
   }, []);
+  return {
+    ...skater,
+    elementLog: [],
+    checkmarkLog: [],
+    ribbonLog: [],
+    badgeLog: [],
+    sessions: [],
+    groups: groups,
+  };
+}
 
+export default function App() {
+  const [skaters, skatersDispatch] = useReducer(
+    skatersReducer,
+    skatersStore.map(createSkater)
+  );
+  const contextObj = {
+    elements,
+    checkmarks,
+    ribbons,
+    SKATER_ACTIONS: SKATER_ACTIONS,
+    skatersDispatch,
+  };
   return (
-    <div className="App">
-      <Form />
-      <StudentList students={students} />
-    </div>
+    <Context.Provider value={contextObj}>
+      <div className="App">
+        <SkaterEval skater={skaters[0]} />
+      </div>
+    </Context.Provider>
   );
 }
-export default App;

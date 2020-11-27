@@ -1,8 +1,11 @@
 import React from 'react'
 
 const Context = React.createContext({
-  name: "marcus",
-  age: "32"
+  elements:[],
+  badges:[],
+  ribbons:[],
+  SKATER_ACTIONS:{},
+  skatersDispatch(){}
 })
 
 export default Context;

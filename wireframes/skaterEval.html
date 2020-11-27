@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html {
+        box-sizing: border-box;
+      }
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      nav {
+        border: 2px solid black;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      nav * {
+        padding-left: 15px;
+        padding-right: 15px;
+        height: 100%;
+      }
+      main {
+        margin-top: 20px;
+      }
+      .filterOptions ul {
+        margin: 0;
+        display: flex;
+        list-style: none;
+        padding-inline-start: 0;
+      }
+      .filterOptions ul li {
+        flex: 1;
+        padding: 0.5rem;
+        border: 1px solid red;
+        text-align: center;
+      }
+      main ul {
+        list-style: none;
+        padding-inline-start: 0;
+        width: 90%;
+        margin: auto;
+      }
+      main ul li {
+        width: 100%;
+        text-align: center;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        border: 2px solid blue;
+        margin-top: 1px;
+      }
+      h3 {
+        text-align: center;
+      }
+
+    </style>
+
+    <script
+      src="https://kit.fontawesome.com/5b5a5f1400.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <nav>
+      <div>☰</div>
+      <h2>James Connolly</h2>
+      <i class="fas fa-chevron-down"></i>
+    </nav>
+    <div class="filterOptions">
+      <ul class="badgeOption">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+      </ul>
+      <ul>
+        <li>Balance</li>
+        <li>Control</li>
+        <li>Agility</li>
+      </ul>
+    </div>
+    <main>
+      <section>
+        <h3>Balance</h3>
+        <ul>
+          <li>Element 1</li>
+          <li>Element 2</li>
+          <li>Element 3</li>
+          <li>Element 4</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

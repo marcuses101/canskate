@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import StudentListItem from './StudentListItem';
+import SessionForm from './SessionForm';
 
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<StudentListItem />, div);
+    ReactDOM.render(<SessionForm />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
   
