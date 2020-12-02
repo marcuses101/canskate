@@ -5,7 +5,9 @@ const Context = React.createContext({
   badges:[],
   ribbons:[],
   SKATER_ACTIONS:{},
-  skatersDispatch(){}
+  skatersDispatch(){},
+  setIsFilterOpen(){},
+  isFilterOpen: false
 })
 
 export default Context;

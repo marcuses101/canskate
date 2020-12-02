@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import useSkaterFromParamId from '../Hooks/useSkaterFromParamId'
-import ElementList from "./ElementList";
+import ElementEvalList from "../ElementEvalList";
 import ElementFilter from "./ElementFilter";
 import Context from "../Context";
 import "./SkaterEval.css";
@@ -21,18 +20,17 @@ const badgeOptions = {
 };
 
 export default function SkaterEval() {
-  const { elements, isFilterOpen,setIsFilterOpen} = useContext(Context);
-  const { elementLog: completedElements } = useSkaterFromParamId();
+  const { elements, skaters, isFilterOpen, setIsFilterOpen } = useContext(Context);
   const [fundamentalFilter, setFundamentalFilter] = useState(
     fundamentalOptions
   );
   const [badgeFilter, setBadgeFilter] = useState(badgeOptions);
 
-  useEffect(()=>{
-    return ()=>{
-      setIsFilterOpen(false)
-    }
-  },[setIsFilterOpen])
+  useEffect(() => {
+    return () => {
+      setIsFilterOpen(false);
+    };
+  }, [setIsFilterOpen]);
 
   function toggleBadgeFilter(badge) {
     setBadgeFilter((badgesObj) => ({
@@ -48,12 +46,13 @@ export default function SkaterEval() {
     }));
   }
 
-  const filteredElements = elements.filter(
-    (element) =>
-      badgeFilter[element.badge] &&
-      fundamentalFilter[element.fundamental] &&
-      !completedElements.map((el) => el.element_id).includes(element.element_id)
-  );
+  const fundamentalsToDisplay = Object.entries(fundamentalFilter)
+    .map(([key, value]) => (value ? key : null))
+    .filter(Boolean);
+    
+  const badgesToDisplay = Object.entries(badgeFilter)
+    .map(([key, value]) => (value ? parseInt(key) : null))
+    .filter(Boolean);
 
   return (
     <div className="SkaterEval">
@@ -65,7 +64,12 @@ export default function SkaterEval() {
           fundamentalFilterState={fundamentalFilter}
         />
       )}
-      <ElementList elements={filteredElements}/>
+      <ElementEvalList
+        fundamentals={fundamentalsToDisplay}
+        badges={badgesToDisplay}
+        skaters={skaters}
+        elements={elements}
+      />
     </div>
   );
 }

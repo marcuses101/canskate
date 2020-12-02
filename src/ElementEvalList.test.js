@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CategoryList from '../CategoryList';
+import ElementEvalList from './ElementEvalList';
 
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<CategoryList />, div);
+    ReactDOM.render(<ElementEvalList />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
+  

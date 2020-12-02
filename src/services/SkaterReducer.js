@@ -25,7 +25,6 @@ function skatersReducer(state, action) {
           elementLog: [...skater.elementLog, { element_id, date: new Date() }],
         };
       });
-      console.log(newState);
       return newState;
     }
     default:

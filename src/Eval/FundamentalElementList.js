@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import ElementButton from './ElementButton'
-export default function FundamentalElementList({ fundamental, elements, logElement }) {
+export default function FundamentalElementList({ fundamental, elements }) {
   const badgeItems = [...new Set(elements.map((el) => el.badge))];
   const badgeLists = badgeItems.map((badge) => {
     return (
@@ -14,7 +14,6 @@ export default function FundamentalElementList({ fundamental, elements, logEleme
               key={el.element_id}
               name={el.element}
               element_id={el.element_id}
-              logElement={logElement}
               />
             ))}
         </ul>

@@ -1,7 +1,7 @@
 import React from "react";
 import FundamentalElementList from "./FundamentalElementList";
 
-export default function ElementList({ elements, logElement }) {
+export default function ElementList({ elements }) {
   const fundamentals = [
     ...new Set(elements.map((element) => element.fundamental)),
   ];
@@ -12,7 +12,6 @@ export default function ElementList({ elements, logElement }) {
     return (
       <FundamentalElementList
         key={fundName}
-        logElement={logElement}
         fundamental={fundName}
         elements={filteredElements}
       />

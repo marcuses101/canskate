@@ -1,7 +1,14 @@
-import React, { useReducer } from "react";
+import React, { useState ,useReducer } from "react";
+import {Route, Switch} from "react-router-dom"
 import SkaterEval from "./Eval/SkaterEval";
+import SkaterList from './SkaterList';
+import Welcome from './Welcome'
+import Progress from './Progress'
+import Manage from "./Manage";
+import Eval from './Eval';
+import SideNav from './SideNav'
 import Context from "./Context";
-import { SKATER_ACTIONS, skatersReducer } from "./services/SkaterReducer";
+import { skatersReducer } from "./services/SkaterReducer";
 import {
   skaters as skatersStore,
   skaterGroupEntries,
@@ -9,6 +16,8 @@ import {
 } from "./store/skaterStore.json";
 import { elements, checkmarks, ribbons } from "./store/elementStore.json";
 import "./App.css";
+import ElementEval from "./Eval/ElementEval";
+import Header from "./Header";
 
 function createSkater(skater) {
   const groups = skaterGroupEntries.reduce((acc, cur) => {
@@ -28,21 +37,35 @@ function createSkater(skater) {
 }
 
 export default function App() {
+  const [navOpen, setNavOpen] = useState(false)
   const [skaters, skatersDispatch] = useReducer(
     skatersReducer,
     skatersStore.map(createSkater)
   );
+  const [isFilterOpen, setIsFilterOpen] = useState(false)
   const contextObj = {
     elements,
     checkmarks,
     ribbons,
-    SKATER_ACTIONS: SKATER_ACTIONS,
+    skaters,
     skatersDispatch,
+    isFilterOpen,
+    setIsFilterOpen
   };
   return (
     <Context.Provider value={contextObj}>
       <div className="App">
-        <SkaterEval skater={skaters[0]} />
+      <Header/>
+      <SideNav className={navOpen?'open':'closed'}/>
+      <Switch>
+        <Route path='/progress' component={Progress}/>
+        <Route path='/manage' component={Manage}/>
+        <Route path="/eval/skater/:id" component={SkaterEval}/>
+        <Route path="/eval/skater" component={SkaterList}/>
+        <Route path='/eval/element' component={ElementEval}/>
+        <Route path='/eval' component={Eval} />
+        <Route path="/" component={Welcome}/>
+      </Switch>
       </div>
     </Context.Provider>
   );
