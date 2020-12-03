@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import ElementEvalList from "../ElementEvalList";
 import ElementFilter from "./ElementFilter";
 import Context from "../Context";
-import "./SkaterEval.css";
+import "./ElementEval.css";
 
 const fundamentalOptions = {
   Balance: true,
@@ -49,13 +49,13 @@ export default function SkaterEval() {
   const fundamentalsToDisplay = Object.entries(fundamentalFilter)
     .map(([key, value]) => (value ? key : null))
     .filter(Boolean);
-    
+
   const badgesToDisplay = Object.entries(badgeFilter)
     .map(([key, value]) => (value ? parseInt(key) : null))
     .filter(Boolean);
 
   return (
-    <div className="SkaterEval">
+    <div>
       {isFilterOpen && (
         <ElementFilter
           toggleBadgeFilter={toggleBadgeFilter}

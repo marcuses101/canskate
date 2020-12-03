@@ -21,7 +21,7 @@ const badgeOptions = {
 };
 
 export default function SkaterEval() {
-  const { elements, isFilterOpen,setIsFilterOpen} = useContext(Context);
+  const { elements, isFilterOpen, setIsFilterOpen} = useContext(Context);
   const { elementLog: completedElements } = useSkaterFromParamId();
   const [fundamentalFilter, setFundamentalFilter] = useState(
     fundamentalOptions

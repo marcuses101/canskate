@@ -17,7 +17,7 @@ export default function ElementEvalList({ fundamentals, elements, ...rest }) {
     );
   });
   return (
-    <div className="ElementEvalList">
+    <div className="ElementEval">
       <ul>{fundamentalItems}</ul>
     </div>
   );

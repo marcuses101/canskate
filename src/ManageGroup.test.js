@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ElementEvalHeader from './ElementEvalHeader';
+import ManageGroup from './ManageGroup';
 
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<ElementEvalHeader />, div);
+    ReactDOM.render(<ManageGroup />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
   

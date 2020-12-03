@@ -1,5 +1,3 @@
-import {v4 as uuid} from 'uuid';
-
 const SKATER_ACTIONS = {
   ADD_SKATER: "add_skater",
   DELETE_SKATER: "delete_skater",
@@ -9,7 +7,14 @@ const SKATER_ACTIONS = {
 function skatersReducer(state, action) {
   switch (action.type) {
     case SKATER_ACTIONS.ADD_SKATER: {
-      return [{ ...action.payload, id: uuid() }, ...state];
+      return [{ ...action.payload,
+        elementLog: [],
+        checkmarkLog: [],
+        ribbonLog: [],
+        badgeLog: [],
+        sessions: [],
+        groups: []
+       }, ...state];
     }
     case SKATER_ACTIONS.DELETE_SKATER: {
       const { id } = action.payload;

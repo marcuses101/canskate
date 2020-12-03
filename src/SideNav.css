@@ -1,0 +1,31 @@
+.SideNav {
+  position: fixed;
+  top:0;
+  left: 0;
+  z-index: 3;
+  height: 100vh;
+  min-width: 25vw;
+  max-width: 33vw;
+  border: 2px solid black;
+  transition: 200ms ease;
+  background: white;
+}
+
+.SideNav.closed {
+  left: -33vw;
+}
+
+.SideNav ul {
+  padding-inline-start: 0;
+  list-style: none;
+}
+
+.SideNav ul li {
+  padding: .5rem;
+}
+
+/* @media screen and (max-width: 500px) {
+.SideNav{
+  width: 33vw;
+}
+} */

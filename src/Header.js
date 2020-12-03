@@ -1,19 +1,26 @@
 import React from "react"
 import {Switch, Route} from "react-router-dom"
-import useSkaterFromParamId from "./Hooks/useSkaterFromParamId";
 import HeaderContent from './Headers/HeaderContent'
-import SkaterListHeader from './Headers/SkaterListHeader'
-import ElementEvalHeader from './Headers/ElementEvalHeader'
 import SkaterEvalHeader from "./Headers/SkaterEvalHeader"
+import './Header.css'
 
- export default function Header(){
-   
+ export default function Header({openNav}){
+
    return (
      <div className="Header">
      <Switch>
-      <Route path="/eval/skater/:id" component={SkaterEvalHeader}/>
-      <Route path="/eval/skater" component={SkaterListHeader}/>
-      <Route path='/eval/element' component={ElementEvalHeader} />
+      <Route path="/eval/skater/:id">
+        <SkaterEvalHeader openNav={openNav}/>
+      </Route>
+      <Route path="/eval/skater" >
+        <HeaderContent title="Skater List" openNav={openNav}/>
+      </Route>
+      <Route path='/eval/element'>
+        <HeaderContent title="Element Evaluation" openNav={openNav}/>
+      </Route>
+      <Route path='/'>
+        <HeaderContent title="Canskate Management" openNav={openNav}/>
+      </Route>
      </Switch>
      </div>
    )

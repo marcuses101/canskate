@@ -1,22 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import {useHistory} from 'react-router-dom'
 import { SKATER_ACTIONS } from "../services/SkaterReducer";
+import Context from '../Context'
 
-export default function SkaterForm({dispatch}) {
+export default function SkaterForm() {
+  const {skatersDispatch, nextSkaterId} = useContext(Context)
   const [fullName, setFullName] = useState("");
   const [birthdate, setBirthdate] = useState("");
   const [gender, setGender] = useState(null);
+  const history = useHistory();
   function handleSubmit(e){
     e.preventDefault();
-    console.log('submitting')
     const skater = {
+      id: nextSkaterId,
       fullname: fullName,
       gender: gender,
       birthdate:birthdate,
     }
-    dispatch({type: SKATER_ACTIONS.ADD_SKATER, payload:skater});
+    skatersDispatch({type: SKATER_ACTIONS.ADD_SKATER, payload:skater});
     setFullName('')
     setBirthdate('');
     setGender(null);
+    history.push(`/eval/skater/${nextSkaterId}`)
   }
 
   return (

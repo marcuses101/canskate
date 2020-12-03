@@ -8,9 +8,7 @@ export default function ElementEvalBadgeList({ badge, elements, skaters }) {
       return !elementLog.includes(element.element_id);
     })
    return (
-    <li key={`${element.id}${i}`}>
-      <ElementEvalElementsDropdown element={element} skaters={skatersNotCompleted}/>
-    </li>
+      <ElementEvalElementsDropdown key={`${element.id}${i}`} element={element} skaters={skatersNotCompleted}/>
   )});
   return (
     <>

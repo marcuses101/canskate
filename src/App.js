@@ -1,12 +1,7 @@
 import React, { useState ,useReducer } from "react";
-import {Route, Switch} from "react-router-dom"
-import SkaterEval from "./Eval/SkaterEval";
-import SkaterList from './SkaterList';
-import Welcome from './Welcome'
-import Progress from './Progress'
-import Manage from "./Manage";
-import Eval from './Eval';
 import SideNav from './SideNav'
+import Header from "./Header";
+import Main from './Main'
 import Context from "./Context";
 import { skatersReducer } from "./services/SkaterReducer";
 import {
@@ -16,8 +11,6 @@ import {
 } from "./store/skaterStore.json";
 import { elements, checkmarks, ribbons } from "./store/elementStore.json";
 import "./App.css";
-import ElementEval from "./Eval/ElementEval";
-import Header from "./Header";
 
 function createSkater(skater) {
   const groups = skaterGroupEntries.reduce((acc, cur) => {
@@ -37,12 +30,15 @@ function createSkater(skater) {
 }
 
 export default function App() {
-  const [navOpen, setNavOpen] = useState(false)
+  const [isNavOpen, setIsNavOpen] = useState(false)
+  const [isFilterOpen, setIsFilterOpen] = useState(false)
+  function closeNav(){setIsNavOpen(false)};
+  function openNav(){setIsNavOpen(true)};
   const [skaters, skatersDispatch] = useReducer(
     skatersReducer,
     skatersStore.map(createSkater)
   );
-  const [isFilterOpen, setIsFilterOpen] = useState(false)
+  const nextSkaterId = skaters.reduce((max,skater)=>{return (skater.id > max?skater.id:max)},0)+1
   const contextObj = {
     elements,
     checkmarks,
@@ -50,22 +46,15 @@ export default function App() {
     skaters,
     skatersDispatch,
     isFilterOpen,
-    setIsFilterOpen
+    setIsFilterOpen,
+    nextSkaterId
   };
   return (
     <Context.Provider value={contextObj}>
       <div className="App">
-      <Header/>
-      <SideNav className={navOpen?'open':'closed'}/>
-      <Switch>
-        <Route path='/progress' component={Progress}/>
-        <Route path='/manage' component={Manage}/>
-        <Route path="/eval/skater/:id" component={SkaterEval}/>
-        <Route path="/eval/skater" component={SkaterList}/>
-        <Route path='/eval/element' component={ElementEval}/>
-        <Route path='/eval' component={Eval} />
-        <Route path="/" component={Welcome}/>
-      </Switch>
+      <SideNav open={isNavOpen} closeNav={closeNav}/>
+      <Header openNav={openNav}/>
+      <Main/>
       </div>
     </Context.Provider>
   );

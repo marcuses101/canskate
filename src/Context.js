@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Context = React.createContext({
+  nextSkaterId:0,
   elements:[],
   badges:[],
   ribbons:[],
