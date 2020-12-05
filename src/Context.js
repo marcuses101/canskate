@@ -2,6 +2,7 @@ import React from 'react'
 
 const Context = React.createContext({
   nextSkaterId:0,
+  club: {},
   elements:[],
   badges:[],
   ribbons:[],

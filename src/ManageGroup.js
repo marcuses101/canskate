@@ -1,13 +1,12 @@
 import React from "react";
 import { Switch, Route, useRouteMatch, Link } from "react-router-dom";
-import AddGroupForm from "./forms/AddGroupForm";
 
 export default function ManageGroup() {
   const { path } = useRouteMatch();
 
   return (
     <Switch>
-      <Route path={`${path}/add`} component={AddGroupForm} />
+      <Route path={`${path}/add`}/>
       <Route path={`${path}/edit`} />
       <Route>
         <div className="ManageGroup">

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Context from "../Context";
 
-export default function HeaderContent({ title, openNav }) {
+export default function HeaderContent({ title, openNav ,showFilter}) {
   const { isFilterOpen, setIsFilterOpen } = useContext(Context);
   return (
     <header className="SkaterEvalHeader">
@@ -9,14 +9,14 @@ export default function HeaderContent({ title, openNav }) {
         ☰
       </div>
       <h2>{title}</h2>
-      <div className="filter" onClick={() => setIsFilterOpen((bool) => !bool)}>
+     {showFilter && <div className="filter" onClick={() => setIsFilterOpen((bool) => !bool)}>
         <h4>Filter</h4>
         {isFilterOpen ? (
           <i className="fas fa-chevron-up"></i>
         ) : (
           <i className="fas fa-chevron-down"></i>
         )}
-      </div>
+      </div>}
     </header>
   );
 }

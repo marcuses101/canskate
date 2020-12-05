@@ -19,12 +19,14 @@ const badgeOptions = {
   6: true,
 };
 
-export default function SkaterEval() {
-  const { elements, skaters, isFilterOpen, setIsFilterOpen } = useContext(Context);
+export default function ElementEval(props) {
+  const { elements, skaters: allSkaters, isFilterOpen, setIsFilterOpen } = useContext(Context);
   const [fundamentalFilter, setFundamentalFilter] = useState(
     fundamentalOptions
   );
   const [badgeFilter, setBadgeFilter] = useState(badgeOptions);
+
+  const skaters = props.skaters || allSkaters;
 
   useEffect(() => {
     return () => {

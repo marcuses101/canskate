@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
-import AddSessionForm from "./forms/AddGroupForm";
+import AddSessionForm from './forms/AddSessionForm'
 
 export default function ManageSession() {
   const { path } = useRouteMatch();
