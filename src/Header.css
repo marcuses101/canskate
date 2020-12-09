@@ -19,6 +19,7 @@ header {
   background-color: white;
 }
 
+
 .Header + * {
   margin-top: var(--header-height);
 }

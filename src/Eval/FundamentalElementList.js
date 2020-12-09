@@ -12,8 +12,7 @@ export default function FundamentalElementList({ fundamental, elements }) {
             .map((el) => (
               <ElementButton
               key={el.element_id}
-              name={el.element}
-              element_id={el.element_id}
+              element={el}
               />
             ))}
         </ul>

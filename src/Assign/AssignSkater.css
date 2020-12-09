@@ -1,0 +1,6 @@
+.otherGroups {
+  display:flex;
+}
+.otherGroups li{
+  flex:1;
+}

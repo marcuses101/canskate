@@ -1,7 +1,6 @@
 import React from "react";
 import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 import ManageSkater from "./ManageSkater";
-import ManageGroup from './ManageGroup';
 import ManageSession from './ManageSession';
 
 export default function Manage() {
@@ -10,9 +9,6 @@ export default function Manage() {
     <Switch>
       <Route path={`${path}/skater`} >
         <ManageSkater />
-      </Route>
-      <Route path={`${path}/group`} >
-         <ManageGroup />
       </Route>
       <Route path={`${path}/session`} >
          <ManageSession />
@@ -23,9 +19,6 @@ export default function Manage() {
           <ul>
             <li>
               <Link to={`${path}/skater`}>Manage Skaters</Link>
-            </li>
-            <li>
-              <Link to={`${path}/group`}>Manage Groups</Link>
             </li>
             <li>
               <Link to={`${path}/session`}>Manage Sessions</Link>

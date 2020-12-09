@@ -1,0 +1,28 @@
+.AssignGroup {
+  min-height: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.AssignGroup:hover{
+  cursor:pointer
+}
+
+.groupName {
+  padding: 1rem;
+}
+
+.AssignGroup ul {
+  width: 80%;
+  background-color: rgba(0,0,0,0.1);
+  margin:auto;
+}
+
+
+
+.AssignGroup li:hover {
+  cursor: pointer;
+  background-color: rgba(0,0,0,0.1);
+}

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import {useHistory} from 'react-router-dom'
-import { SKATER_ACTIONS } from "../services/SkaterReducer";
+import { SKATER_ACTIONS } from "../services/skaterReducer";
 import Context from '../Context'
 
 export default function SkaterForm() {

@@ -1,22 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useParams, Link, useRouteMatch } from "react-router-dom";
-import Context from "../Context";
+import {useSessionGroups} from '../Hooks/useSessionGroups'
 
-export default function GroupEvalList() {
+export default function GroupList() {
   const { url } = useRouteMatch();
-  const { id } = useParams();
-  const sessionId = parseInt(id);
-  const {
-    club: { sessions },
-  } = useContext(Context);
-  console.log(sessions);
-  const { groups } = sessions.find((session) => session.id === sessionId);
-  console.log(groups);
+  const {session_id} = useParams();
+  const  groups  = useSessionGroups(session_id)
+  console.log(groups)
   if (!groups.length)
     return (
       <div className="GroupEvalList">
         <h4>No associated group</h4>
-        <Link to={`/manage/session/edit/${id}`}>Add a group?</Link>
+        <Link to={`/manage/session/edit/${session_id}`}>Add a group?</Link>
       </div>
     );
   return (

@@ -3,8 +3,8 @@ import { Link, Route, Switch, useRouteMatch } from "react-router-dom";
 import SkaterEval from "./Eval/SkaterEval";
 import SkaterList from "./Eval/SkaterList";
 import ElementEval from "./Eval/ElementEval";
-import SessionEvalList from './Eval/SessionEvalList'
-import GroupEvalList from './Eval/GroupEvalList'
+import SessionList from './Eval/SessionList'
+import GroupList from './Eval/GroupList'
 import GroupEval from './Eval/GroupEval'
 
 export default function Eval() {
@@ -16,8 +16,8 @@ export default function Eval() {
         <Route path={`${path}/skater`} component={SkaterList} />
         <Route path={`${path}/element`} component={ElementEval} />
         <Route path={`${path}/session/:session_id/group/:group_id`} component={GroupEval}/>
-        <Route path={`${path}/session/:id`} component={GroupEvalList}/>
-        <Route path={`${path}/session`} component={SessionEvalList} />
+        <Route path={`${path}/session/:session_id`} component={GroupList}/>
+        <Route path={`${path}/session`} component={SessionList} />
         <Route>
           <h1>Evals</h1>
           <ul>
