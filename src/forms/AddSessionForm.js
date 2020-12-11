@@ -30,7 +30,6 @@ export default function SessionForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("Add session");
     const session_id =
       Object.values(club.sessions).reduce(
         (id, session) => (id < session.id ? session.id : id),
@@ -57,12 +56,11 @@ export default function SessionForm() {
       skaters: [],
     };
     clubDispatch({ type: CLUB_ACTIONS.ADD_SESSION, payload: session });
-    
+
   }
 
   function handleSelect(e) {
     const changeColor = e.target.value;
-    console.log(changeColor);
     setGroupColors((currentArray) => {
       return [changeColor, ...currentArray];
     });

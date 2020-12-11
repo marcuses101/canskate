@@ -1,0 +1,33 @@
+.ReportCheckmarkComponent{
+  display:grid;
+  grid-template-columns: 1fr 4fr;
+  width: 85%;
+  border: 2px solid black;
+  margin:0 auto 0 auto;
+  padding:0;
+}
+.ReportCheckmarkComponent .check{
+  font-size: 2rem;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ReportCheckmarkComponent.complete{
+  background-color: rgb(85, 165, 85);
+}
+.ReportCheckmarkComponent span{
+  margin: 0;
+}
+
+.ReportCheckmarkComponent >div:first-child{
+  border-right: 2px solid black;
+}
+
+.ReportCheckmarkComponent div:last-child > div{
+  border-top: 2px dashed black;
+}
+
+.ReportCheckmarkComponent div:last-child > div:first-child{
+  border-top: none;
+}

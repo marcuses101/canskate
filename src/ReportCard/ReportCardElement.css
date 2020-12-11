@@ -1,0 +1,15 @@
+.ReportCardElement {
+  display: grid;
+  min-height: 50px;
+  grid-template-columns: 2fr 1fr;
+}
+
+.ReportCardElement.complete {
+  background-color: rgb(85, 165, 85);
+}
+
+.ReportCardElement span{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}

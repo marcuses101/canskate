@@ -1,24 +1,11 @@
-import React, { useState, useContext } from "react";
-import { SKATER_ACTIONS } from "../services/skaterReducer";
-import Context from "../Context";
+import React, { useState} from "react";
+import SkaterEvalButton from "./SkaterEvalButton";
 import "./ElementDropdown.css";
 
 export default function ElementEvalElementDropdown({ element, skaters }) {
   const [open, setOpen] = useState(false);
-  const { skatersDispatch } = useContext(Context);
   const skaterItems = skaters.map((skater) => (
-    <li
-      onClick={(e) => {
-        e.stopPropagation();
-        skatersDispatch({
-          type: SKATER_ACTIONS.COMPLETE_ELEMENT,
-          payload: { skater_id: skater.id, element_id: element.element_id },
-        });
-      }}
-      key={`${element.id}${skater.id}`}
-    >
-      {skater.fullname}
-    </li>
+    <SkaterEvalButton key={`${skater.id}${element.element_id}`} skater={skater} element={element} />
   ));
   return (
     <li className="ElementDropdown" onClick={() => setOpen((bool) => !bool)}>

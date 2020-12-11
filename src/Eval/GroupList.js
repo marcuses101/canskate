@@ -1,12 +1,11 @@
 import React from "react";
 import { useParams, Link, useRouteMatch } from "react-router-dom";
-import {useSessionGroups} from '../Hooks/useSessionGroups'
+import { useSessionGroups } from "../Hooks/useSessionGroups";
 
 export default function GroupList() {
   const { url } = useRouteMatch();
-  const {session_id} = useParams();
-  const  groups  = useSessionGroups(session_id)
-  console.log(groups)
+  const { session_id } = useParams();
+  const groups = useSessionGroups(session_id);
   if (!groups.length)
     return (
       <div className="GroupEvalList">

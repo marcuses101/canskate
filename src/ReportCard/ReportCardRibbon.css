@@ -1,0 +1,30 @@
+.ReportCardRibbon {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: 1rem;
+  font-size: 1.25rem;
+  border-radius: 4px;
+  width: 90%;
+  margin: auto;
+  border: 2px solid black;
+}
+.ReportCardRibbon span {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.ReportCardRibbon .small{
+  font-size: .75rem;
+}
+
+.ReportCardRibbon.b.complete {
+  background-color: green;
+}
+
+.ReportCardRibbon.c.complete {
+  background-color: rgb(216, 69, 11);
+}
+.ReportCardRibbon.a.complete {
+  background-color: blue;
+}
+

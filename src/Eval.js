@@ -12,7 +12,7 @@ export default function Eval() {
   return (
     <div className="Eval">
       <Switch>
-        <Route path={`${path}/skater/:id`} component={SkaterEval} />
+        <Route path={`${path}/skater/:skater_id`} component={SkaterEval} />
         <Route path={`${path}/skater`} component={SkaterList} />
         <Route path={`${path}/element`} component={ElementEval} />
         <Route path={`${path}/session/:session_id/group/:group_id`} component={GroupEval}/>

@@ -1,0 +1,33 @@
+.ReportCardBadge{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding: 1rem;
+  font-size: 1.5rem;
+  border-radius: 4px;
+  width: 95%;
+  margin: auto;
+  border: 2px solid black;
+}
+.ReportCardBadge.one.complete {
+  background-color: #55abc9
+}
+
+.ReportCardBadge.two.complete{
+  background-color: #ec3030
+}
+
+.ReportCardBadge.three.complete{
+  background-color: #73518d
+}
+
+.ReportCardBadge.four.complete {
+  background-color: #f7e355
+}
+
+.ReportCardBadge.five.complete {
+  background-color: #006ab5
+}
+
+.ReportCardBadge.six.complete {
+  background-color: #3a4b00
+}

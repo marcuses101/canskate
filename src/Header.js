@@ -6,16 +6,22 @@ import './Header.css'
 
  export default function Header({openNav}){
    const header = useRef();
-   // set offset for main content based on header height
-   useEffect(()=>{
-    const offset = header.current?.getBoundingClientRect().height + 16;
+
+   const resize = new ResizeObserver(([entry])=>{
+    const offset = entry.borderBoxSize[0].blockSize + 16
     document.documentElement.style.setProperty('--header-height',`${offset}px`)
+    });
+    
+   useEffect(()=>{
+     const target = header.current
+     resize.observe(target)
+     return ()=>{resize.unobserve(target)}
    })
 
    return (
      <div ref={header} className="Header">
      <Switch>
-      <Route path="/eval/skater/:id">
+      <Route path="/eval/skater/:skater_id">
         <SkaterEvalHeader openNav={openNav}/>
       </Route>
       <Route path="/eval/skater" >

@@ -24,7 +24,6 @@ function skatersReducer(state, action) {
     }
     case SKATER_ACTIONS.COMPLETE_ELEMENT: {
       const { skater_id, element_id } = action.payload;
-      console.log({ skater_id, element_id })
       const newState = state.map((skater) => {
         if (skater.id !== skater_id) return skater;
         return {

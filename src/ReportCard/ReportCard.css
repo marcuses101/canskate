@@ -1,0 +1,8 @@
+.ReportCard{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.ReportCard > div {
+  max-width: 600px;
+}

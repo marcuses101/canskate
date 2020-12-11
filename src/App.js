@@ -1,4 +1,5 @@
 import React, { useState, useReducer } from "react";
+import dayjs from 'dayjs'
 import SideNav from "./SideNav";
 import Header from "./Header";
 import Main from "./Main";
@@ -11,8 +12,10 @@ import { elements, checkmarks, ribbons } from "./store/elementStore.json";
 import "./App.css";
 
 function createSkater(skater) {
+  const age = dayjs().diff(dayjs(skater.birthdate),'years');
   return {
     ...skater,
+    age,
     elementLog: [],
     checkmarkLog: [],
     ribbonLog: [],
@@ -59,8 +62,6 @@ export default function App() {
       .map(createSkater)
       .sort((a, b) => (a.fullname > b.fullname ? 1 : -1))
   );
-  console.log(skaters)
-  console.log(club);
   function closeNav() {
     setIsNavOpen(false);
   }

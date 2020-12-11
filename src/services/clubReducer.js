@@ -38,7 +38,6 @@ function clubReducer (state,action){
     }
     case CLUB_ACTIONS.GROUP_REMOVE_SKATER:{
       const {group_id, skater_id} = action.payload;
-      console.log('remove',{group_id,skater_id})
       club.groups[group_id].skaters = club.groups[group_id].skaters.filter(id=>id!==parseInt(skater_id))
       return club
     }

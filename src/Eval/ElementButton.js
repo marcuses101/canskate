@@ -1,8 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import useSkaterFromParamId from "../Hooks/useSkaterFromParamId";
 import {useLogElement} from '../Hooks/useLogElement'
-import { SKATER_ACTIONS } from "../services/skaterReducer";
-import Context from "../Context";
+
 
 export default function ElementButton({ element }) {
   const skater = useSkaterFromParamId();
