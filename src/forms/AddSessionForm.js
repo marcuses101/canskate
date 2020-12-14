@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { CLUB_ACTIONS } from "../services/clubReducer";
+import {useHistory} from 'react-router-dom'
 import Context from "../Context";
 
 const colorOptions = [
@@ -11,18 +12,19 @@ const colorOptions = [
   "Purple",
   "Turquoise",
 ];
+// fancy way to create an Array of weekdays
+const days = Array.from({ length: 7 }, (_, index) =>
+  new Date(0, 0, index + 1).toLocaleDateString("en-US", { weekday: "long" })
+);
+const dayOptions = days.map((day) => (
+  <option value={day} key={day}>
+    {day}
+  </option>
+));
 
 export default function SessionForm() {
   const { club, clubDispatch } = useContext(Context);
-  // fancy way to create an Array of weekdays
-  const days = Array.from({ length: 7 }, (_, index) =>
-    new Date(0, 0, index + 1).toLocaleDateString("en-US", { weekday: "long" })
-  );
-  const dayOptions = days.map((day) => (
-    <option value={day} key={day}>
-      {day}
-    </option>
-  ));
+  const history = useHistory();
   const [startTime, setStartTime] = useState("");
   const [day, setDay] = useState("");
   const [duration, setDuration] = useState(30);
@@ -56,7 +58,7 @@ export default function SessionForm() {
       skaters: [],
     };
     clubDispatch({ type: CLUB_ACTIONS.ADD_SESSION, payload: session });
-
+    history.push(`/manage/session/edit/${session_id}`)
   }
 
   function handleSelect(e) {

@@ -1,27 +1,53 @@
 import React, { useState, useContext } from "react";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import { SKATER_ACTIONS } from "../services/skaterReducer";
-import Context from '../Context'
+import {CLUB_ACTIONS} from '../services/clubReducer'
+import Context from "../Context";
 
 export default function SkaterForm() {
-  const {skatersDispatch, nextSkaterId} = useContext(Context)
+  const {
+    skatersDispatch,
+    clubDispatch,
+    nextSkaterId,
+    club: { sessions },
+  } = useContext(Context);
   const [fullName, setFullName] = useState("");
   const [birthdate, setBirthdate] = useState("");
   const [gender, setGender] = useState(null);
+  const [selectedSessions, setSelectedSessions] = useState([]);
   const history = useHistory();
-  function handleSubmit(e){
+
+  console.log(sessions)
+
+  function handleSelect(e) {
+    const sessionId = parseInt(e.target.value);
+    setSelectedSessions((sessions) => [...sessions, sessionId]);
+  }
+
+  function handleRemoveSession(e, sessionId) {
     e.preventDefault();
+    setSelectedSessions((sessions) =>
+      sessions.filter((id) => id !== parseInt(sessionId))
+    );
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log('submit fired')
     const skater = {
       id: nextSkaterId,
       fullname: fullName,
       gender: gender,
-      birthdate:birthdate,
-    }
-    skatersDispatch({type: SKATER_ACTIONS.ADD_SKATER, payload:skater});
-    setFullName('')
-    setBirthdate('');
+      birthdate: birthdate,
+    };
+    skatersDispatch({ type: SKATER_ACTIONS.ADD_SKATER, payload: skater });
+    selectedSessions.forEach(sessionId=>{
+      console.log('sessionId',sessionId)
+      clubDispatch({type: CLUB_ACTIONS.SESSION_ADD_SKATER, payload:{session_id: sessionId,skater_id: skater.id}})
+    })
+    setFullName("");
+    setBirthdate("");
     setGender(null);
-    history.push(`/eval/skater/${nextSkaterId}`)
   }
 
   return (
@@ -47,8 +73,8 @@ export default function SkaterForm() {
         type="radio"
         name="gender"
         id="male"
-        value="male"
-        checked={gender === "male"}
+        value="Male"
+        checked={gender === "Male"}
         onChange={(e) => setGender(e.target.value)}
       />
       <br />
@@ -57,12 +83,43 @@ export default function SkaterForm() {
         type="radio"
         name="gender"
         id="female"
-        value="female"
-        checked={gender === "female"}
-        onChange={(e)=>setGender(e.target.value)}
+        value="Female"
+        checked={gender === "Female"}
+        onChange={(e) => setGender(e.target.value)}
       />
       <br />
-      <input type="submit" value="Submit"/>
+      <label htmlFor="sessions">Choose your session(s):</label>
+      <select name="sessions" id="sessions" onChange={handleSelect}>
+        {[
+          <option key="" value={null}>
+            Sessions
+          </option>,
+          ...Object.values(sessions).map((session) => {
+            return selectedSessions.includes(session.id) ? null : (
+              <option key={session.id} value={session.id}>
+                {`${session.day} ${session.start_time.slice(0, 5)}`}
+              </option>
+            );
+          }),
+        ]}
+      </select>
+      <ul className="selectedSessionsList">
+        {selectedSessions.map((sessionId) => {
+          const session = sessions[sessionId];
+          return (
+            <li key={sessionId}>
+              <span>
+                {`${session.day} ${session.start_time.slice(0, 5)}`}
+                <button onClick={(e) => handleRemoveSession(e, sessionId)}>
+                  Remove Session
+                </button>
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+      <br />
+      <input type="submit" value="Submit" />
     </form>
   );
 }

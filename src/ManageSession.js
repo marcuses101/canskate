@@ -3,6 +3,7 @@ import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
 import AssignSkatersToGroups from "./Assign/AssignSkatersToGroups";
 import SessionList from "./Eval/SessionList";
 import AddSessionForm from './forms/AddSessionForm'
+import EditSessionForm from "./forms/EditSessionForm";
 
 export default function ManageSession() {
   const { path } = useRouteMatch();
@@ -10,7 +11,8 @@ export default function ManageSession() {
   return (
     <Switch>
       <Route path={`${path}/add`} component={AddSessionForm} />
-      <Route path={`${path}/edit`} />
+      <Route path={`${path}/edit/:session_id`} component={EditSessionForm} />
+      <Route path={`${path}/edit`} component={SessionList}/>
       <Route path={`${path}/assign/:session_id`} component={AssignSkatersToGroups}/>
       <Route path={`${path}/assign`} component={SessionList}/>
       <Route>
