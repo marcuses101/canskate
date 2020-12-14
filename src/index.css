@@ -1,3 +1,12 @@
+:root{
+  --red: hsl(351, 85%, 43%);
+  --red-light: hsl(351, 81%, 55%);
+  --blue: hsl(223, 68%, 35%);
+  --blue-light:hsl(223, 68%, 60%);
+  --green: hsl(94, 50%, 51%);
+  --green-light: hsl(94, 50%, 65%);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

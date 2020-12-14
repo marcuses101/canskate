@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { CLUB_ACTIONS } from "../services/clubReducer";
-import {useHistory} from 'react-router-dom'
 import Context from "../Context";
+import { useToast } from "../Hooks/useToast";
 
 const colorOptions = [
   "Red",
@@ -23,8 +23,8 @@ const dayOptions = days.map((day) => (
 ));
 
 export default function SessionForm() {
+  const toast = useToast();
   const { club, clubDispatch } = useContext(Context);
-  const history = useHistory();
   const [startTime, setStartTime] = useState("");
   const [day, setDay] = useState("");
   const [duration, setDuration] = useState(30);
@@ -58,7 +58,11 @@ export default function SessionForm() {
       skaters: [],
     };
     clubDispatch({ type: CLUB_ACTIONS.ADD_SESSION, payload: session });
-    history.push(`/manage/session/edit/${session_id}`)
+    toast({message:`${day} ${startTime} session created!`,type:'success'})
+    setDay('')
+    setStartTime('')
+    setDuration(30)
+    setGroupColors([])
   }
 
   function handleSelect(e) {

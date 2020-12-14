@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
 import { SKATER_ACTIONS } from "../services/skaterReducer";
 import {CLUB_ACTIONS} from '../services/clubReducer'
 import Context from "../Context";
+import { useToast } from "../Hooks/useToast";
 
 export default function SkaterForm() {
   const {
@@ -11,11 +11,13 @@ export default function SkaterForm() {
     nextSkaterId,
     club: { sessions },
   } = useContext(Context);
+
+  const toast = useToast();
+
   const [fullName, setFullName] = useState("");
   const [birthdate, setBirthdate] = useState("");
   const [gender, setGender] = useState(null);
   const [selectedSessions, setSelectedSessions] = useState([]);
-  const history = useHistory();
 
   console.log(sessions)
 
@@ -42,12 +44,13 @@ export default function SkaterForm() {
     };
     skatersDispatch({ type: SKATER_ACTIONS.ADD_SKATER, payload: skater });
     selectedSessions.forEach(sessionId=>{
-      console.log('sessionId',sessionId)
       clubDispatch({type: CLUB_ACTIONS.SESSION_ADD_SKATER, payload:{session_id: sessionId,skater_id: skater.id}})
     })
+    toast({message: `${skater.fullname} added!`, type:'success'})
     setFullName("");
     setBirthdate("");
     setGender(null);
+    setSelectedSessions([])
   }
 
   return (

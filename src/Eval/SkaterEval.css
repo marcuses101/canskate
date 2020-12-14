@@ -11,16 +11,16 @@
   border: 1px solid red;
   text-align: center;
 }
-.active {
+.filterOptions .active {
   background-color: lightcoral;
 }
-.balance{
+.filterOptions .balance{
   background-color: green;
 }
-.control{
+.filterOptions .control{
   background-color: red;
 }
-.agility{
+.filterOptions .agility{
   background-color:blue;
 }
 
