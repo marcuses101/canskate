@@ -1,10 +1,17 @@
 :root{
   --red: hsl(351, 85%, 43%);
-  --red-light: hsl(351, 81%, 55%);
+  --red-light: hsl(351, 70%, 65%);
   --blue: hsl(223, 68%, 35%);
   --blue-light:hsl(223, 68%, 60%);
   --green: hsl(94, 50%, 51%);
   --green-light: hsl(94, 50%, 65%);
+
+  --badge-one: hsl(196, 52%, 56%);
+  --badge-two:hsl(0, 83%, 56%);
+  --badge-three:hsl(274, 27%, 44%);
+  --badge-four: hsl(53, 91%, 65%);
+  --badge-five:hsl(205, 100%, 35%);
+  --badge-six: hsl(74, 100%, 15%);
 }
 
 body {

@@ -13,8 +13,16 @@
   align-items: center;
 }
 
-.ReportCheckmarkComponent.complete{
-  background-color: rgb(85, 165, 85);
+.Balance .ReportCheckmarkComponent.complete{
+  background-color: var(--green-light)
+}
+
+.Control .ReportCheckmarkComponent.complete{
+  background-color: var(--red-light);
+}
+
+.Agility .ReportCheckmarkComponent.complete{
+  background-color: var(--blue-light);
 }
 .ReportCheckmarkComponent span{
   margin: 0;

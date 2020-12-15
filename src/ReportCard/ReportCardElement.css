@@ -4,8 +4,16 @@
   grid-template-columns: 2fr 1fr;
 }
 
-.ReportCardElement.complete {
-  background-color: rgb(85, 165, 85);
+.Balance .ReportCardElement.complete {
+  background-color: var(--green-light);
+}
+
+.Control .ReportCardElement.complete {
+  background-color: var(--red-light);
+}
+
+.Agility .ReportCardElement.complete {
+  background-color: var(--blue-light)
 }
 
 .ReportCardElement span{

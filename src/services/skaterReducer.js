@@ -38,7 +38,7 @@ function skatersReducer(state, action) {
       const { id } = action.payload;
       return state.filter((skater) => skater.id !== id);
     }
-    
+
     case SKATER_ACTIONS.COMPLETE_ELEMENT: {
       const { skater_id, element_id } = action.payload;
       const newState = state.map((skater) => {
@@ -70,7 +70,7 @@ function skatersReducer(state, action) {
         if (skater.id !== skater_id) return skater;
         return {
           ...skater,
-          ribbonLog: [...skater.ribbonLog, { ribbon_id, date: new Date() }],
+          ribbonLog: [...skater.ribbonLog, { ribbon_id, date: new Date(), date_distributed: null }],
         };
       });
       return newState;
@@ -81,7 +81,7 @@ function skatersReducer(state, action) {
         if (skater.id !== skater_id) return skater;
         return {
           ...skater,
-          badgeLog: [...skater.badgeLog, { badge, date: new Date() }],
+          badgeLog: [...skater.badgeLog, { badge, date: new Date() , date_distributed: null}],
         };
       });
       return newState;

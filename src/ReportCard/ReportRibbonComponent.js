@@ -8,7 +8,7 @@ import ReportCheckmarkList from './ReportCheckmarkList'
      return (checkmark.ribbon_id===ribbon.id && checkmark.date)?total+1:total
    },0)
    return (
-     <>
+     <div className={fundamental_area}>
      <ReportCardRibbon
       fundamental={fundamental_area}
       checkmarksRequired={checkmarks_required}
@@ -20,6 +20,6 @@ import ReportCheckmarkList from './ReportCheckmarkList'
        checkmarks={checkmarks}
        elements={elements}
      />
-    </>
+    </div>
    )
  }

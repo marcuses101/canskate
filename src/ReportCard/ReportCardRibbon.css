@@ -18,13 +18,13 @@
 }
 
 .ReportCardRibbon.b.complete {
-  background-color: green;
+  background-color: var(--green)
 }
 
 .ReportCardRibbon.c.complete {
-  background-color: rgb(216, 69, 11);
+  background-color: var(--red)
 }
 .ReportCardRibbon.a.complete {
-  background-color: blue;
+  background-color: var(--blue)
 }
 
