@@ -3,12 +3,13 @@
   position: fixed;
   top:0;
   left: 0;
-  z-index: 3;
+  z-index: 2;
   height: 100vh;
   min-width: 25vw;
   max-width: 33vw;
   border: 2px solid black;
-  transition: 200ms ease;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+  transition: left 200ms ease;
   background: white;
 }
 
@@ -30,9 +31,3 @@
 .SideNav ul li:last-child{
   margin-top: auto;
 }
-
-/* @media screen and (max-width: 500px) {
-.SideNav{
-  width: 33vw;
-}
-} */

@@ -1,7 +1,3 @@
 .App {
   text-align: center;
 }
-
-.blur {
-  filter: blur(1px);
-}

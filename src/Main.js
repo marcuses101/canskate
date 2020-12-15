@@ -4,6 +4,8 @@ import Progress from './Progress'
 import Manage from './Manage'
 import Eval from './Eval';
 import Welcome from './Welcome'
+import './Main.css'
+import Distribution from "./Distribution/Distribution";
 
  export default function Main(){
    return (
@@ -12,6 +14,7 @@ import Welcome from './Welcome'
         <Route path='/progress' component={Progress}/>
         <Route path='/manage' component={Manage}/>
         <Route path='/eval' component={Eval} />
+        <Route path='/distribution' component={Distribution} />
         <Route path="/" component={Welcome}/>
       </Switch>
      </main>

@@ -19,15 +19,16 @@ header {
   background-color: white;
 }
 
+.blur header {
+  filter: blur(1px)
+}
 
 .Header + * {
   margin-top: var(--header-height);
 }
-.Header .filter{
-  display:flex;
-  flex-direction:column;
-  justify-content: center;
-}
+
+
+
 .Header .menu {
   display:flex;
   justify-content: center;

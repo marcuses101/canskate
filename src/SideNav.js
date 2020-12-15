@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import './SideNav.css'
 
  export default function SideNav({open, closeNav}){
-   
+
    const sidenav = useRef(null);
 
    // close nav on click outside
@@ -13,8 +13,13 @@ import './SideNav.css'
         event.stopPropagation();
         closeNav()}
      }
-     if (open) document.addEventListener('click',logClickInside,{capture:true})
-     else document.removeEventListener('click', logClickInside,{capture:true});
+     if (open){
+        document.addEventListener('click',logClickInside,{capture:true})
+        document.body.classList.add('blur')
+      }
+     else {document.removeEventListener('click', logClickInside,{capture:true});
+    document.body.classList.remove('blur')
+    }
      return ()=>document.removeEventListener('click',logClickInside,{capture:true})
     },[open, closeNav])
 
@@ -24,6 +29,7 @@ import './SideNav.css'
         <li onClick={closeNav}><Link to="/">Home</Link></li>
         <li onClick={closeNav}><Link to='/eval'>Evaluate</Link></li>
         <li onClick={closeNav}><Link to='/progress'>Progress</Link></li>
+        <li onClick={closeNav}><Link to='/distribution'>Distribution</Link></li>
         <li onClick={closeNav}><Link to='/manage'>Manage</Link></li>
         <li onClick={closeNav}><button>Logout</button></li>
 

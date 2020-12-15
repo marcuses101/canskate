@@ -1,0 +1,3 @@
+.blur .Main {
+ filter: saturate(25%) blur(1px);
+}

@@ -11,7 +11,7 @@ import './Header.css'
     const offset = entry.borderBoxSize[0].blockSize + 16
     document.documentElement.style.setProperty('--header-height',`${offset}px`)
     });
-    
+
    useEffect(()=>{
      const target = header.current
      resize.observe(target)
@@ -29,6 +29,9 @@ import './Header.css'
       </Route>
       <Route path={['/eval/element','/eval/session/:session_id/group/:group_id']}>
         <HeaderContent title="Element Evaluation" openNav={openNav} showFilter={true}/>
+      </Route>
+      <Route path='/distribution'>
+        <HeaderContent title='Distribution' openNav={openNav} showFilter={true} />
       </Route>
       <Route path='/'>
         <HeaderContent title="Canskate Management" openNav={openNav} showFilter={false}/>
