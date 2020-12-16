@@ -1,0 +1,25 @@
+.FilterContainer >  *{
+  width:100%;
+  position:absolute;
+  top: var(--header-offset)
+}
+.blur .FilterContainer > * > *{
+  filter: blur(1px) saturate(25%)
+}
+.FilterContainer > .slide-enter {
+  top: 10px;
+}
+
+.FilterContainer > .slide-enter-active {
+  top: var(--header-offset);
+  transition: top calc(var(--time) / 2) linear;
+}
+
+.FilterContainer > .slide-exit {
+  top: var(--header-offset);
+}
+
+.FilterContainer > .slide-exit-active {
+  top: 10px;
+  transition: top calc(var(--time) / 2) linear;
+}

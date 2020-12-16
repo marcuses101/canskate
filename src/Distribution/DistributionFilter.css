@@ -6,8 +6,6 @@
   border-bottom: 2px solid black;
   border-right: 2px solid black;
   border-left: 2px solid black;
-  position: fixed;
-  top: var(--header-offset);
   z-index: 0;
 }
 .DistributionFilter span {
@@ -37,20 +35,3 @@
 
 
 
-.DistributionFilter.slide-enter {
-  top: 10px;
-}
-
-.DistributionFilter.slide-enter-active {
-  top: calc(var(--header-offset));
-  transition: top calc(var(--time) / 2) linear;
-}
-
-.DistributionFilter.slide-exit {
-  top: calc(var(--header-offset));
-}
-
-.DistributionFilter.slide-exit-active {
-  top: 10px;
-  transition: top calc(var(--time) / 2) linear;
-}

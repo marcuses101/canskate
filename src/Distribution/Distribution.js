@@ -49,7 +49,6 @@ export default function Distribution() {
   );
   if (!showAll)
     distributionList = distributionList.filter((log) => !log.date_distributed);
-  console.log({ distributionList });
   return (
     <div className="Distribution">
       <FilterContainer>
