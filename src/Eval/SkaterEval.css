@@ -1,29 +1,4 @@
 
-.filterOptions ul {
-  margin: 0;
-  display: flex;
-  list-style: none;
-  padding-inline-start: 0;
-}
-.filterOptions ul li {
-  flex: 1;
-  padding: 0.5rem;
-  border: 1px solid red;
-  text-align: center;
-}
-.filterOptions .active {
-  background-color: lightcoral;
-}
-.filterOptions .balance{
-  background-color: green;
-}
-.filterOptions .control{
-  background-color: red;
-}
-.filterOptions .agility{
-  background-color:blue;
-}
-
 .ElementButton {
   display: flex;
   border: 2px solid black;

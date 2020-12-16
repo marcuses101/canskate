@@ -1,3 +1,40 @@
 .filterOptions{
   background-color: white;
 }
+
+.filterOptions ul {
+  margin: 0;
+  display: flex;
+  list-style: none;
+  padding-inline-start: 0;
+}
+.filterOptions ul li {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid black;
+  text-align: center;
+}
+.filterOptions ul:first-child li {
+  border-top: none;
+}
+
+.filterOptions .active {
+  background-color: lightcoral;
+  font-weight: bold;
+}
+.filterOptions .balance{
+  background-color: var(--green-light);
+  font-weight: bold;
+}
+.filterOptions .control{
+  background-color: var(--red);
+  font-weight: bold;
+}
+.filterOptions .agility{
+  background-color: var(--blue-light);
+  font-weight: bold;
+}
+.filterOptions ul li:hover{
+  filter: brightness(125%);
+  cursor: pointer;
+}

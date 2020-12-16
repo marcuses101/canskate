@@ -12,7 +12,7 @@ export default function Distribution() {
   const { skatersDispatch, setIsFilterOpen } = useContext(
     Context
   );
-  const [showAll, setShowAll] = useState(false);
+  const [showAll, setShowAll] = useState(true);
   const skaters = useClubSkaters();
   const getRibbonById = useRibbonById();
 

@@ -1,7 +1,8 @@
 .FilterContainer >  *{
   width:100%;
-  position:absolute;
-  top: var(--header-offset)
+  position:fixed;
+  top: var(--header-offset);
+  z-index:1;
 }
 .blur .FilterContainer > * > *{
   filter: blur(1px) saturate(25%)
