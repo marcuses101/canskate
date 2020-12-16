@@ -1,6 +1,5 @@
-import React, { useContext, useRef, useEffect } from "react";
-import { createPortal } from "react-dom";
-import Context from "../Context";
+import React from "react";
+
 import "./DistributionFilter.css";
 
 export default function DistributionFilter({showAll, setShowAll }) {

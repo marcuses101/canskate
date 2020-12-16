@@ -1,11 +1,9 @@
 import React from "react";
-import {createPortal} from 'react-dom'
 import "./ElementFilter.css"
 
 // filter with render in the .Header div#filter sticky
 
 export default function ElementFilter(props) {
-  const mount = document.getElementById('filter');
   const {
     toggleBadgeFilter,
     toggleFundamentalFilter,
@@ -21,7 +19,7 @@ export default function ElementFilter(props) {
     toggleFundamentalFilter(fundamental)
   }
 
-  return createPortal(
+  return (
     <div className="filterOptions">
       <ul className="badgeOption">
         <li onClick={handleBadgeClick} className={badgeFilterState[1]?'active':''}>1</li>
@@ -36,6 +34,6 @@ export default function ElementFilter(props) {
         <li onClick={handleFundamentalClick} className={fundamentalFilterState['Control']?"control":''}>Control</li>
         <li onClick={handleFundamentalClick} className={fundamentalFilterState['Agility']?"agility":''}>Agility</li>
       </ul>
-    </div>,mount
+    </div>
   );
 }

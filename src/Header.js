@@ -55,7 +55,6 @@ export default function Header({ openNav, setOffset }) {
           />
         </Route>
       </Switch>
-      <div id="filter"></div>
     </div>
   );
 }

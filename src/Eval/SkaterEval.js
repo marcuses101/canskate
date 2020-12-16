@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
-import useSkaterFromParamId from '../Hooks/useSkaterFromParamId'
+import useSkaterFromParamId from "../Hooks/useSkaterFromParamId";
 import ElementList from "./ElementList";
 import ElementFilter from "./ElementFilter";
+import {FilterContainer} from "../FilterContainer";
 import Context from "../Context";
 import "./SkaterEval.css";
 
@@ -21,18 +22,18 @@ const badgeOptions = {
 };
 
 export default function SkaterEval() {
-  const { elements, isFilterOpen, setIsFilterOpen} = useContext(Context);
+  const { elements, isFilterOpen, setIsFilterOpen } = useContext(Context);
   const { elementLog: completedElements } = useSkaterFromParamId();
   const [fundamentalFilter, setFundamentalFilter] = useState(
     fundamentalOptions
   );
   const [badgeFilter, setBadgeFilter] = useState(badgeOptions);
 
-  useEffect(()=>{
-    return ()=>{
-      setIsFilterOpen(false)
-    }
-  },[setIsFilterOpen])
+  useEffect(() => {
+    return () => {
+      setIsFilterOpen(false);
+    };
+  }, [setIsFilterOpen]);
 
   function toggleBadgeFilter(badge) {
     setBadgeFilter((badgesObj) => ({
@@ -57,15 +58,16 @@ export default function SkaterEval() {
 
   return (
     <div className="SkaterEval">
-      {isFilterOpen && (
+      <FilterContainer>
         <ElementFilter
           toggleBadgeFilter={toggleBadgeFilter}
           toggleFundamentalFilter={toggleFundamentalFilter}
           badgeFilterState={badgeFilter}
           fundamentalFilterState={fundamentalFilter}
         />
-      )}
-      <ElementList elements={filteredElements}/>
+      </FilterContainer>
+
+      <ElementList elements={filteredElements} />
     </div>
   );
 }

@@ -7,7 +7,7 @@
   filter: blur(1px) saturate(25%)
 }
 .FilterContainer > .slide-enter {
-  top: 10px;
+  top: -22px
 }
 
 .FilterContainer > .slide-enter-active {
@@ -20,6 +20,6 @@
 }
 
 .FilterContainer > .slide-exit-active {
-  top: 10px;
+  top: -22px;
   transition: top calc(var(--time) / 2) linear;
 }

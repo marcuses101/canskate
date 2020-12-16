@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import ElementEvalList from "../ElementEvalList";
 import ElementFilter from "./ElementFilter";
+import { FilterContainer } from "../FilterContainer";
 import Context from "../Context";
 import "./ElementEval.css";
 
@@ -20,7 +21,12 @@ const badgeOptions = {
 };
 
 export default function ElementEval(props) {
-  const { elements, skaters: allSkaters, isFilterOpen, setIsFilterOpen } = useContext(Context);
+  const {
+    elements,
+    skaters: allSkaters,
+    isFilterOpen,
+    setIsFilterOpen,
+  } = useContext(Context);
   const [fundamentalFilter, setFundamentalFilter] = useState(
     fundamentalOptions
   );
@@ -58,14 +64,15 @@ export default function ElementEval(props) {
 
   return (
     <div>
-      {isFilterOpen && (
+      <FilterContainer>
         <ElementFilter
           toggleBadgeFilter={toggleBadgeFilter}
           toggleFundamentalFilter={toggleFundamentalFilter}
           badgeFilterState={badgeFilter}
           fundamentalFilterState={fundamentalFilter}
         />
-      )}
+      </FilterContainer>
+
       <ElementEvalList
         fundamentals={fundamentalsToDisplay}
         badges={badgesToDisplay}
