@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import ElementEvalList from "../ElementEvalList";
 import ElementFilter from "./ElementFilter";
 import { FilterContainer } from "../FilterContainer";
@@ -21,24 +21,15 @@ const badgeOptions = {
 };
 
 export default function ElementEval(props) {
-  const {
-    elements,
-    skaters: allSkaters,
-    isFilterOpen,
-    setIsFilterOpen,
-  } = useContext(Context);
+  const { elements, skaters: allSkaters } = useContext(Context);
+
   const [fundamentalFilter, setFundamentalFilter] = useState(
     fundamentalOptions
   );
   const [badgeFilter, setBadgeFilter] = useState(badgeOptions);
 
+  // session/group path passes in skaters, otherwise use all skaters from context
   const skaters = props.skaters || allSkaters;
-
-  useEffect(() => {
-    return () => {
-      setIsFilterOpen(false);
-    };
-  }, [setIsFilterOpen]);
 
   function toggleBadgeFilter(badge) {
     setBadgeFilter((badgesObj) => ({

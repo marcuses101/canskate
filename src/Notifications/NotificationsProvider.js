@@ -14,7 +14,6 @@ export const NotificationContext = React.createContext({
 });
 
 function NotificationReducer(notifications, action) {
-  console.log("dispatch fired");
   switch (action.type) {
     case NOTE_ACTIONS.ADD_NOTE: {
       const newNote = { ...action.payload, id: uuid() };

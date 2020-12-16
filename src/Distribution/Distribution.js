@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { useClubSkaters } from "../Hooks/useClubSkaters";
 import { SKATER_ACTIONS } from "../services/skaterReducer";
 import "./Distribution.css";
@@ -9,18 +9,13 @@ import { FilterContainer } from "../FilterContainer";
 import Context from "../Context";
 
 export default function Distribution() {
-  const { skatersDispatch, setIsFilterOpen } = useContext(
+  const { skatersDispatch } = useContext(
     Context
   );
   const [showAll, setShowAll] = useState(true);
   const skaters = useClubSkaters();
   const getRibbonById = useRibbonById();
 
-  useEffect(() => {
-    return () => {
-      setIsFilterOpen(false);
-    };
-  }, [setIsFilterOpen]);
 
   const ribbonsToDistribute = skaters.reduce((ribbons, skater) => {
     const skaterRibbonsToDistribute = skater.ribbonLog.map((log) => {

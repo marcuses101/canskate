@@ -1,4 +1,5 @@
 import React, { useState, useReducer, useEffect } from "react";
+import {useLocation} from 'react-router-dom'
 import dayjs from "dayjs";
 import SideNav from "./SideNav";
 import Header from "./Header";
@@ -53,6 +54,7 @@ function buildClub(store) {
 }
 
 export default function App() {
+  const {pathname} = useLocation();
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [club, clubDispatch] = useReducer(clubReducer, buildClub(store));
@@ -62,6 +64,11 @@ export default function App() {
       .map(createSkater)
       .sort((a, b) => (a.fullname > b.fullname ? 1 : -1))
   );
+
+  // close filter on route change
+  useEffect(()=>{
+    setIsFilterOpen(false)
+  },[pathname])
 
   function closeNav() {
     setIsNavOpen(false);

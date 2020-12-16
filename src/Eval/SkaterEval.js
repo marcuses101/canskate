@@ -1,8 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import useSkaterFromParamId from "../Hooks/useSkaterFromParamId";
 import ElementList from "./ElementList";
 import ElementFilter from "./ElementFilter";
-import {FilterContainer} from "../FilterContainer";
+import { FilterContainer } from "../FilterContainer";
 import Context from "../Context";
 import "./SkaterEval.css";
 
@@ -22,18 +22,12 @@ const badgeOptions = {
 };
 
 export default function SkaterEval() {
-  const { elements, isFilterOpen, setIsFilterOpen } = useContext(Context);
+  const { elements } = useContext(Context);
   const { elementLog: completedElements } = useSkaterFromParamId();
   const [fundamentalFilter, setFundamentalFilter] = useState(
     fundamentalOptions
   );
   const [badgeFilter, setBadgeFilter] = useState(badgeOptions);
-
-  useEffect(() => {
-    return () => {
-      setIsFilterOpen(false);
-    };
-  }, [setIsFilterOpen]);
 
   function toggleBadgeFilter(badge) {
     setBadgeFilter((badgesObj) => ({
@@ -56,6 +50,33 @@ export default function SkaterEval() {
       !completedElements.map((el) => el.element_id).includes(element.element_id)
   );
 
+  const elementObject = elements.reduce((obj, element) => {
+    if (
+      !fundamentalFilter[element.fundamental] ||
+      !badgeFilter[element.badge] ||
+      completedElements.includes(element.id)
+    )
+      return obj;
+    return {
+      ...obj,
+      [element.badge]: obj[element.badge]
+        ? {
+            ...obj[element.badge],
+            [element.fundamental]: obj[element.badge][element.fundamental]
+              ? [...obj[element.badge][element.fundamental], element]
+              : [element],
+          }
+        : { [element.fundamental]: [element] },
+    };
+  }, {});
+  const fundamentals = Object.entries(fundamentalFilter).reduce(
+    (acc, [key, value]) => (value ? [...acc, key] : acc),
+    []
+  );
+  const badges = Object.entries(badgeFilter).reduce(
+    (acc, [key, value]) => (value ? [...acc, key] : acc),
+    []
+  );
   return (
     <div className="SkaterEval">
       <FilterContainer>
@@ -67,7 +88,11 @@ export default function SkaterEval() {
         />
       </FilterContainer>
 
-      <ElementList elements={filteredElements} />
+      <ElementList
+        elements={filteredElements}
+        badges={badges}
+        fundamentals={fundamentals}
+      />
     </div>
   );
 }

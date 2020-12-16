@@ -14,7 +14,7 @@ export default function Notification({ id, message, type, dispatch }) {
 
   return (
     <div className={`notification-item ${type}`}>
-        <p className='fade'>{message}</p>
+        <p>{message}</p>
     </div>
   );
 }

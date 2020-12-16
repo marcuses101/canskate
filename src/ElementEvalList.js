@@ -1,5 +1,6 @@
 import React from "react";
 import ElementEvalFundamentalList from "./Eval/ElementEvalFundamentalList";
+import BadgeList from './Eval/ElementEvalBadgeList';
 
 export default function ElementEvalList({ fundamentals, elements, ...rest }) {
   const fundamentalItems = fundamentals.map((fundamental) => {
