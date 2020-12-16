@@ -12,6 +12,10 @@
   --badge-four: hsl(53, 91%, 65%);
   --badge-five:hsl(205, 100%, 35%);
   --badge-six: hsl(74, 100%, 15%);
+
+  --header-offset: 50px;
+  --filter-offset: 0px;
+  --time: 200ms;
 }
 
 body {

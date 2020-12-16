@@ -11,7 +11,7 @@ const Context = React.createContext({
   SKATER_ACTIONS:{},
   skatersDispatch(){},
   setIsFilterOpen(){},
-  isFilterOpen: false
+  isFilterOpen: false,
 })
 
 export default Context;

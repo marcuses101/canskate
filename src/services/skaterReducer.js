@@ -1,9 +1,10 @@
-import dayjs from 'dayjs'
+import dayjs from "dayjs";
 
 const SKATER_ACTIONS = {
   ADD_SKATER: "add_skater",
   EDIT_SKATER: "edit_skater",
   DELETE_SKATER: "delete_skater",
+  DISTRIBUTE: "distribute",
   COMPLETE_ELEMENT: "complete_element",
   COMPLETE_CHECKMARK: "complete_checkmark",
   COMPLETE_RIBBON: "complete_ribbon",
@@ -16,7 +17,7 @@ function skatersReducer(state, action) {
       return [
         {
           ...action.payload,
-          age: dayjs().diff(dayjs(action.payload.birthdate),'year'),
+          age: dayjs().diff(dayjs(action.payload.birthdate), "year"),
           elementLog: [],
           checkmarkLog: [],
           ribbonLog: [],
@@ -27,11 +28,15 @@ function skatersReducer(state, action) {
     }
 
     case SKATER_ACTIONS.EDIT_SKATER: {
-      const newState = state.map(skater=>{
-        if (skater.id !== action.payload.id) return skater
-        return {...skater, ...action.payload, age: dayjs().diff(dayjs(action.payload.birthdate),'year')}
-      })
-      return newState
+      const newState = state.map((skater) => {
+        if (skater.id !== action.payload.id) return skater;
+        return {
+          ...skater,
+          ...action.payload,
+          age: dayjs().diff(dayjs(action.payload.birthdate), "year"),
+        };
+      });
+      return newState;
     }
 
     case SKATER_ACTIONS.DELETE_SKATER: {
@@ -70,7 +75,10 @@ function skatersReducer(state, action) {
         if (skater.id !== skater_id) return skater;
         return {
           ...skater,
-          ribbonLog: [...skater.ribbonLog, { ribbon_id, date: new Date(), date_distributed: null }],
+          ribbonLog: [
+            ...skater.ribbonLog,
+            { ribbon_id, date: new Date(), date_distributed: null },
+          ],
         };
       });
       return newState;
@@ -81,10 +89,37 @@ function skatersReducer(state, action) {
         if (skater.id !== skater_id) return skater;
         return {
           ...skater,
-          badgeLog: [...skater.badgeLog, { badge, date: new Date() , date_distributed: null}],
+          badgeLog: [
+            ...skater.badgeLog,
+            { badge, date: new Date(), date_distributed: null },
+          ],
         };
       });
       return newState;
+    }
+    case SKATER_ACTIONS.DISTRIBUTE: {
+      const { skater_id, ribbon_id = null, badge_id = null } = action.payload;
+      console.log({skater_id,ribbon_id,badge_id})
+      return state.map((skater) => {
+        if (skater.id !== skater_id) return skater;
+        return ribbon_id
+          ? {
+              ...skater,
+              ribbonLog: skater.ribbonLog.map((log) =>
+                log.ribbon_id === ribbon_id
+                  ? { ...log, date_distributed: new Date() }
+                  : log
+              ),
+            }
+          : {
+              ...skater,
+              badgeLog: skater.badgeLog.map((log) =>
+                log.badge === badge_id
+                  ? { ...log, date_distributed: new Date() }
+                  : log
+              ),
+            };
+      });
     }
     default:
       return state;

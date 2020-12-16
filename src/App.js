@@ -1,5 +1,5 @@
-import React, { useState, useReducer } from "react";
-import dayjs from 'dayjs'
+import React, { useState, useReducer, useEffect } from "react";
+import dayjs from "dayjs";
 import SideNav from "./SideNav";
 import Header from "./Header";
 import Main from "./Main";
@@ -12,7 +12,7 @@ import { elements, checkmarks, ribbons } from "./store/elementStore.json";
 import "./App.css";
 
 function createSkater(skater) {
-  const age = dayjs().diff(dayjs(skater.birthdate),'years');
+  const age = dayjs().diff(dayjs(skater.birthdate), "years");
   return {
     ...skater,
     age,
@@ -62,6 +62,7 @@ export default function App() {
       .map(createSkater)
       .sort((a, b) => (a.fullname > b.fullname ? 1 : -1))
   );
+
   function closeNav() {
     setIsNavOpen(false);
   }
@@ -88,7 +89,9 @@ export default function App() {
     <Context.Provider value={contextObj}>
       <div className="App">
         <SideNav open={isNavOpen} closeNav={closeNav} />
+
         <Header openNav={openNav} />
+
         <Main />
       </div>
     </Context.Provider>

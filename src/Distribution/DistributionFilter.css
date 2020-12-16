@@ -1,0 +1,56 @@
+.DistributionFilter {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  height: 40px;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+  position: fixed;
+  top: var(--header-offset);
+  z-index: 0;
+}
+.DistributionFilter span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+.DistributionFilter span:first-child{
+  border-right: 2px solid black
+}
+
+.DistributionFilter span{
+  background-color: rgb(216, 215, 215);
+  transition: 100ms ease
+}
+
+.DistributionFilter span.active {
+  background-color: var(--green-light);
+  font-weight:bolder;
+}
+
+.DistributionFilter span:hover {
+  cursor:pointer;
+  filter: brightness(125%) saturate(125%);
+}
+
+
+
+.DistributionFilter.slide-enter {
+  top: 10px;
+}
+
+.DistributionFilter.slide-enter-active {
+  top: calc(var(--header-offset));
+  transition: top calc(var(--time) / 2) linear;
+}
+
+.DistributionFilter.slide-exit {
+  top: calc(var(--header-offset));
+}
+
+.DistributionFilter.slide-exit-active {
+  top: 10px;
+  transition: top calc(var(--time) / 2) linear;
+}

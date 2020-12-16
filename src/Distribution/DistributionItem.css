@@ -1,0 +1,11 @@
+.DistributionItem {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding: .25rem;
+}
+.DistributionItem:first-child{
+
+  padding-bottom: .5rem;
+  font-weight:bold;
+  margin-bottom: .5rem;
+}
