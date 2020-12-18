@@ -1,0 +1,29 @@
+.ElementButton {
+  display: flex;
+  align-items: center;
+  padding-left:1rem;
+  border: 2px solid black;
+  height: 3rem;
+  border-radius: var(--radius);
+  margin: .5rem;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.ElementButton:hover {
+  cursor: pointer;
+  transform: scale(1.01);
+}
+
+.ElementButton button{
+  height:100%;
+  background-color: var(--green-light);
+  font-size: 2rem;
+  border-style: none;
+  width:3rem;
+}
+
+.ElementButton button:hover{
+  cursor: pointer;
+  background-color: var(--green);
+}

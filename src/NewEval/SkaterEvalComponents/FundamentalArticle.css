@@ -1,0 +1,13 @@
+.FundamentalArticle {
+  overflow: hidden;
+}
+
+.FundamentalArticle header {
+  width:50%;
+  color: white;
+  height: 3rem;
+}
+
+.FundamentalArticle > div {
+  margin: 1em;
+}

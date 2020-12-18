@@ -1,0 +1,12 @@
+
+
+.ElementList ul {
+  padding-inline-start: 0;
+}
+
+
+.SkaterEval {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

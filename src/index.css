@@ -9,13 +9,18 @@
   --badge-one: hsl(196, 52%, 56%);
   --badge-two:hsl(0, 83%, 56%);
   --badge-three:hsl(274, 27%, 44%);
-  --badge-four: hsl(53, 91%, 65%);
+  --badge-four: hsl(53, 63%, 47%);
   --badge-five:hsl(205, 100%, 35%);
   --badge-six: hsl(74, 100%, 15%);
 
   --header-offset: 50px;
   --filter-offset: 0px;
   --time: 200ms;
+  --radius: 5px;
+
+  --Balance: var(--green);
+  --Control: var(--red);
+  --Agility: var(--blue)
 }
 
 body {

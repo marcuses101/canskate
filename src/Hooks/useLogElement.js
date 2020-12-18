@@ -29,7 +29,6 @@ export function useLogElement(skater_id, element_id) {
     const { total_elements: elementsRequired } = checkmarks.find(
       (checkmark) => checkmark.checkmark_id === checkmark_id
     );
-    console.log(ribbons);
     const {
       checkmarks_required: checkmarksRequired,
       fundamental_area,

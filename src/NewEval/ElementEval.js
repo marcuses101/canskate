@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
-import useSkaterFromParamId from "../Hooks/useSkaterFromParamId";
-import ElementList from "./ElementList";
-import ElementFilter from "./ElementFilter";
+import BadgeSection from "./BadgeSection";
+import ElementFilter from "../Eval/ElementFilter";
 import { FilterContainer } from "../FilterContainer";
 import Context from "../Context";
 import "./SkaterEval.css";
@@ -21,9 +20,17 @@ const badgeOptions = {
   6: true,
 };
 
-export default function SkaterEval() {
+const elementObjectShape = {
+  1: { Balance: [], Control: [], Agility: [] },
+  2: { Balance: [], Control: [], Agility: [] },
+  3: { Balance: [], Control: [], Agility: [] },
+  4: { Balance: [], Control: [], Agility: [] },
+  5: { Balance: [], Control: [], Agility: [] },
+  6: { Balance: [], Control: [], Agility: [] },
+};
+
+export default function ElementEval() {
   const { elements } = useContext(Context);
-  const { elementLog: completedElements } = useSkaterFromParamId();
   const [fundamentalFilter, setFundamentalFilter] = useState(
     fundamentalOptions
   );
@@ -43,32 +50,24 @@ export default function SkaterEval() {
     }));
   }
 
-  const filteredElements = elements.filter(
-    (element) =>
-      badgeFilter[element.badge] &&
-      fundamentalFilter[element.fundamental] &&
-      !completedElements.map((el) => el.element_id).includes(element.element_id)
-  );
 
   const elementObject = elements.reduce((obj, element) => {
     if (
       !fundamentalFilter[element.fundamental] ||
-      !badgeFilter[element.badge] ||
-      completedElements.includes(element.id)
+      !badgeFilter[element.badge]
     )
       return obj;
     return {
       ...obj,
-      [element.badge]: obj[element.badge]
-        ? {
-            ...obj[element.badge],
-            [element.fundamental]: obj[element.badge][element.fundamental]
-              ? [...obj[element.badge][element.fundamental], element]
-              : [element],
-          }
-        : { [element.fundamental]: [element] },
+      [element.badge]: {
+        ...obj[element.badge],
+        [element.fundamental]: [
+          ...obj[element.badge][element.fundamental],
+          element,
+        ],
+      },
     };
-  }, {});
+  }, elementObjectShape);
   const fundamentals = Object.entries(fundamentalFilter).reduce(
     (acc, [key, value]) => (value ? [...acc, key] : acc),
     []
@@ -88,11 +87,14 @@ export default function SkaterEval() {
         />
       </FilterContainer>
 
-      <ElementList
-        elements={filteredElements}
-        badges={badges}
-        fundamentals={fundamentals}
-      />
+      {badges.map((badge) => (
+        <BadgeSection
+          key={badge}
+          badge={badge}
+          fundamentals={fundamentals}
+          elements={elementObject[badge]}
+        />
+      ))}
     </div>
   );
 }
