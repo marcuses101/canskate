@@ -4,7 +4,7 @@ import BadgeSection from "./SkaterEvalComponents/BadgeSection";
 import ElementFilter from "../Eval/ElementFilter";
 import { FilterContainer } from "../FilterContainer";
 import Context from "../Context";
-import "./SkaterEval.css";
+import "./Eval.css";
 
 const fundamentalOptions = {
   Balance: true,
@@ -79,7 +79,7 @@ export default function SkaterEval() {
     []
   );
   return (
-    <div className="SkaterEval">
+    <div className="Eval">
       <FilterContainer>
         <ElementFilter
           toggleBadgeFilter={toggleBadgeFilter}

@@ -5,12 +5,12 @@ import SkaterList from "./Eval/SkaterList";
 import ElementEval from "./NewEval/ElementEval";
 import SessionList from './Eval/SessionList'
 import GroupList from './Eval/GroupList'
-import GroupEval from './Eval/GroupEval'
+import GroupEval from './NewEval/GroupEval'
 
 export default function Eval() {
   const { path } = useRouteMatch();
   return (
-    <div className="Eval">
+    <div>
       <Switch>
         <Route path={`${path}/skater/:skater_id`} component={SkaterEval} />
         <Route path={`${path}/skater`} component={SkaterList} />

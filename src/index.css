@@ -5,6 +5,7 @@
   --blue-light:hsl(223, 68%, 60%);
   --green: hsl(94, 50%, 51%);
   --green-light: hsl(94, 50%, 65%);
+  --green-lighter: hsl(94, 50%, 75%);
 
   --badge-one: hsl(196, 52%, 56%);
   --badge-two:hsl(0, 83%, 56%);

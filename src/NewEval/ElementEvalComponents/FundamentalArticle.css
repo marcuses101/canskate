@@ -1,8 +1,8 @@
-.FundamentalArticle {
+.ElementFundamentals {
   overflow: hidden;
 }
 
-.FundamentalArticle .ribbonHeader {
+.ElementFundamentals .ribbonHeader {
   width:50%;
   color: white;
   height: 3rem;

@@ -1,9 +1,10 @@
 import React, { useState, useContext } from "react";
-import BadgeSection from "./BadgeSection";
+import BadgeSection from "./ElementEvalComponents/BadgeSection";
 import ElementFilter from "../Eval/ElementFilter";
 import { FilterContainer } from "../FilterContainer";
 import Context from "../Context";
-import "./SkaterEval.css";
+import "./Eval.css";
+import { useClubSkaters } from "../Hooks/useClubSkaters";
 
 const fundamentalOptions = {
   Balance: true,
@@ -29,8 +30,10 @@ const elementObjectShape = {
   6: { Balance: [], Control: [], Agility: [] },
 };
 
-export default function ElementEval() {
+export default function ElementEval({groupSkaters}) {
   const { elements } = useContext(Context);
+  const clubSkaters = useClubSkaters();
+  const skaters = groupSkaters || clubSkaters;
   const [fundamentalFilter, setFundamentalFilter] = useState(
     fundamentalOptions
   );
@@ -63,11 +66,12 @@ export default function ElementEval() {
         ...obj[element.badge],
         [element.fundamental]: [
           ...obj[element.badge][element.fundamental],
-          element,
+          {...element,skaters: skaters.filter(skater=>!skater.elementLog.find(log=>log.element_id===element.element_id))},
         ],
       },
     };
   }, elementObjectShape);
+
   const fundamentals = Object.entries(fundamentalFilter).reduce(
     (acc, [key, value]) => (value ? [...acc, key] : acc),
     []
@@ -77,7 +81,7 @@ export default function ElementEval() {
     []
   );
   return (
-    <div className="SkaterEval">
+    <div className="Eval">
       <FilterContainer>
         <ElementFilter
           toggleBadgeFilter={toggleBadgeFilter}

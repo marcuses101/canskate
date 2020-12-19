@@ -25,7 +25,7 @@ export default function FundamentalArticle({ fundamental, badge, elements }) {
 
   return (
     <article className="FundamentalArticle">
-      <header style={{ backgroundColor: `var(--${fundamental})` }}>
+      <header className='ribbonHeader' style={{ backgroundColor: `var(--${fundamental})` }}>
         <h4>{`${fundamental} ${badge}`}</h4>
       </header>
       <SwitchTransition>
