@@ -50,3 +50,17 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+
+form {
+  margin: 1rem auto;
+  padding: 1rem;
+  max-width: 600px;
+  border-radius: var(--radius);
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+form .error-icon {
+  padding-left: 1rem;
+}
+
+

@@ -1,6 +1,10 @@
 import React, { useState, useContext } from "react";
 import { SKATER_ACTIONS } from "../services/skaterReducer";
-import {CLUB_ACTIONS} from '../services/clubReducer'
+import { CLUB_ACTIONS } from "../services/clubReducer";
+import TextInput from "./Components/TextInput";
+import DateInput from "./Components/DateInput";
+import RadioSelector from "./Components/RadioSelector";
+import SessionSelector from './Components/SessionSelector';
 import Context from "../Context";
 import { useToast } from "../Hooks/useToast";
 
@@ -9,119 +13,122 @@ export default function SkaterForm() {
     skatersDispatch,
     clubDispatch,
     nextSkaterId,
-    club: { sessions },
+    club:{sessions}
   } = useContext(Context);
 
   const toast = useToast();
 
-  const [fullName, setFullName] = useState("");
-  const [birthdate, setBirthdate] = useState("");
-  const [gender, setGender] = useState(null);
-  const [selectedSessions, setSelectedSessions] = useState([]);
+  const [fullName, setFullName] = useState({ value: "", error: false });
+  const [birthdate, setBirthdate] = useState({ value: "", error: false });
+  const [gender, setGender] = useState({ value: "", error: false });
+  const [selectedSessions, setSelectedSessions] = useState({
+    value: [],
+    error: false,
+  });
 
-  console.log(sessions)
+  function addSession(sessionId) {
 
-  function handleSelect(e) {
-    const sessionId = parseInt(e.target.value);
-    setSelectedSessions((sessions) => [...sessions, sessionId]);
+    setSelectedSessions((selectedSessions) => ({
+      value: [...selectedSessions.value, {...sessions[sessionId],action:'add'}],
+      error: false,
+    }));
   }
 
-  function handleRemoveSession(e, sessionId) {
-    e.preventDefault();
-    setSelectedSessions((sessions) =>
-      sessions.filter((id) => id !== parseInt(sessionId))
-    );
+  function removeSession(sessionId) {
+    console.log(sessionId)
+    setSelectedSessions((sessions) => ({
+      ...sessions,
+      value: sessions.value.filter(({id}) => id !== parseInt(sessionId)),
+    }));
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log('submit fired')
     const skater = {
       id: nextSkaterId,
-      fullname: fullName,
-      gender: gender,
-      birthdate: birthdate,
+      fullname: fullName.value,
+      gender: gender.value,
+      birthdate: birthdate.value,
     };
+
+    let valid = true;
+
+    console.log(skater.birthdate);
+    if (!skater.fullname) {
+      setFullName((obj) => ({ ...obj, error: true }));
+      toast({ message: `ERROR: Full name field is required`, type: "error" });
+      valid = false;
+    }
+    if (!skater.birthdate) {
+      setBirthdate((obj) => ({ ...obj, error: true }));
+      toast({ message: `ERROR: Birthdate field is required`, type: "error" });
+      valid = false;
+    }
+    if (!skater.gender) {
+      setGender((obj) => ({ ...obj, error: true }));
+      toast({ message: `ERROR: Please select a gender`, type: "error" });
+      valid = false;
+    }
+    if (!selectedSessions.value.length) {
+      setSelectedSessions(sessions=>({...sessions,error:true}))
+      toast({
+        message: "ERROR: Please select at least one session",
+        type: "error",
+      });
+      valid = false;
+    }
+
+    if (!valid) return;
+
     skatersDispatch({ type: SKATER_ACTIONS.ADD_SKATER, payload: skater });
-    selectedSessions.forEach(sessionId=>{
-      clubDispatch({type: CLUB_ACTIONS.SESSION_ADD_SKATER, payload:{session_id: sessionId,skater_id: skater.id}})
-    })
-    toast({message: `${skater.fullname} added!`, type:'success'})
-    setFullName("");
-    setBirthdate("");
-    setGender(null);
-    setSelectedSessions([])
+    selectedSessions.value.forEach(session => {
+      clubDispatch({
+        type: CLUB_ACTIONS.SESSION_ADD_SKATER,
+        payload: { session_id: session.id, skater_id: skater.id },
+      });
+    });
+    toast({ message: `${skater.fullname} added!`, type: "success" });
+    setFullName({ value: "", error: false });
+    setBirthdate({ value: "", error: false });
+    setGender({ value: "", error: false });
+    setSelectedSessions({value:[],error:false});
   }
 
   return (
     <form className="SkaterForm" onSubmit={handleSubmit}>
-      <label htmlFor="fullname">Full Name:</label>
-      <input
-        type="text"
+      <h2>New Skater</h2>
+      <TextInput
         id="fullname"
-        value={fullName}
-        onChange={(e) => setFullName(e.target.value)}
+        label="Full Name: "
+        value={fullName.value}
+        error={fullName.error}
+        onChange={(e) => setFullName({ error: false, value: e.target.value })}
       />
-      <br />
-      <label htmlFor="birthdate">Birthdate:</label>
-      <input
-        type="date"
+      <DateInput
         id="birthdate"
-        value={birthdate}
-        onChange={(e) => setBirthdate(e.target.value)}
+        label="Birthdate: "
+        value={birthdate.value}
+        error={birthdate.error}
+        onChange={(e) => setBirthdate({ error: false, value: e.target.value })}
       />
-      <br />
-      <label htmlFor="male">Male</label>
-      <input
-        type="radio"
+      <RadioSelector
         name="gender"
-        id="male"
-        value="Male"
-        checked={gender === "Male"}
-        onChange={(e) => setGender(e.target.value)}
-      />
-      <br />
-      <label htmlFor="female">Female</label>
-      <input
-        type="radio"
-        name="gender"
-        id="female"
-        value="Female"
-        checked={gender === "Female"}
-        onChange={(e) => setGender(e.target.value)}
-      />
-      <br />
-      <label htmlFor="sessions">Choose your session(s):</label>
-      <select name="sessions" id="sessions" onChange={handleSelect}>
-        {[
-          <option key="" value={null}>
-            Sessions
-          </option>,
-          ...Object.values(sessions).map((session) => {
-            return selectedSessions.includes(session.id) ? null : (
-              <option key={session.id} value={session.id}>
-                {`${session.day} ${session.start_time.slice(0, 5)}`}
-              </option>
-            );
-          }),
+        options={[
+          { value: "Male", label: "Male" },
+          { value: "Female", label: "Female" },
         ]}
-      </select>
-      <ul className="selectedSessionsList">
-        {selectedSessions.map((sessionId) => {
-          const session = sessions[sessionId];
-          return (
-            <li key={sessionId}>
-              <span>
-                {`${session.day} ${session.start_time.slice(0, 5)}`}
-                <button onClick={(e) => handleRemoveSession(e, sessionId)}>
-                  Remove Session
-                </button>
-              </span>
-            </li>
-          );
-        })}
-      </ul>
-      <br />
+        error={gender.error}
+        propValue={gender.value}
+        onChange={(e) =>
+          setGender(() => ({ error: false, value: e.target.value }))
+        }
+      />
+      <SessionSelector
+        selectedSessions={selectedSessions.value}
+        addSession={addSession}
+        removeSession={removeSession}
+        error={selectedSessions.error}
+      />
       <input type="submit" value="Submit" />
     </form>
   );

@@ -10,18 +10,57 @@
 }
 .filterOptions ul li {
   flex: 1;
-  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
   border: 1px solid black;
   text-align: center;
+}
+
+.filterOptions ul.badgeOption li{
+  padding: .25rem;
+}
+.filterOptions .badgeCircle {
+  margin: 0;
 }
 .filterOptions ul:first-child li {
   border-top: none;
 }
 
-.filterOptions .active {
-  background-color: lightcoral;
+.filterOptions .badgeCircle {
+  color: black
+}
+
+.filterOptions .active .badgeCircle {
+  color: white;
+}
+
+.filterOptions .one.active .badgeCircle {
+  background-color: var(--badge-one);
   font-weight: bold;
 }
+.filterOptions .two.active .badgeCircle{
+  background-color: var(--badge-two);
+  font-weight: bold;
+}
+.filterOptions .three.active .badgeCircle{
+  background-color: var(--badge-three);
+  font-weight: bold;
+}
+
+.filterOptions .four.active .badgeCircle{
+  background-color: var(--badge-four);
+  font-weight: bold;
+}
+.filterOptions .five.active .badgeCircle{
+  background-color: var(--badge-five);
+  font-weight: bold;
+}
+.filterOptions .six.active .badgeCircle{
+  background-color: var(--badge-six);
+  font-weight: bold;
+}
+
 .filterOptions .balance{
   background-color: var(--green-light);
   font-weight: bold;

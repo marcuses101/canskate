@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
 import AssignSkatersToGroups from "./Assign/AssignSkatersToGroups";
-import SessionList from "./Eval/SessionList";
+import SessionList from "./Routes/Components/SessionList";
 import AddSessionForm from './forms/AddSessionForm'
 import EditSessionForm from "./forms/EditSessionForm";
 

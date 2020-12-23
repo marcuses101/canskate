@@ -1,9 +1,10 @@
 import React, { useState, useContext } from "react";
-import ElementEvalList from "../ElementEvalList";
+import BadgeSection from "./ElementEvalComponents/BadgeSection";
 import ElementFilter from "./ElementFilter";
 import { FilterContainer } from "../FilterContainer";
 import Context from "../Context";
-import "./ElementEval.css";
+import "./Eval.css";
+import { useClubSkaters } from "../Hooks/useClubSkaters";
 
 const fundamentalOptions = {
   Balance: true,
@@ -20,16 +21,23 @@ const badgeOptions = {
   6: true,
 };
 
-export default function ElementEval(props) {
-  const { elements, skaters: allSkaters } = useContext(Context);
+const elementObjectShape = {
+  1: { Balance: [], Control: [], Agility: [] },
+  2: { Balance: [], Control: [], Agility: [] },
+  3: { Balance: [], Control: [], Agility: [] },
+  4: { Balance: [], Control: [], Agility: [] },
+  5: { Balance: [], Control: [], Agility: [] },
+  6: { Balance: [], Control: [], Agility: [] },
+};
 
+export default function ElementEval({groupSkaters}) {
+  const { elements } = useContext(Context);
+  const clubSkaters = useClubSkaters();
+  const skaters = groupSkaters || clubSkaters;
   const [fundamentalFilter, setFundamentalFilter] = useState(
     fundamentalOptions
   );
   const [badgeFilter, setBadgeFilter] = useState(badgeOptions);
-
-  // session/group path passes in skaters, otherwise use all skaters from context
-  const skaters = props.skaters || allSkaters;
 
   function toggleBadgeFilter(badge) {
     setBadgeFilter((badgesObj) => ({
@@ -45,16 +53,35 @@ export default function ElementEval(props) {
     }));
   }
 
-  const fundamentalsToDisplay = Object.entries(fundamentalFilter)
-    .map(([key, value]) => (value ? key : null))
-    .filter(Boolean);
 
-  const badgesToDisplay = Object.entries(badgeFilter)
-    .map(([key, value]) => (value ? parseInt(key) : null))
-    .filter(Boolean);
+  const elementObject = elements.reduce((obj, element) => {
+    if (
+      !fundamentalFilter[element.fundamental] ||
+      !badgeFilter[element.badge]
+    )
+      return obj;
+    return {
+      ...obj,
+      [element.badge]: {
+        ...obj[element.badge],
+        [element.fundamental]: [
+          ...obj[element.badge][element.fundamental],
+          {...element,skaters: skaters.filter(skater=>!skater.elementLog.find(log=>log.element_id===element.element_id))},
+        ],
+      },
+    };
+  }, elementObjectShape);
 
+  const fundamentals = Object.entries(fundamentalFilter).reduce(
+    (acc, [key, value]) => (value ? [...acc, key] : acc),
+    []
+  );
+  const badges = Object.entries(badgeFilter).reduce(
+    (acc, [key, value]) => (value ? [...acc, key] : acc),
+    []
+  );
   return (
-    <div>
+    <div className="Eval">
       <FilterContainer>
         <ElementFilter
           toggleBadgeFilter={toggleBadgeFilter}
@@ -64,12 +91,14 @@ export default function ElementEval(props) {
         />
       </FilterContainer>
 
-      <ElementEvalList
-        fundamentals={fundamentalsToDisplay}
-        badges={badgesToDisplay}
-        skaters={skaters}
-        elements={elements}
-      />
+      {badges.map((badge) => (
+        <BadgeSection
+          key={badge}
+          badge={badge}
+          fundamentals={fundamentals}
+          elements={elementObject[badge]}
+        />
+      ))}
     </div>
   );
 }

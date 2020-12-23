@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
-import BadgeSection from "./ElementEvalComponents/BadgeSection";
-import ElementFilter from "../Eval/ElementFilter";
+import useSkaterFromParamId from "../Hooks/useSkaterFromParamId";
+import BadgeSection from "./SkaterEvalComponents/BadgeSection";
+import ElementFilter from "./ElementFilter";
 import { FilterContainer } from "../FilterContainer";
 import Context from "../Context";
 import "./Eval.css";
-import { useClubSkaters } from "../Hooks/useClubSkaters";
 
 const fundamentalOptions = {
   Balance: true,
@@ -30,10 +30,9 @@ const elementObjectShape = {
   6: { Balance: [], Control: [], Agility: [] },
 };
 
-export default function ElementEval({groupSkaters}) {
+export default function SkaterEval() {
   const { elements } = useContext(Context);
-  const clubSkaters = useClubSkaters();
-  const skaters = groupSkaters || clubSkaters;
+  const { elementLog: completedElements } = useSkaterFromParamId();
   const [fundamentalFilter, setFundamentalFilter] = useState(
     fundamentalOptions
   );
@@ -53,11 +52,11 @@ export default function ElementEval({groupSkaters}) {
     }));
   }
 
-
   const elementObject = elements.reduce((obj, element) => {
     if (
       !fundamentalFilter[element.fundamental] ||
-      !badgeFilter[element.badge]
+      !badgeFilter[element.badge] ||
+      completedElements.map((el) => el.element_id).includes(element.element_id)
     )
       return obj;
     return {
@@ -66,12 +65,11 @@ export default function ElementEval({groupSkaters}) {
         ...obj[element.badge],
         [element.fundamental]: [
           ...obj[element.badge][element.fundamental],
-          {...element,skaters: skaters.filter(skater=>!skater.elementLog.find(log=>log.element_id===element.element_id))},
+          element,
         ],
       },
     };
   }, elementObjectShape);
-
   const fundamentals = Object.entries(fundamentalFilter).reduce(
     (acc, [key, value]) => (value ? [...acc, key] : acc),
     []

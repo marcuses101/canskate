@@ -47,7 +47,7 @@
 
 .notification-item.error {
   color: white;
-  background-color: var(--red-light);
+  background-color: var(--red);
 }
 
 .fade-enter {

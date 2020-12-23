@@ -1,6 +1,6 @@
 import React, {useContext} from "react"
 import {Link, useRouteMatch} from 'react-router-dom'
-import Context from '../Context';
+import Context from '../../Context';
 
  export default function SessionList(){
    const {club: {sessions}} = useContext(Context);

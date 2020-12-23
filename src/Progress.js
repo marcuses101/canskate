@@ -1,9 +1,9 @@
 import React from "react"
-import SkaterList from './Eval/SkaterList'
+import SkaterList from './Routes/Components/SkaterList'
 import SkaterProgress from './SkaterProgress'
-import GroupList from './Eval/GroupList'
+import GroupList from './Routes/Components/GroupList'
 import {Switch, Route, Link, useRouteMatch} from 'react-router-dom'
-import SessionList from "./Eval/SessionList";
+import SessionList from "./Routes/Components/SessionList";
 
  export default function Progress(){
    const {path} = useRouteMatch();

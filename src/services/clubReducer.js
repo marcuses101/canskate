@@ -19,10 +19,14 @@ function clubReducer(state, action) {
       return club;
     }
     case CLUB_ACTIONS.EDIT_SESSION: {
-      const editedSession = action.payload;
-      const {id} = editedSession;
-      club.sessions = {...club.sessions, [id]: editedSession}
-      return club;
+      const { id, day, start_time, duration } = action.payload;
+      return {
+        ...club,
+        sessions: {
+          ...club.sessions,
+          [id]: { ...club.sessions[id], day, start_time, duration },
+        },
+      };
     }
     case CLUB_ACTIONS.ADD_GROUP: {
       const group = action.payload;
@@ -30,12 +34,12 @@ function clubReducer(state, action) {
       return club;
     }
 
-    case CLUB_ACTIONS.REMOVE_GROUP:{
-      const group_id = action.payload
-      const groups = {...club.groups}
+    case CLUB_ACTIONS.REMOVE_GROUP: {
+      const group_id = action.payload;
+      const groups = { ...club.groups };
       delete groups[group_id];
-      club.groups = {...groups};
-      return club
+      club.groups = { ...groups };
+      return club;
     }
     case CLUB_ACTIONS.ADD_SKATER: {
       return club;
@@ -55,6 +59,10 @@ function clubReducer(state, action) {
     }
 
     case CLUB_ACTIONS.SESSION_REMOVE_SKATER: {
+      const {session_id, skater_id} = action.payload;
+      club.sessions = {
+        ...state.sessions, [session_id]: {...club.sessions[session_id],skaters: club.sessions[session_id].skaters.filter(id=>id!==skater_id) }
+      }
       return club;
     }
     case CLUB_ACTIONS.GROUP_ADD_SKATER: {

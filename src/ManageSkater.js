@@ -1,6 +1,6 @@
 import React from "react"
 import {Link, Route, Switch, useRouteMatch} from 'react-router-dom'
-import SkaterList from "./Eval/SkaterList";
+import SkaterList from "./Routes/Components/SkaterList";
 import AddSkaterForm from "./forms/AddSkaterForm";
 import EditSkaterForm from './forms/EditSkaterForm'
 

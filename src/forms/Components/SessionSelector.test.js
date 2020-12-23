@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import GroupEval from './GroupEval';
+import SessionSelector from './SessionSelector';
 
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<GroupEval />, div);
+    ReactDOM.render(<SessionSelector />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
   

@@ -25,10 +25,14 @@ const dayOptions = days.map((day) => (
 export default function SessionForm() {
   const toast = useToast();
   const { club, clubDispatch } = useContext(Context);
-  const [startTime, setStartTime] = useState("");
-  const [day, setDay] = useState("");
-  const [duration, setDuration] = useState(30);
-  const [groupColors, setGroupColors] = useState([]);
+  const [startTime, setStartTime] = useState({value: '', error:false});
+  const [day, setDay] = useState({value: '', error:false});
+  const [duration, setDuration] = useState({value:30, error: false});
+  const [groupColors, setGroupColors] = useState({value:[], error: false});
+
+  function setErrorTrue (obj){
+    return {...obj, error:true}
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -40,7 +44,32 @@ export default function SessionForm() {
     const group_id = Object.values(club.groups).reduce((id, group) => {
       return group.id>id?group.id:id;
     }, 0);
-    groupColors.forEach((groupColor, i) => {
+    // validate inputs
+    let valid = true;
+    if (!day.value) {
+      setDay(setErrorTrue)
+      toast({message:"ERROR: Please select a day",type:'error'})
+      valid = false
+    }
+    if (!startTime.value){
+      setStartTime(setErrorTrue)
+      toast({message:"ERROR: Please select a start time",type:'error'})
+      valid = false
+    }
+    if (!duration.value){
+      setDuration(setErrorTrue)
+      toast({message:"ERROR: Please select a session duration",type:'error'})
+      valid = false
+    }
+    if (!groupColors.value.length) {
+      setGroupColors(setErrorTrue)
+      toast({message:"ERROR: Please add at least one group",type:'error'})
+      valid = false
+    }
+    // stop submit if form is invalid
+    if (!valid) return
+
+    groupColors.value.forEach((groupColor, i) => {
       const group = {
       id: group_id + i + 1,
       group_color: groupColor,
@@ -52,23 +81,23 @@ export default function SessionForm() {
 
     const session = {
       id: session_id,
-      day,
-      start_time: startTime,
-      duration,
+      day: day.value,
+      start_time: startTime.value,
+      duration: duration.value,
       skaters: [],
     };
     clubDispatch({ type: CLUB_ACTIONS.ADD_SESSION, payload: session });
-    toast({message:`${day} ${startTime} session created!`,type:'success'})
-    setDay('')
-    setStartTime('')
-    setDuration(30)
-    setGroupColors([])
+    toast({message:`${day.value} ${startTime.value} session created!`,type:'success'})
+    setDay({value:'', error:false})
+    setStartTime({value:'', error:false})
+    setDuration({value:30, error:false})
+    setGroupColors({value:[], error:false})
   }
 
   function handleSelect(e) {
     const changeColor = e.target.value;
-    setGroupColors((currentArray) => {
-      return [changeColor, ...currentArray];
+    setGroupColors(obj => {
+      return {value: [changeColor, ...obj.value], error:false};
     });
   }
   return (
@@ -79,10 +108,10 @@ export default function SessionForm() {
         <select
           id="day"
           name="day"
-          value={day}
-          onChange={(e) => setDay(e.target.value)}
+          value={day.value}
+          onChange={(e) => setDay({value: e.target.value, error:false})}
         >
-          {day
+          {day.value
             ? dayOptions
             : [
                 <option key="placeholder" value="">
@@ -90,23 +119,23 @@ export default function SessionForm() {
                 </option>,
                 ...dayOptions,
               ]}
-        </select>
+        </select>{day.error && <i class="fas fa-exclamation-triangle error-icon"></i>}
         <br />
         <label htmlFor="startTime">Start Time: </label>
         <input
           type="time"
-          value={startTime}
-          onChange={(e) => setStartTime(e.target.value)}
-        />
+          value={startTime.value}
+          onChange={(e) => setStartTime({value: e.target.value, error:false})}
+        /> {startTime.error && <i class="fas fa-exclamation-triangle error-icon"></i>}
         <br />
-        <label htmlFor="">Duration: </label>
+        <label htmlFor="">Duration(min): </label>
         <input
           type="number"
           step="5"
           min="30"
-          value={duration}
-          onChange={(e) => setDuration(e.target.value)}
-        />
+          value={duration.value}
+          onChange={(e) => setDuration({value: e.target.value, error: false})}
+        /> {duration.error && <i class="fas fa-exclamation-triangle error-icon"></i>}
         <br />
         <label htmlFor="group">Add a group</label>
         <select name="group" id="group" onChange={handleSelect}>
@@ -115,16 +144,16 @@ export default function SessionForm() {
               Select a color
             </option>,
             ...colorOptions.map((color) =>
-              groupColors.includes(color) ? null : (
+              groupColors.value.includes(color) ? null : (
                 <option key={color} value={color}>
                   {color}
                 </option>
               )
             ),
           ]}
-        </select>
+        </select> {groupColors.error && <i class="fas fa-exclamation-triangle error-icon"></i>}
         <ul className="groupList">
-          {groupColors.map((group, i) => (
+          {groupColors.value.map((group, i) => (
             <li key={`${i}${group}`}>
               <span>{group}</span>
               <button
@@ -139,6 +168,7 @@ export default function SessionForm() {
             </li>
           ))}
         </ul>
+
         <input type="submit" value="Submit" />
       </form>
     </div>

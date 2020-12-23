@@ -1,0 +1,17 @@
+.TextInput {
+  margin: 1rem;
+}
+
+.TextInput input{
+  border-radius: var(--radius);
+  border: 2px solid black;
+}
+
+.TextInput.error input {
+ border-color: var(--red);
+  border-style: solid;
+}
+
+.TextInput .error-icon{
+  padding-left: 1rem;
+}

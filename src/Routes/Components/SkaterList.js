@@ -1,7 +1,6 @@
 import React, {useContext} from "react"
 import {Link, useRouteMatch} from 'react-router-dom'
-import Context from '../Context'
-import "./SkaterList.css";
+import Context from '../../Context'
 
  export default function SkaterList(){
    const {path} = useRouteMatch();
