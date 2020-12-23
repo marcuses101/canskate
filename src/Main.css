@@ -3,6 +3,7 @@
 }
 
 .Main {
+  margin: auto;
   margin-top: calc(var(--header-offset) + var(--filter-offset) + 16px);
 
 }

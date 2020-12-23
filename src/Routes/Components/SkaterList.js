@@ -1,18 +1,37 @@
-import React, {useContext} from "react"
-import {Link, useRouteMatch} from 'react-router-dom'
-import Context from '../../Context'
+import React, { useState } from "react";
+import { Link, useRouteMatch } from "react-router-dom";
+import { useClubSkaters } from "../../Hooks/useClubSkaters";
+import "./SkaterList.css";
 
- export default function SkaterList(){
-   const {path} = useRouteMatch();
-   const {skaters,isFilterOpen} = useContext(Context)
-   const skaterLinks = skaters.map(skater=>{
-     return <li style={{flexGrow:1}} key={skater.id}><Link to={`${path}/${skater.id}`} >{skater.fullname}</Link></li>
-   })
-   return (
-     <div className="SkaterList">
+export default function SkaterList() {
+  const [name, setName] = useState("");
+  const { path } = useRouteMatch();
+  const skaters = useClubSkaters();
+  const filteredSkaters = name
+    ? skaters.filter((skater) => new RegExp(name, "i").test(skater.fullname))
+    : skaters;
+
+  const skaterLinks = filteredSkaters.map((skater) => {
+    return (
+      <li key={skater.id}>
+        <Link to={`${path}/${skater.id}`}>{skater.fullname}</Link>
+      </li>
+    );
+  });
+  return (
+    <div className="SkaterList">
       <h2>Choose a skater:</h2>
-        {isFilterOpen && <h2>Filter Open</h2>}
-        <ul className="links" style={{display:'flex', flexWrap:'wrap', justifyContent:'stretch'}}>{skaterLinks}</ul>
-     </div>
-   )
- }
+      <div className="field">
+        <input className='input'
+          type="text"
+          id='name'
+          value={name?name:null}
+          placeholder=''
+          onChange={(e) => setName(e.target.value)}
+        />
+        <label className={name && 'scale'} htmlFor="name">Search name</label>
+      </div>
+      <ul className="links">{skaterLinks}</ul>
+    </div>
+  );
+}

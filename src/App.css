@@ -13,7 +13,7 @@ a {
   padding: .5rem;
 }
 
-.links li a{
+a{
   color: rgb(44, 44, 44);
   box-shadow: var(--box-shadow);
   margin: auto;
@@ -22,10 +22,10 @@ a {
   max-width: 300px;
 }
 
-.links li a:hover{
+a:hover{
   transform: scale(1.015)
 }
 
-.links li a:active {
+a:active {
   transform: scale(1);
 }

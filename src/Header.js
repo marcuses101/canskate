@@ -28,9 +28,6 @@ export default function Header({ openNav, setOffset }) {
         <Route path="/eval/skater/:skater_id">
           <SkaterEvalHeader openNav={openNav} />
         </Route>
-        <Route path="/eval/skater">
-          <HeaderContent title="Skater List" openNav={openNav} />
-        </Route>
         <Route
           path={["/eval/element", "/eval/session/:session_id/group/:group_id"]}
         >
