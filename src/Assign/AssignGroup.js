@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import AssignSkater from "./AssignSkater";
 import "./AssignGroup.css";
 
-export default function AssignGroup({ name, group_id, skaters, otherGroups }) {
+export default function AssignGroup({ name, group_id, skaters, otherGroups,text }) {
   const [open, setOpen] = useState(false);
   return (
-    <li style={{ background: `${name.toLowerCase()}` }} className="AssignGroup"
-
+    <li
+      style={{ background: `var(--${name.toLowerCase()})` }}
+      className="AssignGroup"
     >
-      <div className='groupName' onClick={() => setOpen((bool) => !bool)}>{name}</div>
+      <div style={{color:text}} className="groupName" onClick={() => setOpen((bool) => !bool)}>
+        {name}
+      </div>
       {open && (
         <ul>
           {skaters.map((skater) => (

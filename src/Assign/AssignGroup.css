@@ -1,13 +1,23 @@
+.AssignSkatersToGroups{
+  max-width: 600px;
+  margin: auto;
+}
+
 .AssignGroup {
   min-height: 4rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: .5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--box-shadow);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: stretch;
 }
 
 .AssignGroup:hover{
-  cursor:pointer
+  cursor:pointer;
+  transform: scale(1.01);
 }
 
 .groupName {
