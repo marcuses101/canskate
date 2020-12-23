@@ -151,8 +151,8 @@ export default function EditSessionForm() {
 
   return (
     <div className="SessionForm">
-      <h1>Hello Sessions</h1>
       <form onSubmit={handleSubmit}>
+      <h2>Edit Session</h2>
         <label htmlFor="day">Day: </label>
         <select
           id="day"

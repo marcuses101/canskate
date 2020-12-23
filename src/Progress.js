@@ -15,13 +15,12 @@ import SessionList from "./Routes/Components/SessionList";
        <Route path={`${path}/session`} component={SessionList}/>
        <Route>
          <div className="Progress">
-      <h1>Progress Reports</h1>
-      <h2>Coming Soon</h2>
-      <ul>
+
+      <ul className="links">
         <li><Link to={`${path}/skater`}>All Skaters</Link></li>
-        <li>
+        {/* <li>
           <Link to={`${path}/session`}>Sessions</Link>
-        </li>
+        </li> */}
       </ul>
      </div>
        </Route>

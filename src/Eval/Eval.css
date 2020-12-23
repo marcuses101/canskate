@@ -4,3 +4,11 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.groupHeader {
+  display: inline-block;
+  color: white;
+  padding: .5rem .75rem;
+  border-radius: var(--radius);
+  margin-top: .5rem;
+}

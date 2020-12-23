@@ -1,5 +1,6 @@
 .FundamentalArticle {
   overflow: hidden;
+  min-height: 128px;
 }
 
 .FundamentalArticle .ribbonHeader {

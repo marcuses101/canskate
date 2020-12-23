@@ -8,7 +8,9 @@ import useSkaterFromParamId from "./Hooks/useSkaterFromParamId"
    return (
      <div className="SkaterProgress">
         <h2>{skater.fullname}</h2>
-        <Link to={`/eval/skater/${skater.id}`}>Go to Evaluation</Link>
+       <ul className='links'>
+         <li><Link to={`/eval/skater/${skater.id}`}>Go to Evaluation</Link></li>
+       </ul>
         <ReportCard skater={skater} />
      </div>
    )

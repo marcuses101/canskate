@@ -14,7 +14,7 @@ import EditSkaterForm from './forms/EditSkaterForm'
           <Route path={`${path}/edit`} component={SkaterList}/>
           <Route >
             <div className="ManageSkater">
-              <ul>
+              <ul className="links">
                 <li>
                   <Link to={`${path}/add`}>Add Skater</Link>
                 </li>

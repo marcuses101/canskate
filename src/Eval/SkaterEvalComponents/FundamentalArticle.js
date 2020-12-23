@@ -59,11 +59,10 @@ export default function FundamentalArticle({ fundamental, badge, elements }) {
                 style={{
                   ...defaultStyle,
                   ...transitionStyles[state],
-                  height: "48px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  transitionDuration:'100ms'
+                  height: "80px",
+                  display:'flex',
+                  alignItems:'center',
+                  justifyContent: 'center'
                 }}
               >
                 All ribbon elements complete!

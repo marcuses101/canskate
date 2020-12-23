@@ -36,6 +36,7 @@ function skatersReducer(state, action) {
           age: dayjs().diff(dayjs(action.payload.birthdate), "year"),
         };
       });
+      debugger
       return newState;
     }
 

@@ -40,6 +40,30 @@ export default function Header({ openNav, setOffset }) {
             showFilter={true}
           />
         </Route>
+        <Route path='/eval'>
+          <HeaderContent
+            title="Evaluation"
+            openNav={openNav}
+          />
+        </Route>
+        <Route path='/manage/skater'>
+          <HeaderContent
+            title="Skater Management"
+            openNav={openNav}
+          />
+        </Route>
+        <Route path='/manage/session'>
+          <HeaderContent
+            title="Session Management"
+            openNav={openNav}
+          />
+        </Route>
+        <Route path='/manage'>
+          <HeaderContent
+          title="Management"
+          openNav={openNav}
+          />
+        </Route>
         <Route path="/distribution">
           <HeaderContent
             title="Distribution"
@@ -47,9 +71,16 @@ export default function Header({ openNav, setOffset }) {
             showFilter={true}
           />
         </Route>
+        <Route path='/progress'>
+          <HeaderContent
+            title="Progress"
+            openNav={openNav}
+            showFilter={false}
+          />
+        </Route>
         <Route path="/">
           <HeaderContent
-            title="Canskate Management"
+            title="Canskate App"
             openNav={openNav}
             showFilter={false}
           />

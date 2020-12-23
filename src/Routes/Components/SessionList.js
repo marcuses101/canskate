@@ -7,8 +7,8 @@ import Context from '../../Context';
    const {path} = useRouteMatch();
    return (
          <div className="SessionList">
-        <h2>Choose a session</h2>
-        <ul>{Object.values(sessions).map(session=>{
+        <h2>Choose a session:</h2>
+        <ul className="links">{Object.values(sessions).map(session=>{
           return <li key={session.id}><Link to={`${path}/${session.id}`}>{`${session.day} ${session.start_time.substring(0,5)}`}</Link></li>
         })}</ul>
      </div>

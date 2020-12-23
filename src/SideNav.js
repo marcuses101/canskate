@@ -25,7 +25,7 @@ import './SideNav.css'
 
    return (
      <nav className={`SideNav ${open?'open':'closed'}`} ref={sidenav}>
-      <ul>
+      <ul className='links'>
         <li onClick={closeNav}><Link to="/">Home</Link></li>
         <li onClick={closeNav}><Link to='/eval'>Evaluate</Link></li>
         <li onClick={closeNav}><Link to='/progress'>Progress</Link></li>

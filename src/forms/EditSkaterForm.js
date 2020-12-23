@@ -4,7 +4,6 @@ import dayjs from "dayjs";
 import Context from "../Context";
 import useSkaterFromParamId from "../Hooks/useSkaterFromParamId";
 import { CLUB_ACTIONS } from "../services/clubReducer";
-import {useHistory, useParams} from 'react-router-dom'
 import TextInput from "./Components/TextInput";
 import DateInput from "./Components/DateInput";
 import RadioSelector from "./Components/RadioSelector";
@@ -12,8 +11,6 @@ import SessionSelector from "./Components/SessionSelector";
 import { useToast } from "../Hooks/useToast";
 
 export default function EditSkaterForm() {
-  const {url} = useParams();
-  const {push} = useHistory();
   const toast = useToast();
   const skater = useSkaterFromParamId();
   const {
@@ -43,19 +40,6 @@ export default function EditSkaterForm() {
       .filter(Boolean),
     error: false,
   });
-  function handleSubmit(e) {
-    e.preventDefault();
-    const editedSkater = {
-      id: skater.id,
-      fullname: fullName,
-      gender: gender,
-      birthdate: birthdate,
-    };
-    skatersDispatch({
-      type: SKATER_ACTIONS.EDIT_SKATER,
-      payload: editedSkater,
-    });
-  }
 
   function addSession(sessionId) {
     setSelectedSessions((selectedSessions) => ({
@@ -99,11 +83,10 @@ export default function EditSkaterForm() {
     e.preventDefault();
     const editedSkater = {
       id: skater.id,
-      fullname: fullName,
-      gender: gender,
-      birthdate: birthdate,
+      fullname: fullName.value,
+      gender: gender.value,
+      birthdate: birthdate.value,
     };
-
     let valid = true;
 
     console.log(skater.birthdate);
@@ -133,7 +116,7 @@ export default function EditSkaterForm() {
 
     if (!valid) return;
 
-    skatersDispatch({ type: SKATER_ACTIONS.EDIT_SKATER, payload: skater });
+    skatersDispatch({ type: SKATER_ACTIONS.EDIT_SKATER, payload: editedSkater });
     selectedSessions.value.forEach(session => {
     if (session.action === 'add')  {clubDispatch({
         type: CLUB_ACTIONS.SESSION_ADD_SKATER,
@@ -149,7 +132,7 @@ export default function EditSkaterForm() {
       removeSession(session.id)
     }
     });
-    
+
     toast({ message: `${skater.fullname} edited!`, type: "success" });
 
   }

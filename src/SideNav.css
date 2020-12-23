@@ -5,8 +5,8 @@
   left: 0;
   z-index: 2;
   height: 100vh;
-  min-width: 25vw;
-  max-width: 33vw;
+  min-width: 20vw;
+  max-width: 37vw;
   border: 2px solid black;
   box-shadow: 2px 0 10px rgba(0,0,0,0.5);
   transition: left 200ms ease;
@@ -14,7 +14,8 @@
 }
 
 .SideNav.closed {
-  left: -33vw;
+  left: -40vw;
+  box-shadow: none;
 }
 
 .SideNav ul {
@@ -30,4 +31,6 @@
 }
 .SideNav ul li:last-child{
   margin-top: auto;
+  /* hide logout button for now */
+  display: none;
 }

@@ -1,8 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext , useEffect} from "react";
 import Context from "../Context";
 
 export default function HeaderContent({ title, openNav ,showFilter}) {
   const { isFilterOpen, setIsFilterOpen } = useContext(Context);
+
+
+  // animate main margin top
+  useEffect(() => {
+    if (showFilter) {document.body.classList.add('filter')}
+    else {document.body.classList.remove('filter')}
+    return () => {
+      document.body.classList.remove('filter')
+    }
+  }, [showFilter])
+
   return (
     <header className="SkaterEvalHeader">
       <div className="menu" onClick={openNav}>

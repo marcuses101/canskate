@@ -4,5 +4,9 @@
 
 .Main {
   margin-top: calc(var(--header-offset) + var(--filter-offset) + 16px);
+
+}
+
+.filter .Main {
   transition: margin calc(var(--time) / 2) linear;
 }

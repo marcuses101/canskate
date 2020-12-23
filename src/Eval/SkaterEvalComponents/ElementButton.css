@@ -8,6 +8,7 @@
   margin: .5rem;
   justify-content: space-between;
   overflow: hidden;
+  text-align: left;
 }
 
 .ElementButton:hover {

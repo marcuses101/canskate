@@ -2,7 +2,7 @@ import React from "react";
 import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
 import AssignSkatersToGroups from "./Assign/AssignSkatersToGroups";
 import SessionList from "./Routes/Components/SessionList";
-import AddSessionForm from './forms/AddSessionForm'
+import AddSessionForm from "./forms/AddSessionForm";
 import EditSessionForm from "./forms/EditSessionForm";
 
 export default function ManageSession() {
@@ -12,20 +12,23 @@ export default function ManageSession() {
     <Switch>
       <Route path={`${path}/add`} component={AddSessionForm} />
       <Route path={`${path}/edit/:session_id`} component={EditSessionForm} />
-      <Route path={`${path}/edit`} component={SessionList}/>
-      <Route path={`${path}/assign/:session_id`} component={AssignSkatersToGroups}/>
-      <Route path={`${path}/assign`} component={SessionList}/>
+      <Route path={`${path}/edit`} component={SessionList} />
+      <Route
+        path={`${path}/assign/:session_id`}
+        component={AssignSkatersToGroups}
+      />
+      <Route path={`${path}/assign`} component={SessionList} />
       <Route>
         <div className="ManageSkater">
-          <ul>
+          <ul className="links">
             <li>
               <Link to={`${path}/add`}>Add Session</Link>
             </li>
             <li>
-              <Link to={`${path}/assign`}>Assign Skaters to groups</Link>
+              <Link to={`${path}/edit`}>Edit Session</Link>
             </li>
             <li>
-              <Link to={`${path}/edit`}>Edit Session</Link>
+              <Link to={`${path}/assign`}>Assign Skaters to groups</Link>
             </li>
           </ul>
         </div>

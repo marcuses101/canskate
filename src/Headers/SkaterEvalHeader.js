@@ -1,12 +1,22 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import useSkaterFromParamId from '../Hooks/useSkaterFromParamId'
 import Context from "../Context";
 
 export default function SkaterEvalHeader({openNav}) {
   const {isFilterOpen, setIsFilterOpen } = useContext(Context);
   const skater = useSkaterFromParamId();
+  const render = useRef(null)
+
+
+  useEffect(() => {
+    if (render.current) document.body.classList.add('filter')
+    return () => {
+      document.body.classList.remove('filter')
+    }
+  },[render])
+
   return (
-    <header className="SkaterEvalHeader">
+    <header ref={render} className="SkaterEvalHeader">
       <div className='menu' onClick={openNav}>☰</div>
       <h2>{skater.fullname}</h2>
       <div className='filter' onClick={() => setIsFilterOpen((bool) => !bool)}>

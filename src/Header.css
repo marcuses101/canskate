@@ -9,7 +9,6 @@
 }
 
 .Header > header {
-  border-radius: 0 0 var(--radius) var(--radius);
   border: 2px solid black;
   overflow: hidden;
   min-height: 50px;

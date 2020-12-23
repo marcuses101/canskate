@@ -6,6 +6,11 @@
   --green: hsl(94, 50%, 51%);
   --green-light: hsl(94, 50%, 65%);
   --green-lighter: hsl(94, 50%, 75%);
+  --yellow: hsl(53, 63%, 47%);
+  --orange: orange;
+  --purple: hsl(274, 27%, 44%);
+  --turquoise: rgb(16, 172, 172);
+
 
   --badge-one: hsl(196, 52%, 56%);
   --badge-two:hsl(0, 83%, 56%);
@@ -13,6 +18,8 @@
   --badge-four: hsl(53, 63%, 47%);
   --badge-five:hsl(205, 100%, 35%);
   --badge-six: hsl(74, 100%, 15%);
+
+  --box-shadow: 0 0 5px rgba(0,0,0,0.72);
 
   --header-offset: 50px;
   --filter-offset: 0px;
@@ -63,4 +70,7 @@ form .error-icon {
   padding-left: 1rem;
 }
 
+form h2 {
+  margin-bottom: 1rem;
+}
 
