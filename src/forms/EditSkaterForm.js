@@ -133,7 +133,7 @@ export default function EditSkaterForm() {
     }
     });
 
-    toast({ message: `${skater.fullname} edited!`, type: "success" });
+    toast({ message: `${editedSkater.fullname} edited!`, type: "success" });
 
   }
 
