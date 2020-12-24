@@ -155,15 +155,15 @@ export default function SessionForm() {
         <ul className="groupList">
           {groupColors.value.map((group, i) => (
             <li key={`${i}${group}`}>
-              <span>{group}</span>
+              <span>{group} </span>
               <button
                 onClick={() => {
-                  setGroupColors((arr) =>
-                    arr.filter((color) => color !== group)
+                  setGroupColors(groups =>
+                    ({...groups, value: groups.value.filter((color) => color !== group)})
                   );
                 }}
               >
-                X
+                 X
               </button>
             </li>
           ))}

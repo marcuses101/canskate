@@ -26,7 +26,7 @@ export default function SkaterList() {
           type="text"
           id='name'
           value={name?name:null}
-          placeholder=''
+          autoComplete='off'
           onChange={(e) => setName(e.target.value)}
         />
         <label className={name && 'scale'} htmlFor="name">Search name</label>

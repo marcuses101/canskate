@@ -66,6 +66,10 @@ form {
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
+form input, form select {
+  margin: .25rem auto;
+}
+
 form .error-icon {
   padding-left: 1rem;
 }
