@@ -19,6 +19,6 @@
 }
 
 .ElementDropdown ul {
-  height: 33vh;
+  max-height: 33vh;
   overflow-y: scroll;
 }

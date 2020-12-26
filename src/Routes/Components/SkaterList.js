@@ -25,7 +25,7 @@ export default function SkaterList() {
         <input className='input'
           type="text"
           id='name'
-          value={name?name:null}
+          value={name?name:''}
           autoComplete='off'
           onChange={(e) => setName(e.target.value)}
         />
