@@ -6,7 +6,7 @@ import "./SkaterList.css";
 export default function SkaterList() {
   const [name, setName] = useState("");
   const { path } = useRouteMatch();
-  const skaters = useClubSkaters();
+  const skaters = useClubSkaters().sort((a,b)=>a.fullname>b.fullname?1:-1);
   const filteredSkaters = name
     ? skaters.filter((skater) => new RegExp(name, "i").test(skater.fullname))
     : skaters;
