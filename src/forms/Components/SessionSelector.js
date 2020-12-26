@@ -11,7 +11,7 @@ export default function SessionSelector({
 }) {
   const sessions = useSessions();
   const select = useRef(null);
-  console.log({ selectedSessions });
+
   return (
     <div className="SessionSelector">
       <label htmlFor="sessions">Choose your session(s):</label>
@@ -68,7 +68,6 @@ export default function SessionSelector({
               </li>
             );
           } else {
-            console.log({ session });
             return (
               <li key={session.id}>
                 <span>

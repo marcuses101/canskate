@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { SKATER_ACTIONS } from "../services/skaterReducer";
+import {skaterAPI} from '../API/skaterAPI'
 import dayjs from "dayjs";
 import Context from "../Context";
 import useSkaterFromParamId from "../Hooks/useSkaterFromParamId";
@@ -26,7 +27,6 @@ export default function EditSkaterForm() {
     value: dayjs(skater.birthdate).format("YYYY-MM-DD"),
     error: false,
   });
-  console.log({ sessions });
   const [gender, setGender] = useState({ value: skater.gender, error: false });
 
   // set selectedSession No CLUB_ACTIONS will be taken on submit for sessions with action:null
@@ -79,7 +79,7 @@ export default function EditSkaterForm() {
     }));
   }
 
-  function handleSubmit(e) {
+ async function handleSubmit(e) {
     e.preventDefault();
     const editedSkater = {
       id: skater.id,
@@ -89,7 +89,6 @@ export default function EditSkaterForm() {
     };
     let valid = true;
 
-    console.log(skater.birthdate);
     if (!editedSkater.fullname) {
       setFullName((obj) => ({ ...obj, error: true }));
       toast({ message: `ERROR: Full name field is required`, type: "error" });
@@ -115,6 +114,11 @@ export default function EditSkaterForm() {
     }
 
     if (!valid) return;
+
+    if (!await skaterAPI.editSkater(editedSkater)) {
+      toast({message:"Server Error", type:'error'})
+      return
+    }
 
     skatersDispatch({ type: SKATER_ACTIONS.EDIT_SKATER, payload: editedSkater });
     selectedSessions.value.forEach(session => {

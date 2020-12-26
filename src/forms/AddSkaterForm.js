@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import {skaterAPI} from '../API/skaterAPI'
 import { SKATER_ACTIONS } from "../services/skaterReducer";
 import { CLUB_ACTIONS } from "../services/clubReducer";
 import TextInput from "./Components/TextInput";
@@ -42,7 +43,7 @@ export default function SkaterForm() {
     }));
   }
 
-  function handleSubmit(e) {
+ async function handleSubmit(e) {
     e.preventDefault();
     const skater = {
       id: nextSkaterId,
@@ -79,6 +80,11 @@ export default function SkaterForm() {
     }
 
     if (!valid) return;
+
+    if (!await skaterAPI.addSkater(skater)) {
+      toast({message:'Server Error', type: 'error'})
+      return
+    }
 
     skatersDispatch({ type: SKATER_ACTIONS.ADD_SKATER, payload: skater });
     selectedSessions.value.forEach(session => {
