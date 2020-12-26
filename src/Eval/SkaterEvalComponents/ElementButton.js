@@ -10,7 +10,7 @@ export default function ElementButton({ element, style }) {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const logElement = useLogElement(skater.id, element.element_id)
 
-const duration = 100;
+const duration = 0;
 
 const defaultStyle = {
   transition: `transform ${duration}ms ease`,
@@ -27,7 +27,12 @@ const transitionStyles = {
   return (
     <li
       className="ElementButton"
-      onClick={() => setConfirmOpen((bool) => !bool)}
+      onClick={(e) => {
+            e.stopPropagation();
+            logElement();}}
+      onMouseEnter={() => setConfirmOpen(true)}
+      onMouseLeave={()=> {
+        setConfirmOpen(false)}}
       style={style}
     >
       <div>{element.element}</div>

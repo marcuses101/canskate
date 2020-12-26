@@ -23,8 +23,3 @@
   border-style: none;
   width:3rem;
 }
-
-.ElementButton button:hover{
-  cursor: pointer;
-  background-color: var(--green);
-}

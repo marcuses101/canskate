@@ -3,7 +3,6 @@ import ReportCardRibbon from './ReportCardRibbon'
 import ReportCheckmarkList from './ReportCheckmarkList'
  export default function ReportRibbonComponent({ribbon,checkmarks,elements,date}){
    const {fundamental_area, stage, checkmarks_required} = ribbon
-   console.log(checkmarks)
    const checkmarksCompleted = checkmarks.reduce((total,checkmark)=>{
      return (checkmark.ribbon_id===ribbon.id && checkmark.date)?total+1:total
    },0)

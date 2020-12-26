@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import useSkaterFromParamId from "../Hooks/useSkaterFromParamId";
+import {Link} from 'react-router-dom'
 import BadgeSection from "./SkaterEvalComponents/BadgeSection";
 import ElementFilter from "./ElementFilter";
 import { FilterContainer } from "../FilterContainer";
@@ -32,7 +33,7 @@ const elementObjectShape = {
 
 export default function SkaterEval() {
   const { elements } = useContext(Context);
-  const { elementLog: completedElements } = useSkaterFromParamId();
+  const { elementLog: completedElements,id } = useSkaterFromParamId();
   const [fundamentalFilter, setFundamentalFilter] = useState(
     fundamentalOptions
   );
@@ -78,7 +79,8 @@ export default function SkaterEval() {
     (acc, [key, value]) => (value ? [...acc, key] : acc),
     []
   );
-  return (
+  return (<>
+      <Link to={`/progress/skater/${id}`}>Go to progress page</Link>
     <div className="Eval">
       <FilterContainer>
         <ElementFilter
@@ -88,7 +90,6 @@ export default function SkaterEval() {
           fundamentalFilterState={fundamentalFilter}
         />
       </FilterContainer>
-
       {badges.map((badge) => (
         <BadgeSection
           key={badge}
@@ -98,5 +99,6 @@ export default function SkaterEval() {
         />
       ))}
     </div>
+    </>
   );
 }

@@ -1,6 +1,5 @@
 import React from "react";
-import { useParams, Link, useRouteMatch } from "react-router-dom";
-import SessionForm from "../../forms/AddSessionForm";
+import { Link, useRouteMatch } from "react-router-dom";
 import { useSessionFromParamId } from "../../Hooks/useSessionFromParamId";
 import { useSessionGroups } from "../../Hooks/useSessionGroups";
 

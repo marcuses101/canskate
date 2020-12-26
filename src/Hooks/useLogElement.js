@@ -69,7 +69,6 @@ export function useLogElement(skater_id, element_id) {
         ribbon_id,
       },
     });
-    console.log({fundamental_area})
     toast({
       message: `${skater.fullname} completed ${fundamental_area} ${stage}`,
       type: fundamental_area.toLowerCase(),
