@@ -27,7 +27,7 @@ export default function Welcome() {
         I will be continuing to develop this application going forward, and your
         feedback will be essential in creating a great tool.
       </p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScTEUH7_XaK5sDyQ1_w_NX9EIxJQS0aGpyxJ5Yejts38G4waQ/viewform?usp=sf_link">
+      <a target="_blank" rel="noreferrer" href="https://docs.google.com/forms/d/e/1FAIpQLScTEUH7_XaK5sDyQ1_w_NX9EIxJQS0aGpyxJ5Yejts38G4waQ/viewform?usp=sf_link">
         Survey
       </a>
 
