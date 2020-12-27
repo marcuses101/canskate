@@ -7,12 +7,12 @@ export default function Welcome() {
     <div className="Welcome">
       <h2>What is it?</h2>
       <p>
-        This application is designed to managing the Canskate program a breeze.
+        This application is designed to make managing the Canskate program a breeze.
       </p>
       <p>
         The main feature is the evaluation tool. You can evaluate by skater, by
         element, or by group. There are filters to display elements based on
-        Badge and Fundamental area (Balance, Control Agility). In the skater
+        Badge and Fundamental area (Balance, Control, Agility). In the skater
         view only elements yet to be completed are displayed. In the
         element/group view, only the skaters yet to complete the element are
         displayed.
