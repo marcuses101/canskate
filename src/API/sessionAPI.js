@@ -3,6 +3,7 @@ const url = `${config.SERVER}/session`;
 
 export const sessionAPI = {
   async addSession(session){
+    console.log(url)
    try {
     const response = await fetch(url, {
       method: 'POST',

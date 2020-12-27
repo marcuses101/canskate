@@ -2,7 +2,7 @@ import config from "../config";
 const url = `${config.SERVER}/group`;
 
 export const groupAPI = {
-  async addgroup(group){
+  async addGroup(group){
    try {
     const response = await fetch(url, {
       method: 'POST',
@@ -18,7 +18,7 @@ export const groupAPI = {
     return false
    }
   },
-  async editgroup(group){
+  async editGroup(group){
     try {
       const response = await fetch(`${url}/${group.id}`,{
         method:'PATCH',

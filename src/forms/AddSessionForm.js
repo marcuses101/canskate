@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { sessionAPI } from "../API/sessionAPI";
+import { groupAPI } from "../API/groupAPI";
 import { CLUB_ACTIONS } from "../services/clubReducer";
 import Context from "../Context";
 import { useToast } from "../Hooks/useToast";
@@ -77,18 +78,32 @@ export default function SessionForm() {
 
     if (!responseSession) {
       toast({ message: "Server Error", type: "error" });
+      return;
+    }
+
+    responseSession.skaters = [];
+
+    let responseGroups = [];
+    try{
+       responseGroups = await Promise.all(
+      groupColors.value.map(async (groupColor) => {
+        const responseGroup = await groupAPI.addGroup({
+          group_color: groupColor,
+          session_id: responseSession.id,
+        });
+        return responseGroup;
+      })
+    );
+    } catch(error) {
+      console.error(error)
+      toast({message: 'Group Server Error', type:'error'})
       return
     }
 
-    responseSession.skaters = []
+    console.log({responseGroups});
 
-    groupColors.value.forEach((groupColor, i) => {
-      const group = {
-        id: group_id + i + 1,
-        group_color: groupColor,
-        session_id: responseSession.id,
-        skaters: [],
-      };
+    responseGroups.forEach((group) => {
+      group.skaters = []
       clubDispatch({ type: CLUB_ACTIONS.ADD_GROUP, payload: group });
     });
 
