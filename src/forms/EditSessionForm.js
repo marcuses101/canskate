@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { CLUB_ACTIONS } from "../services/clubReducer";
+import {sessionAPI} from '../API/sessionAPI'
 import GroupItem from "./GroupItem";
 import Context from "../Context";
 import { useSessionFromParamId } from "../Hooks/useSessionFromParamId";
@@ -58,10 +59,10 @@ export default function EditSessionForm() {
     </option>
   ));
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
-    const newSession = {
+    const editedSession = {
       id: session.id,
       day: day.value,
       start_time: startTime.value,
@@ -69,17 +70,17 @@ export default function EditSessionForm() {
     };
     let valid = true;
 
-    if (!newSession.day) {
+    if (!editedSession.day) {
       toast({ message: "ERROR: Please select a day", type: "error" });
       setDay(setError);
       valid = false
     }
-    if (!newSession.start_time) {
+    if (!editedSession.start_time) {
       toast({ message: "ERROR: Please select a start time", type: "error" });
       setStartTime(setError);
       valid = false
     }
-    if (!newSession.duration) {
+    if (!editedSession.duration) {
       toast({ message: "ERROR: Please select a duration", type: "error" });
       setDuration(setError);
       valid = false
@@ -87,8 +88,15 @@ export default function EditSessionForm() {
 
     if (!valid) return
 
+    const response = await sessionAPI.editSession(editedSession)
+
+    if (!response) {
+      toast({message:'Server Error', type: 'error'})
+      return
+    }
+
     toast({message: 'Session updated', type:'success'})
-    clubDispatch({ type: CLUB_ACTIONS.EDIT_SESSION, payload: newSession });
+    clubDispatch({ type: CLUB_ACTIONS.EDIT_SESSION, payload: editedSession });
 
     const groupsToDelete = groups.value.filter(
       (group) => group.action === "delete"
@@ -169,7 +177,7 @@ export default function EditSessionForm() {
                 ...dayOptions,
               ]}
         </select>
-        {day.error && <i class="fas fa-exclamation-triangle error-icon"></i>}
+        {day.error && <i className="fas fa-exclamation-triangle error-icon"></i>}
         <br />
         <label htmlFor="startTime">Start Time: </label>
         <input
@@ -180,7 +188,7 @@ export default function EditSessionForm() {
           }
         />{" "}
         {startTime.error && (
-          <i class="fas fa-exclamation-triangle error-icon"></i>
+          <i className="fas fa-exclamation-triangle error-icon"></i>
         )}
         <br />
         <label htmlFor="">Duration: </label>
@@ -192,7 +200,7 @@ export default function EditSessionForm() {
           onChange={(e) => setDuration({ value: e.target.value, error: false })}
         />{" "}
         {duration.error && (
-          <i class="fas fa-exclamation-triangle error-icon"></i>
+          <i className="fas fa-exclamation-triangle error-icon"></i>
         )}
         <br />
         <label htmlFor="group">Add a group</label>
@@ -210,7 +218,7 @@ export default function EditSessionForm() {
             ),
           ]}
         </select>{" "}
-        {groups.error && <i class="fas fa-exclamation-triangle error-icon"></i>}
+        {groups.error && <i className="fas fa-exclamation-triangle error-icon"></i>}
         <ul className="groupList">
           {groups.value.map((group) => (
             <GroupItem

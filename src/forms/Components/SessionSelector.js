@@ -43,7 +43,7 @@ export default function SessionSelector({
           Add Session
         </button>
       }
-      {error && <i class="fas fa-exclamation-triangle error-icon"></i>}
+      {error && <i className="fas fa-exclamation-triangle error-icon"></i>}
       <ul className="selectedSessionsList">
         {selectedSessions.map((session) => {
           if (session.action === "add") {

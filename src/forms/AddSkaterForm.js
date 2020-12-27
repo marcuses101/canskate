@@ -13,7 +13,6 @@ export default function SkaterForm() {
   const {
     skatersDispatch,
     clubDispatch,
-    nextSkaterId,
     club:{sessions}
   } = useContext(Context);
 
@@ -36,7 +35,6 @@ export default function SkaterForm() {
   }
 
   function removeSession(sessionId) {
-    console.log(sessionId)
     setSelectedSessions((sessions) => ({
       ...sessions,
       value: sessions.value.filter(({id}) => id !== parseInt(sessionId)),
@@ -46,7 +44,6 @@ export default function SkaterForm() {
  async function handleSubmit(e) {
     e.preventDefault();
     const skater = {
-      id: nextSkaterId,
       fullname: fullName.value,
       gender: gender.value,
       birthdate: birthdate.value,
@@ -54,7 +51,6 @@ export default function SkaterForm() {
 
     let valid = true;
 
-    console.log(skater.birthdate);
     if (!skater.fullname) {
       setFullName((obj) => ({ ...obj, error: true }));
       toast({ message: `ERROR: Full name field is required`, type: "error" });
@@ -81,16 +77,18 @@ export default function SkaterForm() {
 
     if (!valid) return;
 
-    if (!await skaterAPI.addSkater(skater)) {
+    const serverSkater = await skaterAPI.addSkater(skater);
+
+    if (!serverSkater) {
       toast({message:'Server Error', type: 'error'})
       return
     }
 
-    skatersDispatch({ type: SKATER_ACTIONS.ADD_SKATER, payload: skater });
+    skatersDispatch({ type: SKATER_ACTIONS.ADD_SKATER, payload: serverSkater});
     selectedSessions.value.forEach(session => {
       clubDispatch({
         type: CLUB_ACTIONS.SESSION_ADD_SKATER,
-        payload: { session_id: session.id, skater_id: skater.id },
+        payload: { session_id: session.id, skater_id: serverSkater.id },
       });
     });
     toast({ message: `${skater.fullname} added!`, type: "success" });

@@ -27,7 +27,7 @@ export default function RadioSelector({
           );
         })}
       </div>
-        {error && <i class="fas fa-exclamation-triangle error-icon"></i>}
+        {error && <i className="fas fa-exclamation-triangle error-icon"></i>}
     </div>
   );
 }
