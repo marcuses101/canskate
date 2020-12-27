@@ -6,8 +6,11 @@ import "./Header.css";
 
 export default function Header({ openNav, setOffset }) {
   const header = useRef();
+
   const resize = new ResizeObserver(([entry]) => {
-    const offset = entry.borderBoxSize[0].blockSize;
+    // borderBoxSize object held in an array in Chrome, not in firefox?
+    const borderBoxSize = entry.borderBoxSize[0] || entry.borderBoxSize
+    const offset = borderBoxSize.blockSize;
     document.documentElement.style.setProperty(
       "--header-offset",
       `${offset}px`

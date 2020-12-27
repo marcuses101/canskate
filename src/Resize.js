@@ -6,7 +6,8 @@ import Context from './Context'
   const { isFilterOpen } = useContext(Context);
   const resize = new ResizeObserver(([entry]) => {
     if (isFilterOpen) {
-      const offset = entry.borderBoxSize[0].blockSize;
+      const borderBoxSize = entry.borderBoxSize[0] || entry.borderBoxSize;
+      const offset = borderBoxSize.blockSize;
       document.documentElement.style.setProperty(
         "--filter-offset",
         `${offset}px`
