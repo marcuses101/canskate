@@ -4,7 +4,7 @@ import HeaderContent from "./Headers/HeaderContent";
 import SkaterEvalHeader from "./Headers/SkaterEvalHeader";
 import "./Header.css";
 
-export default function Header({ openNav, setOffset }) {
+export default function Header({ openNav }) {
   const header = useRef();
 
   const resize = new ResizeObserver(([entry]) => {
