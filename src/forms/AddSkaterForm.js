@@ -35,7 +35,6 @@ export default function SkaterForm() {
   }
 
   function removeSession(sessionId) {
-    console.log(sessionId)
     setSelectedSessions((sessions) => ({
       ...sessions,
       value: sessions.value.filter(({id}) => id !== parseInt(sessionId)),
@@ -53,7 +52,6 @@ export default function SkaterForm() {
 
     let valid = true;
 
-    console.log(skater.birthdate);
     if (!skater.fullname) {
       setFullName((obj) => ({ ...obj, error: true }));
       toast({ message: `ERROR: Full name field is required`, type: "error" });

@@ -26,7 +26,7 @@ export default function EditSkaterForm() {
     value: dayjs(skater.birthdate).format("YYYY-MM-DD"),
     error: false,
   });
-  console.log({ sessions });
+
   const [gender, setGender] = useState({ value: skater.gender, error: false });
 
   // set selectedSession No CLUB_ACTIONS will be taken on submit for sessions with action:null
@@ -52,7 +52,6 @@ export default function EditSkaterForm() {
   }
 
   function removeSession(sessionId) {
-    console.log(sessionId);
     setSelectedSessions((sessions) => ({
       ...sessions,
       value: sessions.value.filter(({ id }) => id !== parseInt(sessionId)),
@@ -89,7 +88,6 @@ export default function EditSkaterForm() {
     };
     let valid = true;
 
-    console.log(skater.birthdate);
     if (!editedSkater.fullname) {
       setFullName((obj) => ({ ...obj, error: true }));
       toast({ message: `ERROR: Full name field is required`, type: "error" });

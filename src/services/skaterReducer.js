@@ -99,7 +99,6 @@ function skatersReducer(state, action) {
     }
     case SKATER_ACTIONS.DISTRIBUTE: {
       const { skater_id, ribbon_id = null, badge_id = null } = action.payload;
-      console.log({skater_id,ribbon_id,badge_id})
       return state.map((skater) => {
         if (skater.id !== skater_id) return skater;
         return ribbon_id
