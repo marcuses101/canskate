@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { CLUB_ACTIONS } from "../services/clubReducer";
-import {sessionAPI} from '../API/sessionAPI'
+import {sessionAPI} from '../API/sessionAPI';
+import {groupAPI} from '../API/groupAPI'
 import GroupItem from "./GroupItem";
 import Context from "../Context";
 import { useSessionFromParamId } from "../Hooks/useSessionFromParamId";
@@ -88,15 +89,15 @@ export default function EditSessionForm() {
 
     if (!valid) return
 
-    const response = await sessionAPI.editSession(editedSession)
+    try {
+      await sessionAPI.editSession(editedSession)
+      toast({message: 'Session updated', type:'success'})
+      clubDispatch({ type: CLUB_ACTIONS.EDIT_SESSION, payload: editedSession });
 
-    if (!response) {
-      toast({message:'Server Error', type: 'error'})
+    } catch (error) {
+      toast({message:'Session Server Error', type: 'error'})
       return
     }
-
-    toast({message: 'Session updated', type:'success'})
-    clubDispatch({ type: CLUB_ACTIONS.EDIT_SESSION, payload: editedSession });
 
     const groupsToDelete = groups.value.filter(
       (group) => group.action === "delete"
@@ -105,16 +106,41 @@ export default function EditSessionForm() {
       (group) => group.action === "create"
     );
 
+    // API call to create or delete groups
+
+    try {
+     const createGroupPromise =  Promise.all(groupsToCreate.map(async (group)=>{
+        return (await groupAPI.addGroup({
+          group_color: group.group_color,
+          session_id: group.session_id
+        }))
+      }))
+
+    const deleteGroupPromise = Promise.all(groupsToDelete.map(async (group)=>{
+        return (await groupAPI.deleteGroup(group))
+      }))
+
+      const [createGroupResponse, deleteGroupResponse] = await Promise.all([createGroupPromise,deleteGroupPromise])
+      console.log({createGroupResponse,deleteGroupResponse})
+
     groupsToDelete.forEach((group) => {
       clubDispatch({ type: CLUB_ACTIONS.REMOVE_GROUP, payload: group.id });
       toast({ message: `${group.group_color} group removed`, type: "success" });
     });
-    groupsToCreate.forEach((group) => {
+    createGroupResponse.forEach((group) => {
       const { id, skaters, session_id, group_color } = group;
       const newGroup = { id, skaters, session_id, group_color };
       clubDispatch({ type: CLUB_ACTIONS.ADD_GROUP, payload: newGroup });
       toast({ message: `${group.group_color} group added`, type: "success" });
     });
+
+
+    } catch (error) {
+      toast({message: 'Group Server Error', type:'error'});
+      return
+    }
+
+
     setGroups((groups) => ({
       ...groups,
       value: groups.value

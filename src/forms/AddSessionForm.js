@@ -74,44 +74,52 @@ export default function SessionForm() {
       start_time: startTime.value,
       duration: duration.value,
     };
-    const responseSession = await sessionAPI.addSession(session);
 
-    if (!responseSession) {
-      toast({ message: "Server Error", type: "error" });
+    let responseSession = {};
+
+    try {
+      responseSession = await sessionAPI.addSession(session);
+      responseSession.skaters = [];
+
+      clubDispatch({
+        type: CLUB_ACTIONS.ADD_SESSION,
+        payload: responseSession,
+      });
+
+      toast({
+        message: `${day.value} ${startTime.value} session created!`,
+        type: "success",
+      });
+    } catch (error) {
+      toast({ message: "Session Server Error", type: "error" });
       return;
     }
 
-    responseSession.skaters = [];
-
     let responseGroups = [];
-    try{
-       responseGroups = await Promise.all(
-      groupColors.value.map(async (groupColor) => {
-        const responseGroup = await groupAPI.addGroup({
-          group_color: groupColor,
-          session_id: responseSession.id,
+    try {
+      responseGroups = await Promise.all(
+        groupColors.value.map(async (groupColor) => {
+          const responseGroup = await groupAPI.addGroup({
+            group_color: groupColor,
+            session_id: responseSession.id,
+          });
+          return responseGroup;
+        })
+      );
+
+      responseGroups.forEach((group) => {
+        group.skaters = [];
+        toast({
+          message: `${group.group_color} group created`,
+          type: "success",
         });
-        return responseGroup;
-      })
-    );
-    } catch(error) {
-      console.error(error)
-      toast({message: 'Group Server Error', type:'error'})
-      return
+        clubDispatch({ type: CLUB_ACTIONS.ADD_GROUP, payload: group });
+      });
+    } catch (error) {
+      toast({ message: "Group Server Error", type: "error" });
+      return;
     }
 
-    console.log({responseGroups});
-
-    responseGroups.forEach((group) => {
-      group.skaters = []
-      clubDispatch({ type: CLUB_ACTIONS.ADD_GROUP, payload: group });
-    });
-
-    clubDispatch({ type: CLUB_ACTIONS.ADD_SESSION, payload: responseSession });
-    toast({
-      message: `${day.value} ${startTime.value} session created!`,
-      type: "success",
-    });
     setDay({ value: "", error: false });
     setStartTime({ value: "", error: false });
     setDuration({ value: 30, error: false });

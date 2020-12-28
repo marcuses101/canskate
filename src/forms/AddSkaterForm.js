@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
-import {skaterAPI} from '../API/skaterAPI'
+import { skaterAPI } from "../API/skaterAPI";
 import { SKATER_ACTIONS } from "../services/skaterReducer";
 import { CLUB_ACTIONS } from "../services/clubReducer";
 import TextInput from "./Components/TextInput";
 import DateInput from "./Components/DateInput";
 import RadioSelector from "./Components/RadioSelector";
-import SessionSelector from './Components/SessionSelector';
+import SessionSelector from "./Components/SessionSelector";
 import Context from "../Context";
 import { useToast } from "../Hooks/useToast";
 
@@ -13,7 +13,7 @@ export default function SkaterForm() {
   const {
     skatersDispatch,
     clubDispatch,
-    club:{sessions}
+    club: { sessions },
   } = useContext(Context);
 
   const toast = useToast();
@@ -27,9 +27,11 @@ export default function SkaterForm() {
   });
 
   function addSession(sessionId) {
-
     setSelectedSessions((selectedSessions) => ({
-      value: [...selectedSessions.value, {...sessions[sessionId],action:'add'}],
+      value: [
+        ...selectedSessions.value,
+        { ...sessions[sessionId], action: "add" },
+      ],
       error: false,
     }));
   }
@@ -37,11 +39,11 @@ export default function SkaterForm() {
   function removeSession(sessionId) {
     setSelectedSessions((sessions) => ({
       ...sessions,
-      value: sessions.value.filter(({id}) => id !== parseInt(sessionId)),
+      value: sessions.value.filter(({ id }) => id !== parseInt(sessionId)),
     }));
   }
 
- async function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const skater = {
       fullname: fullName.value,
@@ -67,7 +69,7 @@ export default function SkaterForm() {
       valid = false;
     }
     if (!selectedSessions.value.length) {
-      setSelectedSessions(sessions=>({...sessions,error:true}))
+      setSelectedSessions((sessions) => ({ ...sessions, error: true }));
       toast({
         message: "ERROR: Please select at least one session",
         type: "error",
@@ -77,25 +79,28 @@ export default function SkaterForm() {
 
     if (!valid) return;
 
-    const serverSkater = await skaterAPI.addSkater(skater);
-
-    if (!serverSkater) {
-      toast({message:'Server Error', type: 'error'})
-      return
+    try {
+      const serverSkater = await skaterAPI.addSkater(skater);
+      skatersDispatch({
+        type: SKATER_ACTIONS.ADD_SKATER,
+        payload: serverSkater,
+      });
+      selectedSessions.value.forEach((session) => {
+        clubDispatch({
+          type: CLUB_ACTIONS.SESSION_ADD_SKATER,
+          payload: { session_id: session.id, skater_id: serverSkater.id },
+        });
+      });
+    } catch (error) {
+      toast({ message: "Server Error", type: "error" });
+      return;
     }
 
-    skatersDispatch({ type: SKATER_ACTIONS.ADD_SKATER, payload: serverSkater});
-    selectedSessions.value.forEach(session => {
-      clubDispatch({
-        type: CLUB_ACTIONS.SESSION_ADD_SKATER,
-        payload: { session_id: session.id, skater_id: serverSkater.id },
-      });
-    });
     toast({ message: `${skater.fullname} added!`, type: "success" });
     setFullName({ value: "", error: false });
     setBirthdate({ value: "", error: false });
     setGender({ value: "", error: false });
-    setSelectedSessions({value:[],error:false});
+    setSelectedSessions({ value: [], error: false });
   }
 
   return (

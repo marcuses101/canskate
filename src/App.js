@@ -13,10 +13,8 @@ import { elements, checkmarks, ribbons } from "./store/elementStore.json";
 import "./App.css";
 
 function createSkater(skater) {
-  const age = dayjs().diff(dayjs(skater.birthdate), "years");
   return {
     ...skater,
-    age,
     elementLog: [],
     checkmarkLog: [],
     ribbonLog: [],

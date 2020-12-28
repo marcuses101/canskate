@@ -4,7 +4,6 @@ import Progress from './Progress'
 import Manage from './Manage'
 import Eval from './Eval';
 import Welcome from './Welcome'
-import TestApi from './TestApi'
 import './Main.css'
 import Distribution from "./Distribution/Distribution";
 
@@ -16,7 +15,6 @@ import Distribution from "./Distribution/Distribution";
         <Route path='/manage' component={Manage}/>
         <Route path='/eval' component={Eval} />
         <Route path='/distribution' component={Distribution} />
-        <Route path='/api' component={TestApi} />
         <Route path="/" component={Welcome}/>
       </Switch>
      </main>

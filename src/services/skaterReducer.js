@@ -17,7 +17,6 @@ function skatersReducer(state, action) {
       return [
         {
           ...action.payload,
-          age: dayjs().diff(dayjs(action.payload.birthdate), "year"),
           elementLog: [],
           checkmarkLog: [],
           ribbonLog: [],
@@ -33,7 +32,6 @@ function skatersReducer(state, action) {
         return {
           ...skater,
           ...action.payload,
-          age: dayjs().diff(dayjs(action.payload.birthdate), "year"),
         };
       });
       return newState;

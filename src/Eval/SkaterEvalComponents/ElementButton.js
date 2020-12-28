@@ -27,9 +27,9 @@ const transitionStyles = {
   return (
     <li
       className="ElementButton"
-      onClick={(e) => {
+      onClick={async (e) => {
             e.stopPropagation();
-            logElement();}}
+           await logElement();}}
       onMouseEnter={() => setConfirmOpen(true)}
       onMouseLeave={()=> {
         setConfirmOpen(false)}}

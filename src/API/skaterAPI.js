@@ -2,8 +2,18 @@ import config from "../config";
 const url = `${config.SERVER}/skater`;
 
 export const skaterAPI = {
-  async addSkater(skater) {
+  async getSkaters(){
     try {
+       const response = await fetch(url);
+    if (!response.ok) throw new Error(response.statusText);
+    const skaters = await response.json;
+    return skaters;
+    } catch (error) {
+      console.error(error)
+    }
+  },
+
+  async addSkater(skater) {
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -14,13 +24,9 @@ export const skaterAPI = {
       if (!response.ok) throw new Error(response.statusText)
       const data = await response.json();
       return data;
-    } catch (error) {
-      console.error(error);
-      return false;
-    }
   },
   async editSkater(skater) {
-    try {
+
        const { id } = skater;
     const response = await fetch(`${url}/${id}`, {
       method: "PATCH",
@@ -33,10 +39,7 @@ export const skaterAPI = {
     const data = await response.json();
     console.log(data)
     return data;
-    } catch (error) {
-      console.error(error)
-      return false;
-    }
+
 
   },
 };
