@@ -91,7 +91,7 @@ export function useLogElement(skater_id, element_id) {
         type: SKATER_ACTIONS.COMPLETE_BADGE,
         payload: {
           skater_id: skater.id,
-          badge,
+          badge_id: badge,
         },
       });
       toast({

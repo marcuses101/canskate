@@ -1,12 +1,12 @@
 import React, { useState, useReducer, useEffect } from "react";
 import {useLocation} from 'react-router-dom'
-import dayjs from "dayjs";
 import SideNav from "./SideNav";
 import Header from "./Header";
 import Main from "./Main";
 import Context from "./Context";
-import { skatersReducer } from "./services/skaterReducer";
-import { clubReducer } from "./services/clubReducer";
+import {clubAPI} from './API/clubAPI';
+import { skatersReducer, SKATER_ACTIONS } from "./services/skaterReducer";
+import { clubReducer, CLUB_ACTIONS } from "./services/clubReducer";
 import { skaters as skaterStore } from "./store/clubStore.json";
 import store from "./store/clubStore.json";
 import { elements, checkmarks, ribbons } from "./store/elementStore.json";
@@ -67,6 +67,17 @@ export default function App() {
   useEffect(()=>{
     setIsFilterOpen(false)
   },[pathname])
+
+  //test load club data
+  useEffect(()=>{
+    (async()=>{
+      const clubData = await clubAPI.getClubById(1);
+      const club = buildClub(clubData)
+      clubDispatch({type:CLUB_ACTIONS.LOAD_CLUB, payload:club})
+      skatersDispatch({type:SKATER_ACTIONS.LOAD_SKATERS,payload:clubData.skatersWithLogs})
+      console.log(club)
+    })()
+  },[])
 
   function closeNav() {
     setIsNavOpen(false);

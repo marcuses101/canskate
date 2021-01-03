@@ -40,7 +40,7 @@ export default function Distribution() {
   }, []);
 
   let distributionList = [...badgesToDistribute, ...ribbonsToDistribute].sort(
-    (a, b) => b.date - a.date
+    (a, b) => b.date_completed - a.date_completed
   );
   if (!showAll)
     distributionList = distributionList.filter((log) => !log.date_distributed);
@@ -59,12 +59,12 @@ export default function Distribution() {
         </li>
         {distributionList.map((log) => (
           <DistributionItem
-            key={`${log.skater_id}${log.badge}${log.ribbon}`}
+            key={`${log.skater_id}${log.badge_id||''}${log.ribbon_id||''}`}
             name={log.skater_fullname}
-            badge={log.badge}
+            badge={log.badge_id}
             ribbon={log.ribbon}
-            date={log.date}
-            date_distributed={log.date_distributed}
+            date={log.date_completed}
+            dateDistributed={log.date_distributed}
             distribution={() =>
               skatersDispatch({
                 type: SKATER_ACTIONS.DISTRIBUTE,

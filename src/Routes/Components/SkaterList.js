@@ -8,7 +8,9 @@ export default function SkaterList() {
   const { path } = useRouteMatch();
   const skaters = useClubSkaters();
   const filteredSkaters = name
-    ? skaters.filter((skater) => new RegExp(name, "i").test(skater.fullname))
+    ? skaters.filter((skater) =>
+        skater.fullname.toLowerCase().includes(name.toLowerCase())
+      )
     : skaters;
 
   const skaterLinks = filteredSkaters.map((skater) => {
@@ -22,16 +24,23 @@ export default function SkaterList() {
     <div className="SkaterList">
       <h2>Choose a skater:</h2>
       <div className="field">
-        <input className='input'
+        <input
+          className="input"
           type="text"
-          id='name'
-          value={name?name:''}
-          autoComplete='off'
+          id="name"
+          value={name ? name : ""}
+          autoComplete="off"
           onChange={(e) => setName(e.target.value)}
         />
-        <label className={name && 'scale'} htmlFor="name">Search name</label>
+        <label className={name && "scale"} htmlFor="name">
+          Search name
+        </label>
       </div>
-      <ul className="links">{skaterLinks}</ul>
+      {skaterLinks.length ? (
+        <ul className="links">{skaterLinks}</ul>
+      ) : (
+        <b>No skaters found matching search term</b>
+      )}
     </div>
   );
 }

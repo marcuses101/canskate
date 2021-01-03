@@ -50,23 +50,3 @@
   background-color: var(--red);
 }
 
-.fade-enter {
-  transform: translateY(30px);
-  opacity: 0;
-}
-.fade-enter-active {
-  transform: translateY(0px);
-  opacity:1;
-  transition: 200ms;
-}
-
-.fade-exit {
-  transform: translateY(0px);
-  opacity:1;
-}
-
-.fade-exit-active {
-  transform: translateY(-30px);
-  opacity: 0;
-  transition: 200ms;
-}

@@ -1,4 +1,5 @@
 const CLUB_ACTIONS = {
+  LOAD_CLUB: 'load_club',
   ADD_SESSION: "add_session",
   EDIT_SESSION: "edit_session",
   ADD_SKATER: "add_skater",
@@ -13,6 +14,10 @@ const CLUB_ACTIONS = {
 function clubReducer(state, action) {
   const club = { ...state };
   switch (action.type) {
+    case CLUB_ACTIONS.LOAD_CLUB:{
+      const {sessions, groups} = action.payload;
+      return {sessions,groups}
+    }
     case CLUB_ACTIONS.ADD_SESSION: {
       const newSession = action.payload;
       club.sessions = { ...club.sessions, [newSession.id]: newSession };

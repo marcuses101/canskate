@@ -12,15 +12,15 @@ export default function ReportCard({ skater }) {
       badge_id: badge,
       date:
         skater.badgeLog.find((entry) => {
-          return entry.badge === badge;
-        })?.date || null,
+          return parseInt(entry.badge_id) === badge;
+        })?.date_completed || null,
     };
   });
   const skaterRibbons = ribbons.map((ribbon) => {
     return {
       ...ribbon,
       date:
-        skater.ribbonLog.find((entry) => entry.ribbon_id === ribbon.id)?.date ||
+        skater.ribbonLog.find((entry) => entry.ribbon_id === ribbon.id)?.date_completed ||
         null,
     };
   });
@@ -31,7 +31,7 @@ export default function ReportCard({ skater }) {
       date:
         skater.checkmarkLog.find(
           (entry) => entry.checkmark_id === checkmark.checkmark_id
-        )?.date || null,
+        )?.date_completed || null,
     };
   });
   const skaterElements = elements.map((element) => {
@@ -40,7 +40,7 @@ export default function ReportCard({ skater }) {
       date:
         skater.elementLog.find(
           (entry) => entry.element_id === element.element_id
-        )?.date || null,
+        )?.date_completed || null,
     };
   });
 

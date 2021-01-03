@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { Transition, TransitionGroup } from "react-transition-group";
 import { v4 as uuid } from "uuid";
 import Notification from "./Notification";
 import "./NotificationsProvider.css";
@@ -26,6 +26,18 @@ function NotificationReducer(notifications, action) {
       return notifications;
   }
 }
+const defaultStyle = {
+  transition: 'var(--time) ease',
+  opacity: 0,
+  transform: 'translateY(30px)'
+}
+
+const transitionStyles = {
+  entering:{transform:'translateY(30px)',opacity:0},
+  entered:{transform:'translateY(0px)',opacity:1},
+  exiting:{transform:'translateY(-30px)',opacity:0},
+  exited:{transform:'translateY(-30px)',opacity:0},
+}
 
 export function NotificationsProvider(props) {
   const [notifications, notificationDispatch] = useReducer(
@@ -34,29 +46,26 @@ export function NotificationsProvider(props) {
   );
 
   return (
-    <div>
-      <NotificationContext.Provider value={{ notificationDispatch }}>
-
-        <div className="notification-wrapper">
-        <TransitionGroup component='div'>
+    <NotificationContext.Provider value={{ notificationDispatch }}>
+      <div className="notification-wrapper">
+        <TransitionGroup >
           {notifications.map((note) => {
-              return (
-                <CSSTransition timeout={200} classNames='fade' key={note.id}>
-                  <Notification
+            return (
+              <Transition key={note.id} timeout={200}>
+                {state=><Notification
+                  style={transitionStyles[state]}
+                  defaultStyle={defaultStyle}
                   dispatch={notificationDispatch}
                   actions={NOTE_ACTIONS}
                   {...note}
-                />
-                </CSSTransition>
+                />}
+              </Transition>
 
-              );
-            })}
+            );
+          })}
         </TransitionGroup>
-
-
-        </div>
-        {props.children}
-      </NotificationContext.Provider>
-    </div>
+      </div>
+      {props.children}
+    </NotificationContext.Provider>
   );
 }

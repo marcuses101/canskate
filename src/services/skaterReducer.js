@@ -1,6 +1,5 @@
-import dayjs from "dayjs";
-
 const SKATER_ACTIONS = {
+  LOAD_SKATERS: "load_skaters",
   ADD_SKATER: "add_skater",
   EDIT_SKATER: "edit_skater",
   DELETE_SKATER: "delete_skater",
@@ -11,8 +10,13 @@ const SKATER_ACTIONS = {
   COMPLETE_BADGE: "complete_badge",
 };
 
+
 function skatersReducer(state, action) {
   switch (action.type) {
+    case SKATER_ACTIONS.LOAD_SKATERS: {
+      return action.payload
+      }
+
     case SKATER_ACTIONS.ADD_SKATER: {
       return [
         {
@@ -48,7 +52,7 @@ function skatersReducer(state, action) {
         if (skater.id !== skater_id) return skater;
         return {
           ...skater,
-          elementLog: [...skater.elementLog, { element_id, date: new Date() }],
+          elementLog: [...skater.elementLog, { element_id, date_completed: new Date() }],
         };
       });
       return newState;
@@ -61,7 +65,7 @@ function skatersReducer(state, action) {
           ...skater,
           checkmarkLog: [
             ...skater.checkmarkLog,
-            { checkmark_id, date: new Date() },
+            { checkmark_id, date_completed: new Date() },
           ],
         };
       });
@@ -75,7 +79,7 @@ function skatersReducer(state, action) {
           ...skater,
           ribbonLog: [
             ...skater.ribbonLog,
-            { ribbon_id, date: new Date(), date_distributed: null },
+            { ribbon_id, date_completed: new Date(), date_distributed: null },
           ],
         };
       });
@@ -89,7 +93,7 @@ function skatersReducer(state, action) {
           ...skater,
           badgeLog: [
             ...skater.badgeLog,
-            { badge, date: new Date(), date_distributed: null },
+            { badge, date_completed: new Date(), date_distributed: null },
           ],
         };
       });
@@ -97,7 +101,7 @@ function skatersReducer(state, action) {
     }
     case SKATER_ACTIONS.DISTRIBUTE: {
       const { skater_id, ribbon_id = null, badge_id = null } = action.payload;
-      console.log({skater_id,ribbon_id,badge_id})
+      console.log({ skater_id, ribbon_id, badge_id });
       return state.map((skater) => {
         if (skater.id !== skater_id) return skater;
         return ribbon_id
