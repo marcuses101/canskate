@@ -6,7 +6,7 @@ export const skaterAPI = {
     try {
        const response = await fetch(url);
     if (!response.ok) throw new Error(response.statusText);
-    const skaters = await response.json;
+    const skaters = await response.json();
     return skaters;
     } catch (error) {
       console.error(error)
