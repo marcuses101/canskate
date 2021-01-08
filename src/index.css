@@ -70,6 +70,22 @@ form input, form select {
   margin: .25rem auto;
 }
 
+form input[type="submit"] {
+  font-size: 1rem;
+  box-shadow: var(--box-shadow);
+  background-color: rgba(0,0,0,0);
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: none;
+  padding: .25rem .5rem;
+}
+
+form input[type="submit"]:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+  background-color: var(--green-lighter);
+}
+
 form .error-icon {
   padding-left: 1rem;
 }

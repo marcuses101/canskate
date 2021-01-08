@@ -21,8 +21,12 @@ export function useLogElement(skater_id, element_id) {
       const elementRegex = new RegExp(element.checkmark_id + "\\d");
       const checkmarkRegex = new RegExp(element.ribbon_id + "\\d");
       const ribbonRegex = new RegExp(element.badge + "\\w");
-
-      await logAPI.addElementLog({
+      const {
+        element_log: { id: element_log_id },
+        checkmark_log: { id: checkmark_log_id = null },
+        ribbon_log: { id: ribbon_log_id = null },
+        badge_log: { id: badge_log_id = null },
+      } = await logAPI.addElementLog({
         skater_id,
         element_id,
         date_completed: new Date(),
@@ -30,7 +34,11 @@ export function useLogElement(skater_id, element_id) {
       // log element
       skatersDispatch({
         type: SKATER_ACTIONS.COMPLETE_ELEMENT,
-        payload: { skater_id: skater.id, element_id: element.element_id },
+        payload: {
+          skater_id: skater.id,
+          element_id: element.element_id,
+          id: element_log_id,
+        },
       });
 
       const { total_elements: elementsRequired } = checkmarks.find(
@@ -59,6 +67,7 @@ export function useLogElement(skater_id, element_id) {
         payload: {
           skater_id: skater.id,
           checkmark_id,
+          id: checkmark_log_id,
         },
       });
 
@@ -74,6 +83,7 @@ export function useLogElement(skater_id, element_id) {
         payload: {
           skater_id: skater.id,
           ribbon_id,
+          id: ribbon_log_id,
         },
       });
       toast({
@@ -91,7 +101,8 @@ export function useLogElement(skater_id, element_id) {
         type: SKATER_ACTIONS.COMPLETE_BADGE,
         payload: {
           skater_id: skater.id,
-          badge_id: badge,
+          badge: badge,
+          id: badge_log_id,
         },
       });
       toast({

@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Context = React.createContext({
-  nextSkaterId:0,
   club: {},
   clubDispatch(){},
   elements:[],

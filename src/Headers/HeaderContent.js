@@ -1,7 +1,7 @@
 import React, { useContext , useEffect} from "react";
 import Context from "../Context";
 
-export default function HeaderContent({ title, openNav ,showFilter}) {
+export default function HeaderContent({ title, openNav ,showFilter, hideMenu}) {
   const { isFilterOpen, setIsFilterOpen } = useContext(Context);
 
 
@@ -16,9 +16,9 @@ export default function HeaderContent({ title, openNav ,showFilter}) {
 
   return (
     <header className="SkaterEvalHeader">
-      <div className="menu" onClick={openNav}>
+      {!hideMenu?<div className="menu" onClick={openNav}>
         ☰
-      </div>
+      </div>:<div></div>}
       <h2>{title}</h2>
      {showFilter && <div className="filter" onClick={() => setIsFilterOpen((bool) => !bool)}>
         <h4>Filter</h4>

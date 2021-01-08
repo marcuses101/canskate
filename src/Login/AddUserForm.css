@@ -1,0 +1,9 @@
+.AddUserForm {
+  display: flex;
+  justify-content: center;
+}
+
+.AddUserForm form {
+  margin: .5rem;
+  width: 500px;
+}

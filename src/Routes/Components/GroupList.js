@@ -6,7 +6,17 @@ import { useSessionGroups } from "../../Hooks/useSessionGroups";
 export default function GroupList() {
   const { url } = useRouteMatch();
   const session = useSessionFromParamId();
-  const groups = useSessionGroups(session.id);
+  const groups = useSessionGroups(session?.id);
+
+// figure out a better solution to return
+  if (!session) {
+    return (
+      <>
+        <h2>Session not found</h2><br/>
+        <Link to='/'>Go home?</Link>
+      </>
+    )
+  }
   if (!groups.length)
     return (
       <div className="GroupEvalList">

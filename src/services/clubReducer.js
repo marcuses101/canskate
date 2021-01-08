@@ -1,5 +1,6 @@
 const CLUB_ACTIONS = {
   LOAD_CLUB: 'load_club',
+  LOGOUT: 'logout',
   ADD_SESSION: "add_session",
   EDIT_SESSION: "edit_session",
   ADD_SKATER: "add_skater",
@@ -11,12 +12,55 @@ const CLUB_ACTIONS = {
   GROUP_REMOVE_SKATER: "group_remove_skater",
 };
 
+function buildClub(store) {
+  const {
+    sessions,
+    groups,
+    skaterGroupEntries,
+    skaterSessionEntries,
+    id,
+    name,
+  } = store;
+  function convertArrayToObject(array, key) {
+    return array.reduce((obj, entry) => {
+      return { ...obj, [entry[key]]: entry };
+    }, {});
+  }
+  const club = {
+    sessions: convertArrayToObject(
+      sessions.map((session) => ({
+        ...session,
+        skaters: skaterSessionEntries
+          .filter(({ session_id }) => session.id === session_id)
+          .map((entry) => entry.skater_id),
+      })),
+      "id"
+    ),
+    groups: convertArrayToObject(
+      groups.map((group) => ({
+        ...group,
+        skaters: skaterGroupEntries
+          .filter(({ group_id }) => group_id === group.id)
+          .map((entry) => entry.skater_id),
+      })),
+      "id"
+    ),
+    id,
+    name,
+  };
+  return club;
+}
+
 function clubReducer(state, action) {
   const club = { ...state };
   switch (action.type) {
     case CLUB_ACTIONS.LOAD_CLUB:{
-      const {sessions, groups} = action.payload;
-      return {sessions,groups}
+      const club = buildClub(action.payload)
+      return club
+    }
+
+    case CLUB_ACTIONS.LOGOUT:{
+      return {}
     }
     case CLUB_ACTIONS.ADD_SESSION: {
       const newSession = action.payload;

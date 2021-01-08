@@ -33,12 +33,20 @@ const elementObjectShape = {
 
 export default function SkaterEval() {
   const { elements } = useContext(Context);
-  const { elementLog: completedElements,id } = useSkaterFromParamId();
+  const { elementLog: completedElements = null, id = null} = useSkaterFromParamId();
   const [fundamentalFilter, setFundamentalFilter] = useState(
     fundamentalOptions
-  );
-  const [badgeFilter, setBadgeFilter] = useState(badgeOptions);
+    );
+    const [badgeFilter, setBadgeFilter] = useState(badgeOptions);
 
+    if (!completedElements) {
+      return (
+        <>
+          <h2>Skater not found</h2><br></br>
+          <Link to='/eval/skater'>Go back?</Link>
+        </>
+      )
+    }
   function toggleBadgeFilter(badge) {
     setBadgeFilter((badgesObj) => ({
       ...badgesObj,

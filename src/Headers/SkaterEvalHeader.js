@@ -7,7 +7,6 @@ export default function SkaterEvalHeader({openNav}) {
   const skater = useSkaterFromParamId();
   const render = useRef(null)
 
-
   useEffect(() => {
     if (render.current) document.body.classList.add('filter')
     return () => {
@@ -15,10 +14,12 @@ export default function SkaterEvalHeader({openNav}) {
     }
   },[render])
 
+
+
   return (
     <header ref={render} className="SkaterEvalHeader">
       <div className='menu' onClick={openNav}>☰</div>
-      <h2>{skater.fullname}</h2>
+      <h2>{skater.fullname?skater.fullname:'Skater Evaluation'}</h2>
       <div className='filter' onClick={() => setIsFilterOpen((bool) => !bool)}>
         <h4>Filter</h4>
         {isFilterOpen ? (

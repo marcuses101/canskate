@@ -73,6 +73,7 @@ export default function SessionForm() {
       day: day.value,
       start_time: startTime.value,
       duration: duration.value,
+      club_id: club.id
     };
 
     let responseSession = {};

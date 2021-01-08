@@ -1,39 +1,51 @@
-import React, {useRef,useEffect} from "react"
-import {Link} from 'react-router-dom'
-import './SideNav.css'
+import React, { useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "./SideNav.css";
 
- export default function SideNav({open, closeNav}){
+export default function SideNav({ open, closeNav, logout }) {
+  const sidenav = useRef(null);
 
-   const sidenav = useRef(null);
-
-   // close nav on click outside
-   useEffect(()=>{
-     function logClickInside(event){
+  // close nav on click outside
+  useEffect(() => {
+    function logClickInside(event) {
       if (!sidenav.current.contains(event.target)) {
         event.stopPropagation();
-        closeNav()}
-     }
-     if (open){
-        document.addEventListener('click',logClickInside,{capture:true})
-        document.body.classList.add('blur')
+        closeNav();
       }
-     else {document.removeEventListener('click', logClickInside,{capture:true});
-    document.body.classList.remove('blur')
     }
-     return ()=>document.removeEventListener('click',logClickInside,{capture:true})
-    },[open, closeNav])
+    if (open) {
+      document.addEventListener("click", logClickInside, { capture: true });
+      document.body.classList.add("blur");
+    } else {
+      document.removeEventListener("click", logClickInside, { capture: true });
+      document.body.classList.remove("blur");
+    }
+    return () =>
+      document.removeEventListener("click", logClickInside, { capture: true });
+  }, [open, closeNav]);
 
-   return (
-     <nav className={`SideNav ${open?'open':'closed'}`} ref={sidenav}>
-      <ul className='links'>
-        <li onClick={closeNav}><Link to="/">Home</Link></li>
-        <li onClick={closeNav}><Link to='/eval'>Evaluate</Link></li>
-        <li onClick={closeNav}><Link to='/progress'>Progress</Link></li>
-        <li onClick={closeNav}><Link to='/distribution'>Distribution</Link></li>
-        <li onClick={closeNav}><Link to='/manage'>Manage</Link></li>
-        <li onClick={closeNav}><button>Logout</button></li>
-
+  return (
+    <nav className={`SideNav ${open ? "open" : "closed"}`} ref={sidenav}>
+      <ul className="links">
+        <li onClick={closeNav}>
+          <Link to="/">Home</Link>
+        </li>
+        <li onClick={closeNav}>
+          <Link to="/eval">Evaluate</Link>
+        </li>
+        <li onClick={closeNav}>
+          <Link to="/progress">Progress</Link>
+        </li>
+        <li onClick={closeNav}>
+          <Link to="/distribution">Distribution</Link>
+        </li>
+        <li onClick={closeNav}>
+          <Link to="/manage">Manage</Link>
+        </li>
+        <li onClick={closeNav}>
+          <button onClick={logout}>Logout</button>
+        </li>
       </ul>
-     </nav>
-   )
- }
+    </nav>
+  );
+}

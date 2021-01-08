@@ -1,5 +1,7 @@
 import React, { useState, useContext } from "react";
 import { skaterAPI } from "../API/skaterAPI";
+import { skaterClubAPI } from "../API/skaterClubAPI";
+import { skaterSessionAPI } from "../API/skaterSessionAPI";
 import { SKATER_ACTIONS } from "../services/skaterReducer";
 import { CLUB_ACTIONS } from "../services/clubReducer";
 import TextInput from "./Components/TextInput";
@@ -13,7 +15,7 @@ export default function SkaterForm() {
   const {
     skatersDispatch,
     clubDispatch,
-    club: { sessions },
+    club: { sessions, id: club_id },
   } = useContext(Context);
 
   const toast = useToast();
@@ -81,16 +83,23 @@ export default function SkaterForm() {
 
     try {
       const serverSkater = await skaterAPI.addSkater(skater);
+      await skaterClubAPI.addSkaterToClub(serverSkater.id, club_id);
       skatersDispatch({
         type: SKATER_ACTIONS.ADD_SKATER,
         payload: serverSkater,
       });
-      selectedSessions.value.forEach((session) => {
-        clubDispatch({
-          type: CLUB_ACTIONS.SESSION_ADD_SKATER,
-          payload: { session_id: session.id, skater_id: serverSkater.id },
-        });
-      });
+      await Promise.all(
+        selectedSessions.value.map(async (session) => {
+          await skaterSessionAPI.addSkaterToSession(
+            serverSkater.id,
+            session.id
+          );
+          clubDispatch({
+            type: CLUB_ACTIONS.SESSION_ADD_SKATER,
+            payload: { session_id: session.id, skater_id: serverSkater.id },
+          });
+        })
+      );
     } catch (error) {
       toast({ message: "Server Error", type: "error" });
       return;

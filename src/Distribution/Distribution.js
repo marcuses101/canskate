@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useClubSkaters } from "../Hooks/useClubSkaters";
+import { logAPI } from "../API/logAPI";
 import { SKATER_ACTIONS } from "../services/skaterReducer";
 import "./Distribution.css";
 import DistributionItem from "./DistributionItem";
@@ -7,15 +8,36 @@ import { useRibbonById } from "../Hooks/useRibbonById";
 import DistributionFilter from "./DistributionFilter";
 import { FilterContainer } from "../FilterContainer";
 import Context from "../Context";
+import { useToast } from "../Hooks/useToast";
 
 export default function Distribution() {
-  const { skatersDispatch } = useContext(
-    Context
-  );
+  const toast = useToast();
+  const { skatersDispatch } = useContext(Context);
   const [showAll, setShowAll] = useState(true);
   const skaters = useClubSkaters();
   const getRibbonById = useRibbonById();
 
+  async function distribution({ id, skater_id, ribbon_id, badge_id }) {
+    try {
+      if (badge_id) {
+        await logAPI.distributeBadge(id);
+      }
+      if (ribbon_id) {
+        await logAPI.distributeRibbon(id);
+      }
+      skatersDispatch({
+        type: SKATER_ACTIONS.DISTRIBUTE,
+        payload: {
+          skater_id,
+          badge_id,
+          ribbon_id,
+        },
+      });
+      toast({ message: "Distributed!", type: "success" });
+    } catch (error) {
+      toast({ message: "Server Error", type: "error" });
+    }
+  }
 
   const ribbonsToDistribute = skaters.reduce((ribbons, skater) => {
     const skaterRibbonsToDistribute = skater.ribbonLog.map((log) => {
@@ -30,12 +52,11 @@ export default function Distribution() {
     return [...ribbons, ...skaterRibbonsToDistribute];
   }, []);
   const badgesToDistribute = skaters.reduce((badges, skater) => {
-    const skaterBadgesToDistribute = skater.badgeLog
-      .map((log) => ({
-        ...log,
-        skater_id: skater.id,
-        skater_fullname: skater.fullname,
-      }));
+    const skaterBadgesToDistribute = skater.badgeLog.map((log) => ({
+      ...log,
+      skater_id: skater.id,
+      skater_fullname: skater.fullname,
+    }));
     return [...badges, ...skaterBadgesToDistribute];
   }, []);
 
@@ -51,7 +72,7 @@ export default function Distribution() {
       </FilterContainer>
 
       <ul className="DistributionList">
-        <li key='header' className='DistributionItem'>
+        <li key="header" className="DistributionItem">
           <span>Name:</span>
           <span>Badge/ Ribbon:</span>
           <span>Date Completed:</span>
@@ -59,22 +80,13 @@ export default function Distribution() {
         </li>
         {distributionList.map((log) => (
           <DistributionItem
-            key={`${log.skater_id}${log.badge_id||''}${log.ribbon_id||''}`}
+            key={`${log.skater_id}${log.badge_id || ""}${log.ribbon_id || ""}`}
             name={log.skater_fullname}
             badge={log.badge_id}
             ribbon={log.ribbon}
             date={log.date_completed}
             dateDistributed={log.date_distributed}
-            distribution={() =>
-              skatersDispatch({
-                type: SKATER_ACTIONS.DISTRIBUTE,
-                payload: {
-                  skater_id: log.skater_id,
-                  badge_id: log.badge,
-                  ribbon_id: log.ribbon_id,
-                },
-              })
-            }
+            distribution={() => distribution(log)}
           />
         ))}
       </ul>

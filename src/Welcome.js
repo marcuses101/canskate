@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./Welcome.css";
 
 export default function Welcome() {
@@ -22,33 +21,6 @@ export default function Welcome() {
         skater's individual progress sheet is updated, and the ribbon/badge is
         added to a list of items to distribute.{" "}
       </p>
-
-      <p>
-        I will be continuing to develop this application going forward, and your
-        feedback will be essential in creating a great tool.
-      </p>
-      <a target="_blank" rel="noreferrer" href="https://docs.google.com/forms/d/e/1FAIpQLScTEUH7_XaK5sDyQ1_w_NX9EIxJQS0aGpyxJ5Yejts38G4waQ/viewform?usp=sf_link">
-        Survey
-      </a>
-
-      <p>Currently this application is pre-populated with fake sessions/groups/skaters.</p>
-
-      <br />
-      <h2>What would you like to do?</h2>
-      <ul className="links">
-        <li>
-          <Link to="/eval">Evaluate</Link>
-        </li>
-        <li>
-          <Link to="/progress">View Progress</Link>
-        </li>
-        <li>
-          <Link to="/manage">Manage Sessions/Groups/Skaters</Link>
-        </li>
-        <li>
-          <Link to="/distribution">Distribute Ribbons/Badges</Link>
-        </li>
-      </ul>
     </div>
   );
 }

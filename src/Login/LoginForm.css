@@ -1,0 +1,8 @@
+.LoginForm {
+  display: flex;
+  justify-content: center;
+}
+.LoginForm form {
+  margin: .5rem;
+  width: 500px;
+}

@@ -1,0 +1,6 @@
+.Loading {
+  height: calc(100vh - var(--header-offset) - var(--filter-offset));
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}

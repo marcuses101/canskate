@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { SKATER_ACTIONS } from "../services/skaterReducer";
 import { skaterAPI } from "../API/skaterAPI";
+import { skaterSessionAPI } from "../API/skaterSessionAPI";
 import dayjs from "dayjs";
 import Context from "../Context";
 import useSkaterFromParamId from "../Hooks/useSkaterFromParamId";
@@ -52,7 +53,6 @@ export default function EditSkaterForm() {
   }
 
   function removeSession(sessionId) {
-    console.log(sessionId);
     setSelectedSessions((sessions) => ({
       ...sessions,
       value: sessions.value.filter(({ id }) => id !== parseInt(sessionId)),
@@ -120,27 +120,36 @@ export default function EditSkaterForm() {
         type: SKATER_ACTIONS.EDIT_SKATER,
         payload: editedSkater,
       });
+      await Promise.all(
+        selectedSessions.value.map(async (session) => {
+          if (session.action === "add") {
+            await skaterSessionAPI.addSkaterToSession(
+              editedSkater.id,
+              session.id
+            );
+            clubDispatch({
+              type: CLUB_ACTIONS.SESSION_ADD_SKATER,
+              payload: { session_id: session.id, skater_id: skater.id },
+            });
+            setSessionActionNull(session.id);
+          } else if (session.action === "remove") {
+            await skaterSessionAPI.removeSkaterFromSession(
+              editedSkater.id,
+              session.id
+            );
+            clubDispatch({
+              type: CLUB_ACTIONS.SESSION_REMOVE_SKATER,
+              payload: { session_id: session.id, skater_id: skater.id },
+            });
+            removeSession(session.id);
+          }
+        })
+      );
     } catch (error) {
       console.error(error);
       toast({ message: "Server Error", type: "error" });
       return;
     }
-
-    selectedSessions.value.forEach((session) => {
-      if (session.action === "add") {
-        clubDispatch({
-          type: CLUB_ACTIONS.SESSION_ADD_SKATER,
-          payload: { session_id: session.id, skater_id: skater.id },
-        });
-        setSessionActionNull(session.id);
-      } else if (session.action === "remove") {
-        clubDispatch({
-          type: CLUB_ACTIONS.SESSION_REMOVE_SKATER,
-          payload: { session_id: session.id, skater_id: skater.id },
-        });
-        removeSession(session.id);
-      }
-    });
   }
 
   return (

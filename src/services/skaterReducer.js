@@ -8,14 +8,17 @@ const SKATER_ACTIONS = {
   COMPLETE_CHECKMARK: "complete_checkmark",
   COMPLETE_RIBBON: "complete_ribbon",
   COMPLETE_BADGE: "complete_badge",
+  LOGOUT: 'logout'
 };
-
 
 function skatersReducer(state, action) {
   switch (action.type) {
     case SKATER_ACTIONS.LOAD_SKATERS: {
-      return action.payload
-      }
+      return action.payload;
+    }
+    case SKATER_ACTIONS.LOGOUT: {
+      return []
+    }
 
     case SKATER_ACTIONS.ADD_SKATER: {
       return [
@@ -47,53 +50,67 @@ function skatersReducer(state, action) {
     }
 
     case SKATER_ACTIONS.COMPLETE_ELEMENT: {
-      const { skater_id, element_id } = action.payload;
+      const { skater_id, element_id, id } = action.payload;
       const newState = state.map((skater) => {
         if (skater.id !== skater_id) return skater;
         return {
           ...skater,
-          elementLog: [...skater.elementLog, { element_id, date_completed: new Date() }],
+          elementLog: [
+            ...skater.elementLog,
+            { element_id, id, date_completed: new Date() },
+          ],
         };
       });
       return newState;
     }
     case SKATER_ACTIONS.COMPLETE_CHECKMARK: {
-      const { skater_id, checkmark_id } = action.payload;
+      const { skater_id, checkmark_id, id } = action.payload;
       const newState = state.map((skater) => {
         if (skater.id !== skater_id) return skater;
         return {
           ...skater,
           checkmarkLog: [
             ...skater.checkmarkLog,
-            { checkmark_id, date_completed: new Date() },
+            { checkmark_id, date_completed: new Date(), id },
           ],
         };
       });
       return newState;
     }
     case SKATER_ACTIONS.COMPLETE_RIBBON: {
-      const { skater_id, ribbon_id } = action.payload;
+      const { skater_id, ribbon_id, id } = action.payload;
       const newState = state.map((skater) => {
         if (skater.id !== skater_id) return skater;
         return {
           ...skater,
           ribbonLog: [
             ...skater.ribbonLog,
-            { ribbon_id, date_completed: new Date(), date_distributed: null },
+            {
+              ribbon_id,
+              date_completed: new Date(),
+              date_distributed: null,
+              id,
+            },
           ],
         };
       });
       return newState;
     }
     case SKATER_ACTIONS.COMPLETE_BADGE: {
-      const { skater_id, badge } = action.payload;
+      const { skater_id, badge, id } = action.payload;
       const newState = state.map((skater) => {
         if (skater.id !== skater_id) return skater;
         return {
           ...skater,
           badgeLog: [
             ...skater.badgeLog,
-            { badge, date_completed: new Date(), date_distributed: null },
+            {
+              badge,
+              badge_id: badge,
+              date_completed: new Date(),
+              date_distributed: null,
+              id,
+            },
           ],
         };
       });
@@ -101,7 +118,7 @@ function skatersReducer(state, action) {
     }
     case SKATER_ACTIONS.DISTRIBUTE: {
       const { skater_id, ribbon_id = null, badge_id = null } = action.payload;
-      console.log({ skater_id, ribbon_id, badge_id });
+
       return state.map((skater) => {
         if (skater.id !== skater_id) return skater;
         return ribbon_id
@@ -116,7 +133,7 @@ function skatersReducer(state, action) {
           : {
               ...skater,
               badgeLog: skater.badgeLog.map((log) =>
-                log.badge === badge_id
+                parseInt(log.badge_id) === parseInt(badge_id)
                   ? { ...log, date_distributed: new Date() }
                   : log
               ),

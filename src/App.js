@@ -1,83 +1,58 @@
 import React, { useState, useReducer, useEffect } from "react";
-import {useLocation} from 'react-router-dom'
+import config from "./config";
+import { useLocation } from "react-router-dom";
 import SideNav from "./SideNav";
 import Header from "./Header";
 import Main from "./Main";
 import Context from "./Context";
-import {clubAPI} from './API/clubAPI';
+import { clubAPI } from "./API/clubAPI";
 import { skatersReducer, SKATER_ACTIONS } from "./services/skaterReducer";
 import { clubReducer, CLUB_ACTIONS } from "./services/clubReducer";
-import { skaters as skaterStore } from "./store/clubStore.json";
-import store from "./store/clubStore.json";
 import { elements, checkmarks, ribbons } from "./store/elementStore.json";
 import "./App.css";
-
-function createSkater(skater) {
-  return {
-    ...skater,
-    elementLog: [],
-    checkmarkLog: [],
-    ribbonLog: [],
-    badgeLog: [],
-  };
-}
-function buildClub(store) {
-  const { sessions, groups, skaterGroupEntries, skaterSessionEntries } = store;
-  function convertArrayToObject(array, key) {
-    return array.reduce((obj, entry) => {
-      return { ...obj, [entry[key]]: entry };
-    }, {});
-  }
-  const club = {
-    sessions: convertArrayToObject(
-      sessions.map((session) => ({
-        ...session,
-        skaters: skaterSessionEntries
-          .filter(({ session_id }) => session.id === session_id)
-          .map((entry) => entry.skater_id),
-      })),
-      "id"
-    ),
-    groups: convertArrayToObject(
-      groups.map((group) => ({
-        ...group,
-        skaters: skaterGroupEntries
-          .filter(({ group_id }) => group_id === group.id)
-          .map((entry) => entry.skater_id),
-      })),
-      "id"
-    ),
-  };
-  return club;
-}
+import { useToast } from "./Hooks/useToast";
 
 export default function App() {
-  const {pathname} = useLocation();
+  const toast  = useToast();
+  const { pathname } = useLocation();
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [loginState, setLoginState] = useState({
+    loggedIn: localStorage.getItem("jwt") ? true : false,
+    loading: false,
+    clubLoaded: false,
+  });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [club, clubDispatch] = useReducer(clubReducer, buildClub(store));
-  const [skaters, skatersDispatch] = useReducer(
-    skatersReducer,
-    skaterStore
-      .map(createSkater)
-      .sort((a, b) => (a.fullname > b.fullname ? 1 : -1))
-  );
+  const [clubList, setClubList] = useState([]);
+  const [club, clubDispatch] = useReducer(clubReducer, {});
+  const [skaters, skatersDispatch] = useReducer(skatersReducer, []);
 
   // close filter on route change
-  useEffect(()=>{
-    setIsFilterOpen(false)
-  },[pathname])
+  useEffect(() => {
+    setIsFilterOpen(false);
+  }, [pathname]);
 
-  //test load club data
-  useEffect(()=>{
-    (async()=>{
-      const clubData = await clubAPI.getClubById(1);
-      const club = buildClub(clubData)
-      clubDispatch({type:CLUB_ACTIONS.LOAD_CLUB, payload:club})
-      skatersDispatch({type:SKATER_ACTIONS.LOAD_SKATERS,payload:clubData.skatersWithLogs})
-      console.log(club)
-    })()
-  },[])
+  //load club data
+  useEffect(() => {
+    (async () => {
+      if (loginState.loggedIn) {
+        const clubs = await clubAPI.getClubs();
+        setClubList(clubs);
+      }
+    })();
+  }, [loginState.loggedIn]);
+
+  function logout() {
+    localStorage.clear();
+    clubDispatch({ type: CLUB_ACTIONS.LOGOUT });
+    skatersDispatch({ type: SKATER_ACTIONS.LOGOUT });
+    setClubList([])
+    setLoginState({
+      loggedIn: false,
+      loading: false,
+      clubLoaded: false,
+    });
+    toast({message:'Logout successful', type:'success'})
+  }
 
   function closeNav() {
     setIsNavOpen(false);
@@ -85,10 +60,7 @@ export default function App() {
   function openNav() {
     setIsNavOpen(true);
   }
-  const nextSkaterId =
-    skaters.reduce((max, skater) => {
-      return skater.id > max ? skater.id : max;
-    }, 0) + 1;
+
   const contextObj = {
     elements,
     checkmarks,
@@ -99,16 +71,20 @@ export default function App() {
     skatersDispatch,
     isFilterOpen,
     setIsFilterOpen,
-    nextSkaterId,
   };
   return (
     <Context.Provider value={contextObj}>
       <div className="App">
-        <SideNav open={isNavOpen} closeNav={closeNav} />
+        <SideNav open={isNavOpen} closeNav={closeNav} logout={logout} />
 
-        <Header openNav={openNav} />
+        <Header loggedIn={loginState.loggedIn} openNav={openNav} />
 
-        <Main />
+        <Main
+          loginState={loginState}
+          setLoginState={setLoginState}
+          clubList={clubList}
+          setClubList={setClubList}
+        />
       </div>
     </Context.Provider>
   );

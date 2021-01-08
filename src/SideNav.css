@@ -29,8 +29,22 @@
 .SideNav ul li {
   padding: .5rem;
 }
+
+.SideNav li button {
+  box-shadow: var(--box-shadow);
+  padding: 1rem;
+  border-radius: var(--radius);
+  border-style: none;
+  width:100%;
+}
+
+.SideNav li button:hover {
+  cursor:pointer;
+  transform: scale(1.01);
+}
+
+
 .SideNav ul li:last-child{
   margin-top: auto;
   /* hide logout button for now */
-  display: none;
 }
