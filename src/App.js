@@ -1,6 +1,6 @@
 import React, { useState, useReducer, useEffect } from "react";
 import config from "./config";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import SideNav from "./SideNav";
 import Header from "./Header";
 import Main from "./Main";
@@ -13,7 +13,8 @@ import "./App.css";
 import { useToast } from "./Hooks/useToast";
 
 export default function App() {
-  const toast  = useToast();
+  const toast = useToast();
+  const { push } = useHistory();
   const { pathname } = useLocation();
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [loginState, setLoginState] = useState({
@@ -35,8 +36,10 @@ export default function App() {
   useEffect(() => {
     (async () => {
       if (loginState.loggedIn) {
+        setLoginState((state) => ({ ...state, loading: true }));
         const clubs = await clubAPI.getClubs();
         setClubList(clubs);
+        setLoginState((state) => ({ ...state, loading: false }));
       }
     })();
   }, [loginState.loggedIn]);
@@ -45,13 +48,14 @@ export default function App() {
     localStorage.clear();
     clubDispatch({ type: CLUB_ACTIONS.LOGOUT });
     skatersDispatch({ type: SKATER_ACTIONS.LOGOUT });
-    setClubList([])
+    setClubList([]);
     setLoginState({
       loggedIn: false,
       loading: false,
       clubLoaded: false,
     });
-    toast({message:'Logout successful', type:'success'})
+    toast({ message: "Logout successful", type: "success" });
+    push("/");
   }
 
   function closeNav() {
