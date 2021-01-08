@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { CLUB_ACTIONS } from "../services/clubReducer";
 import { sessionAPI } from "../API/sessionAPI";
+import {Link} from 'react-router-dom'
 import { groupAPI } from "../API/groupAPI";
 import GroupItem from "./GroupItem";
 import Context from "../Context";
@@ -30,15 +31,15 @@ function setError(obj) {
 export default function EditSessionForm() {
   const toast = useToast();
   const session = useSessionFromParamId();
-  const sessionGroups = useSessionGroups(session.id);
+  const sessionGroups = useSessionGroups(session?.id);
   const allGroups = useGroups();
   const [startTime, setStartTime] = useState({
-    value: session.start_time,
+    value: session?.start_time,
     error: false,
   });
-  const [day, setDay] = useState({ value: session.day, error: false });
+  const [day, setDay] = useState({ value: session?.day, error: false });
   const [duration, setDuration] = useState({
-    value: session.duration,
+    value: session?.duration,
     error: false,
   });
   const [groups, setGroups] = useState({
@@ -59,6 +60,15 @@ export default function EditSessionForm() {
       {day}
     </option>
   ));
+
+  if(!session){
+    return (
+      <>
+  <h2>Session not found</h2><br/>
+      <Link to='/manage/session/edit'>Go back?</Link>
+      </>
+    )
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();

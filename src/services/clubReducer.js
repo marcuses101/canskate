@@ -1,6 +1,6 @@
 const CLUB_ACTIONS = {
-  LOAD_CLUB: 'load_club',
-  LOGOUT: 'logout',
+  LOAD_CLUB: "load_club",
+  LOGOUT: "logout",
   ADD_SESSION: "add_session",
   EDIT_SESSION: "edit_session",
   ADD_SKATER: "add_skater",
@@ -54,13 +54,13 @@ function buildClub(store) {
 function clubReducer(state, action) {
   const club = { ...state };
   switch (action.type) {
-    case CLUB_ACTIONS.LOAD_CLUB:{
-      const club = buildClub(action.payload)
-      return club
+    case CLUB_ACTIONS.LOAD_CLUB: {
+      const club = buildClub(action.payload);
+      return club;
     }
 
-    case CLUB_ACTIONS.LOGOUT:{
-      return {}
+    case CLUB_ACTIONS.LOGOUT: {
+      return {};
     }
     case CLUB_ACTIONS.ADD_SESSION: {
       const newSession = action.payload;
@@ -78,7 +78,7 @@ function clubReducer(state, action) {
       };
     }
     case CLUB_ACTIONS.ADD_GROUP: {
-      const group = action.payload;
+      const group = { ...action.payload, skaters: [] };
       club.groups = { ...club.groups, [group.id]: group };
       return club;
     }
@@ -108,10 +108,16 @@ function clubReducer(state, action) {
     }
 
     case CLUB_ACTIONS.SESSION_REMOVE_SKATER: {
-      const {session_id, skater_id} = action.payload;
+      const { session_id, skater_id } = action.payload;
       club.sessions = {
-        ...state.sessions, [session_id]: {...club.sessions[session_id],skaters: club.sessions[session_id].skaters.filter(id=>id!==skater_id) }
-      }
+        ...state.sessions,
+        [session_id]: {
+          ...club.sessions[session_id],
+          skaters: club.sessions[session_id].skaters.filter(
+            (id) => id !== skater_id
+          ),
+        },
+      };
       return club;
     }
     case CLUB_ACTIONS.GROUP_ADD_SKATER: {

@@ -22,6 +22,8 @@ export default function ClubList({ clubList, onClick }) {
     <main className="ClubList Main">
       <h2>Choose a club:</h2>
       <ul>{clubListItems}</ul>
+      <h2>Create new club:</h2><br/>
+      <Link to="/club/add">New Club</Link>
     </main>
   );
 }

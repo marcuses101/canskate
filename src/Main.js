@@ -54,7 +54,6 @@ export default function Main({
     setLoginState((state) => ({ ...state, loading: true }));
     const clubObject = await clubAPI.getClubById(id);
     const { skatersWithLogs } = clubObject;
-    console.log(clubObject);
     clubDispatch({ type: CLUB_ACTIONS.LOAD_CLUB, payload: clubObject });
     skatersDispatch({
       type: SKATER_ACTIONS.LOAD_SKATERS,
