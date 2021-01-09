@@ -45,7 +45,7 @@ export default function AddUserForm({ setLoginState }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!validateForm()) return console.log("not submitting");
+    if (!validateForm()) return;
     try {
       await userAPI.addUser({ username, password });
       const jwt = await userAPI.submitLogin({ username, password });
@@ -53,7 +53,7 @@ export default function AddUserForm({ setLoginState }) {
       setLoginState((state) => ({ ...state, loggedIn: true }));
       push("/");
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast({ message: "Server Error", type: "error" });
     }
   }

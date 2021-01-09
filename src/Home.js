@@ -4,7 +4,6 @@ import { useSessions } from "./Hooks/useSessions"
 
  export default function Home(){
    const sessions = useSessions();
-   console.log(sessions)
     if (!Object.entries(sessions).length) return(
       <div className="Home">
         <h2>Please start by creating a session</h2><br/>

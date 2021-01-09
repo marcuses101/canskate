@@ -32,6 +32,10 @@ export default function App() {
     setIsFilterOpen(false);
   }, [pathname]);
 
+  useEffect(()=>{
+    (async()=>await fetch(config.PING))()
+  },[])
+
   //load club data
   useEffect(() => {
     (async () => {

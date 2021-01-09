@@ -12,6 +12,7 @@ export default function LoginForm({setLoginState}) {
   const [usernameError, setUsernameError] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
+  const [sending,setSending] = useState(false)
   const toast = useToast();
 
   function validateForm() {
@@ -33,12 +34,15 @@ export default function LoginForm({setLoginState}) {
     e.preventDefault();
     if (!validateForm()) return;
     try {
+      setSending(true)
       const jwt = await userAPI.submitLogin({ username, password });
       localStorage.setItem("jwt", JSON.stringify(jwt));
       toast({ message: "Login successful", type: "success" });
+      setSending(false)
       setLoginState(state=>({...state,loggedIn:true}))
       push('/');
     } catch (error) {
+      setSending(false)
       toast({message:'Invalid login credentials',type:'error'})
       setUsernameError(true);
       setPasswordError(true);
@@ -70,7 +74,7 @@ export default function LoginForm({setLoginState}) {
             setPasswordError(false);
           }}
         />
-        <input type="submit" value="Submit" />
+       {sending?<span style={{display:'flex',height:'34px',justifyContent:'center',alignItems:'center'}}>Awaiting server response</span>:<input type="submit" value="Submit" />}
       </form>
     </div>
   );

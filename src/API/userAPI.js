@@ -26,7 +26,6 @@ export const userAPI = {
       body: JSON.stringify(user),
     });
     const responseData = await response.text();
-    console.log(responseData)
     if (!response.ok) {
       console.error(responseData);
       throw new Error(response.statusText);
