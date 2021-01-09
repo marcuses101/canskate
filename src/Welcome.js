@@ -6,7 +6,7 @@ export default function Welcome() {
     <div className="Welcome">
       <h2>What is it?</h2>
       <p>
-        This application is designed to managing the Canskate program a breeze.
+        This application is designed to make managing the Canskate program a breeze.
       </p>
       <p>
         The main feature is the evaluation tool. You can evaluate by skater, by
@@ -21,6 +21,8 @@ export default function Welcome() {
         skater's individual progress sheet is updated, and the ribbon/badge is
         added to a list of items to distribute.{" "}
       </p>
+
+      
     </div>
   );
 }
