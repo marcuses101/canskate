@@ -31,6 +31,7 @@
 }
 
 .SideNav li button {
+  font-size: 1rem;
   box-shadow: var(--box-shadow);
   padding: 1rem;
   border-radius: var(--radius);

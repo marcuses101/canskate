@@ -7,6 +7,16 @@ export default function SkaterList() {
   const [name, setName] = useState("");
   const { path } = useRouteMatch();
   const skaters = useClubSkaters().sort((a,b)=>a.fullname>b.fullname?1:-1);
+
+  if (!skaters.length) {
+    return (
+      <div className="SkaterList">
+        <h2>No skaters found</h2><br/>
+        <Link to='/manage/skater/add'>Add skater?</Link>
+      </div>
+    )
+  }
+
   const filteredSkaters = name
     ? skaters.filter((skater) =>
         skater.fullname.toLowerCase().includes(name.toLowerCase())

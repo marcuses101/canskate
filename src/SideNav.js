@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./SideNav.css";
 
-export default function SideNav({ open, closeNav, logout }) {
+export default function SideNav({ open, closeNav, logout, clubLogout, clubLoaded }) {
   const sidenav = useRef(null);
 
   // close nav on click outside
@@ -43,7 +43,11 @@ export default function SideNav({ open, closeNav, logout }) {
           <Link to="/manage">Manage</Link>
         </li>
         <li onClick={closeNav}>
-          <button onClick={logout}>Logout</button>
+          <ul>
+            {clubLoaded && <li><button onClick={clubLogout}>Change club</button></li>}
+            <li><button onClick={logout}>Logout</button></li>
+          </ul>
+
         </li>
       </ul>
     </nav>

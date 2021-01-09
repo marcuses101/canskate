@@ -32,9 +32,9 @@ export default function App() {
     setIsFilterOpen(false);
   }, [pathname]);
 
-  useEffect(()=>{
-    (async()=>await fetch(config.PING))()
-  },[])
+  useEffect(() => {
+    (async () => await fetch(config.PING))();
+  }, []);
 
   //load club data
   useEffect(() => {
@@ -61,6 +61,15 @@ export default function App() {
     toast({ message: "Logout successful", type: "success" });
     push("/");
   }
+  function clubLogout() {
+    clubDispatch({ type: CLUB_ACTIONS.LOGOUT });
+    skatersDispatch({ type: SKATER_ACTIONS.LOGOUT });
+    setLoginState({
+      loggedIn: true,
+      loading: false,
+      clubLoaded: false,
+    });
+  }
 
   function closeNav() {
     setIsNavOpen(false);
@@ -83,7 +92,13 @@ export default function App() {
   return (
     <Context.Provider value={contextObj}>
       <div className="App">
-        <SideNav open={isNavOpen} closeNav={closeNav} logout={logout} />
+        <SideNav
+          open={isNavOpen}
+          closeNav={closeNav}
+          logout={logout}
+          clubLogout={clubLogout}
+          clubLoaded={loginState.clubLoaded}
+        />
 
         <Header loggedIn={loginState.loggedIn} openNav={openNav} />
 
