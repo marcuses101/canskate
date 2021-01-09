@@ -42,7 +42,7 @@ const transitionStyles = {
 export function NotificationsProvider(props) {
   const [notifications, notificationDispatch] = useReducer(
     NotificationReducer,
-    []
+    [{message:'test',id:'5',type:'success'},{message:'Testtesttesttest',id:4,type:"error"}]
   );
 
   return (
