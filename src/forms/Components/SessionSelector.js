@@ -13,8 +13,15 @@ export default function SessionSelector({
   const select = useRef(null);
   return (
     <div className="SessionSelector">
-      <label htmlFor="sessions">Choose your session(s):</label>
-      <select ref={select} name="sessions" id="sessions">
+      <label htmlFor="sessions">Choose your session(s): </label>
+      <select
+        ref={select}
+        name="sessions"
+        id="sessions"
+        onChange={() => {
+          select.current.value && addSession(select.current.value);
+        }}
+      >
         {[
           <option key="" defaultValue value="">
             Sessions
@@ -32,17 +39,8 @@ export default function SessionSelector({
             )),
         ]}
       </select>
-      {
-        <button
-          type="button"
-          onClick={() => {
-            select.current.value && addSession(select.current.value);
-          }}
-        >
-          Add Session
-        </button>
-      }
-      {error && <i class="fas fa-exclamation-triangle error-icon"></i>}
+
+      {error && <i className="fas fa-exclamation-triangle error-icon"></i>}
       <ul className="selectedSessionsList">
         {selectedSessions.map((session) => {
           if (session.action === "add") {
@@ -63,7 +61,9 @@ export default function SessionSelector({
                 <span>{`Remove skater from ${
                   session.day
                 } ${session.start_time.slice(0, 5)}`}</span>{" "}
-                <button type="button" onClick={()=>setActionNull(session.id)}>Cancel</button>
+                <button type="button" onClick={() => setActionNull(session.id)}>
+                  Cancel
+                </button>
               </li>
             );
           } else {
@@ -74,7 +74,6 @@ export default function SessionSelector({
                   <button
                     type="button"
                     onClick={() => {
-
                       setActionRemove(session.id);
                     }}
                   >

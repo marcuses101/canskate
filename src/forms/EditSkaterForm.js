@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
 import { SKATER_ACTIONS } from "../services/skaterReducer";
+import { skaterAPI } from "../API/skaterAPI";
+import { skaterSessionAPI } from "../API/skaterSessionAPI";
 import dayjs from "dayjs";
 import Context from "../Context";
 import useSkaterFromParamId from "../Hooks/useSkaterFromParamId";
@@ -26,7 +28,6 @@ export default function EditSkaterForm() {
     value: dayjs(skater.birthdate).format("YYYY-MM-DD"),
     error: false,
   });
-
   const [gender, setGender] = useState({ value: skater.gender, error: false });
 
   // set selectedSession No CLUB_ACTIONS will be taken on submit for sessions with action:null
@@ -58,27 +59,23 @@ export default function EditSkaterForm() {
     }));
   }
   function setSessionActionRemove(sessionId) {
-
     setSelectedSessions((sessions) => ({
       ...sessions,
-      value:
-        sessions.value.map((session) =>
-          session.id === sessionId ? { ...session, action: "remove" } : session
-        )
-
+      value: sessions.value.map((session) =>
+        session.id === sessionId ? { ...session, action: "remove" } : session
+      ),
     }));
   }
-  function setSessionActionNull(sessionId){
+  function setSessionActionNull(sessionId) {
     setSelectedSessions((sessions) => ({
       ...sessions,
-      value:
-        sessions.value.map((session) =>
-          session.id === sessionId ? { ...session, action: null } : session
-        )
+      value: sessions.value.map((session) =>
+        session.id === sessionId ? { ...session, action: null } : session
+      ),
     }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const editedSkater = {
       id: skater.id,
@@ -104,7 +101,7 @@ export default function EditSkaterForm() {
       valid = false;
     }
     if (!selectedSessions.value.length) {
-      setSelectedSessions(sessions=>({...sessions,error:true}))
+      setSelectedSessions((sessions) => ({ ...sessions, error: true }));
       toast({
         message: "ERROR: Please select at least one session",
         type: "error",
@@ -114,25 +111,45 @@ export default function EditSkaterForm() {
 
     if (!valid) return;
 
-    skatersDispatch({ type: SKATER_ACTIONS.EDIT_SKATER, payload: editedSkater });
-    selectedSessions.value.forEach(session => {
-    if (session.action === 'add')  {clubDispatch({
-        type: CLUB_ACTIONS.SESSION_ADD_SKATER,
-        payload: { session_id: session.id, skater_id: skater.id },
+    try {
+      await skaterAPI.editSkater(editedSkater);
+
+      toast({ message: `${editedSkater.fullname} edited!`, type: "success" });
+
+      skatersDispatch({
+        type: SKATER_ACTIONS.EDIT_SKATER,
+        payload: editedSkater,
       });
-      setSessionActionNull(session.id)
+      await Promise.all(
+        selectedSessions.value.map(async (session) => {
+          if (session.action === "add") {
+            await skaterSessionAPI.addSkaterToSession(
+              editedSkater.id,
+              session.id
+            );
+            clubDispatch({
+              type: CLUB_ACTIONS.SESSION_ADD_SKATER,
+              payload: { session_id: session.id, skater_id: skater.id },
+            });
+            setSessionActionNull(session.id);
+          } else if (session.action === "remove") {
+            await skaterSessionAPI.removeSkaterFromSession(
+              editedSkater.id,
+              session.id
+            );
+            clubDispatch({
+              type: CLUB_ACTIONS.SESSION_REMOVE_SKATER,
+              payload: { session_id: session.id, skater_id: skater.id },
+            });
+            removeSession(session.id);
+          }
+        })
+      );
+    } catch (error) {
+      console.error(error);
+      toast({ message: "Server Error", type: "error" });
+      return;
     }
-    else if (session.action === 'remove') {
-      clubDispatch({
-        type: CLUB_ACTIONS.SESSION_REMOVE_SKATER,
-        payload: {session_id: session.id, skater_id: skater.id}
-      })
-      removeSession(session.id)
-    }
-    });
-
-    toast({ message: `${editedSkater.fullname} edited!`, type: "success" });
-
   }
 
   return (

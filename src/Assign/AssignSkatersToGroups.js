@@ -9,9 +9,9 @@ export default function AssignSkatersToGroups() {
   const session = useSessionFromParamId();
   const groups = useSessionGroups(session.id);
   const assignedSkaters = groups.map((group) => group.skaters).flat();
-  const sessionSkaters = useClubSkaters().filter((skater) =>
-    session.skaters.includes(skater.id)
-  );
+  const sessionSkaters = useClubSkaters()
+    .filter((skater) => session.skaters.includes(skater.id))
+    .sort((a, b) => (a.fullname > b.fullname ? 1 : -1));
   const unassignedSkaters = sessionSkaters.filter(
     (skater) => !assignedSkaters.includes(skater.id)
   );
@@ -22,7 +22,7 @@ export default function AssignSkatersToGroups() {
     return (
       <AssignGroup
         key={group.id}
-        text='white'
+        text="white"
         name={group.group_color}
         group_id={group.id}
         skaters={groupSkaters}
@@ -31,24 +31,27 @@ export default function AssignSkatersToGroups() {
     );
   });
   return (
-    <ul className="AssignSkatersToGroups">
-      {unassignedSkaters.length ? (
-        <AssignGroup
-          key="unassigned"
-          text='black'
-          name="Unassigned Skaters"
-          skaters={unassignedSkaters}
-          otherGroups={groups}
-        />
-      ) : null}
-      {groups.length ? (
-        groupComponents
-      ) : (
-        <>
-          <div>No groups associated with this session</div>
-          <Link to={`/manage/session/edit/${session.id}`}>Add a group?</Link>
-        </>
-      )}
-    </ul>
+    <>
+      <h2>Assign Skaters to groups</h2>
+      <ul className="AssignSkatersToGroups">
+        {unassignedSkaters.length ? (
+          <AssignGroup
+            key="unassigned"
+            text="black"
+            name="Unassigned Skaters"
+            skaters={unassignedSkaters}
+            otherGroups={groups}
+          />
+        ) : null}
+        {groups.length ? (
+          groupComponents
+        ) : (
+          <>
+            <div>No groups associated with this session</div>
+            <Link to={`/manage/session/edit/${session.id}`}>Add a group?</Link>
+          </>
+        )}
+      </ul>
+    </>
   );
 }

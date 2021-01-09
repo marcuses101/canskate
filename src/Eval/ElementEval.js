@@ -33,7 +33,7 @@ const elementObjectShape = {
 export default function ElementEval({groupSkaters}) {
   const { elements } = useContext(Context);
   const clubSkaters = useClubSkaters();
-  const skaters = groupSkaters || clubSkaters;
+  const skaters = (groupSkaters || clubSkaters).sort((a,b)=>a.fullname>b.fullname?1:-1);
   const [fundamentalFilter, setFundamentalFilter] = useState(
     fundamentalOptions
   );

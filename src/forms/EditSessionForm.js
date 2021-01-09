@@ -1,5 +1,8 @@
 import React, { useState, useContext } from "react";
 import { CLUB_ACTIONS } from "../services/clubReducer";
+import { sessionAPI } from "../API/sessionAPI";
+import {Link} from 'react-router-dom'
+import { groupAPI } from "../API/groupAPI";
 import GroupItem from "./GroupItem";
 import Context from "../Context";
 import { useSessionFromParamId } from "../Hooks/useSessionFromParamId";
@@ -28,15 +31,15 @@ function setError(obj) {
 export default function EditSessionForm() {
   const toast = useToast();
   const session = useSessionFromParamId();
-  const sessionGroups = useSessionGroups(session.id);
+  const sessionGroups = useSessionGroups(session?.id);
   const allGroups = useGroups();
   const [startTime, setStartTime] = useState({
-    value: session.start_time,
+    value: session?.start_time,
     error: false,
   });
-  const [day, setDay] = useState({ value: session.day, error: false });
+  const [day, setDay] = useState({ value: session?.day, error: false });
   const [duration, setDuration] = useState({
-    value: session.duration,
+    value: session?.duration,
     error: false,
   });
   const [groups, setGroups] = useState({
@@ -58,10 +61,19 @@ export default function EditSessionForm() {
     </option>
   ));
 
-  function handleSubmit(e) {
+  if(!session){
+    return (
+      <>
+  <h2>Session not found</h2><br/>
+      <Link to='/manage/session/edit'>Go back?</Link>
+      </>
+    )
+  }
+
+  async function handleSubmit(e) {
     e.preventDefault();
 
-    const newSession = {
+    const editedSession = {
       id: session.id,
       day: day.value,
       start_time: startTime.value,
@@ -69,26 +81,32 @@ export default function EditSessionForm() {
     };
     let valid = true;
 
-    if (!newSession.day) {
+    if (!editedSession.day) {
       toast({ message: "ERROR: Please select a day", type: "error" });
       setDay(setError);
-      valid = false
+      valid = false;
     }
-    if (!newSession.start_time) {
+    if (!editedSession.start_time) {
       toast({ message: "ERROR: Please select a start time", type: "error" });
       setStartTime(setError);
-      valid = false
+      valid = false;
     }
-    if (!newSession.duration) {
+    if (!editedSession.duration) {
       toast({ message: "ERROR: Please select a duration", type: "error" });
       setDuration(setError);
-      valid = false
+      valid = false;
     }
 
-    if (!valid) return
+    if (!valid) return;
 
-    toast({message: 'Session updated', type:'success'})
-    clubDispatch({ type: CLUB_ACTIONS.EDIT_SESSION, payload: newSession });
+    try {
+      await sessionAPI.editSession(editedSession);
+      toast({ message: "Session updated", type: "success" });
+      clubDispatch({ type: CLUB_ACTIONS.EDIT_SESSION, payload: editedSession });
+    } catch (error) {
+      toast({ message: "Session Server Error", type: "error" });
+      return;
+    }
 
     const groupsToDelete = groups.value.filter(
       (group) => group.action === "delete"
@@ -97,16 +115,47 @@ export default function EditSessionForm() {
       (group) => group.action === "create"
     );
 
-    groupsToDelete.forEach((group) => {
-      clubDispatch({ type: CLUB_ACTIONS.REMOVE_GROUP, payload: group.id });
-      toast({ message: `${group.group_color} group removed`, type: "success" });
-    });
-    groupsToCreate.forEach((group) => {
-      const { id, skaters, session_id, group_color } = group;
-      const newGroup = { id, skaters, session_id, group_color };
-      clubDispatch({ type: CLUB_ACTIONS.ADD_GROUP, payload: newGroup });
-      toast({ message: `${group.group_color} group added`, type: "success" });
-    });
+    // API call to create or delete groups
+
+    try {
+      const createGroupPromise = Promise.all(
+        groupsToCreate.map(async (group) => {
+          return await groupAPI.addGroup({
+            group_color: group.group_color,
+            session_id: group.session_id,
+          });
+        })
+      );
+
+      const deleteGroupPromise = Promise.all(
+        groupsToDelete.map(async (group) => {
+          return await groupAPI.deleteGroup(group);
+        })
+      );
+
+      const [createGroupResponse, deleteGroupResponse] = await Promise.all([
+        createGroupPromise,
+        deleteGroupPromise,
+      ]);
+
+      groupsToDelete.forEach((group) => {
+        clubDispatch({ type: CLUB_ACTIONS.REMOVE_GROUP, payload: group.id });
+        toast({
+          message: `${group.group_color} group removed`,
+          type: "success",
+        });
+      });
+      createGroupResponse.forEach((group) => {
+        const { id, skaters, session_id, group_color } = group;
+        const newGroup = { id, skaters, session_id, group_color };
+        clubDispatch({ type: CLUB_ACTIONS.ADD_GROUP, payload: newGroup });
+        toast({ message: `${group.group_color} group added`, type: "success" });
+      });
+    } catch (error) {
+      toast({ message: "Group Server Error", type: "error" });
+      return;
+    }
+
     setGroups((groups) => ({
       ...groups,
       value: groups.value
@@ -152,7 +201,7 @@ export default function EditSessionForm() {
   return (
     <div className="SessionForm">
       <form onSubmit={handleSubmit}>
-      <h2>Edit Session</h2>
+        <h2>Edit Session</h2>
         <label htmlFor="day">Day: </label>
         <select
           id="day"
@@ -169,7 +218,9 @@ export default function EditSessionForm() {
                 ...dayOptions,
               ]}
         </select>
-        {day.error && <i class="fas fa-exclamation-triangle error-icon"></i>}
+        {day.error && (
+          <i className="fas fa-exclamation-triangle error-icon"></i>
+        )}
         <br />
         <label htmlFor="startTime">Start Time: </label>
         <input
@@ -180,7 +231,7 @@ export default function EditSessionForm() {
           }
         />{" "}
         {startTime.error && (
-          <i class="fas fa-exclamation-triangle error-icon"></i>
+          <i className="fas fa-exclamation-triangle error-icon"></i>
         )}
         <br />
         <label htmlFor="">Duration: </label>
@@ -192,7 +243,7 @@ export default function EditSessionForm() {
           onChange={(e) => setDuration({ value: e.target.value, error: false })}
         />{" "}
         {duration.error && (
-          <i class="fas fa-exclamation-triangle error-icon"></i>
+          <i className="fas fa-exclamation-triangle error-icon"></i>
         )}
         <br />
         <label htmlFor="group">Add a group</label>
@@ -210,7 +261,9 @@ export default function EditSessionForm() {
             ),
           ]}
         </select>{" "}
-        {groups.error && <i class="fas fa-exclamation-triangle error-icon"></i>}
+        {groups.error && (
+          <i className="fas fa-exclamation-triangle error-icon"></i>
+        )}
         <ul className="groupList">
           {groups.value.map((group) => (
             <GroupItem

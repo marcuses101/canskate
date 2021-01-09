@@ -1,15 +1,29 @@
 import React, { useState, useContext } from "react";
+import {skaterGroupAPI} from '../API/skaterGroupAPI';
 import {useParams} from 'react-router-dom'
 import Context from "../Context";
+import { useToast } from "../Hooks/useToast";
 import { CLUB_ACTIONS } from "../services/clubReducer";
 import "./AssignSkater.css"
-export default function AssignSkater({ skater,group_id, otherGroups }) {
+export default function AssignSkater({ skater,group_id, otherGroups}) {
+  const toast = useToast();
   const [open, setOpen] = useState(false);
   const { clubDispatch } = useContext(Context);
   const {session_id} = useParams();
-  function groupTransfer(skater_id, session_id, initialGroupId, targetGroupId) {
-   initialGroupId && clubDispatch({ type: CLUB_ACTIONS.GROUP_REMOVE_SKATER, payload: {skater_id,session_id,group_id:initialGroupId} });
-   targetGroupId && clubDispatch({type: CLUB_ACTIONS.GROUP_ADD_SKATER,payload:{skater_id,session_id,group_id:targetGroupId}})
+ async function groupTransfer(skater_id, session_id, initialGroupId, targetGroupId) {
+    try {
+      // await groupChange(skater_id, targetGroupId)
+      if (initialGroupId){
+        await skaterGroupAPI.changeGroup(skater_id, initialGroupId, targetGroupId)
+      } else {
+        await skaterGroupAPI.addSkaterToGroup(skater_id, targetGroupId)
+      }
+      initialGroupId && clubDispatch({ type: CLUB_ACTIONS.GROUP_REMOVE_SKATER, payload: {skater_id,session_id,group_id:initialGroupId} });
+      targetGroupId && clubDispatch({type: CLUB_ACTIONS.GROUP_ADD_SKATER,payload:{skater_id,session_id,group_id:targetGroupId}})
+    } catch (error) {
+      console.error(error);
+      toast({message:"Server Error", type:"error"})
+    }
   }
 
   return (

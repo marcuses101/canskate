@@ -4,7 +4,7 @@ import HeaderContent from "./Headers/HeaderContent";
 import SkaterEvalHeader from "./Headers/SkaterEvalHeader";
 import "./Header.css";
 
-export default function Header({ openNav }) {
+export default function Header({ openNav, setOffset, loggedIn }) {
   const header = useRef();
 
   const resize = new ResizeObserver(([entry]) => {
@@ -24,6 +24,17 @@ export default function Header({ openNav }) {
       resize.unobserve(target);
     };
   });
+
+  if (!loggedIn) {
+    return (
+      <div ref={header} className='Header'>
+<HeaderContent
+  title="Canskate App"
+  hideMenu={true}
+/>
+      </div>
+    )
+  }
 
   return (
     <div ref={header} className="Header">
