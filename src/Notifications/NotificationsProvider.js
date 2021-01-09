@@ -27,40 +27,41 @@ function NotificationReducer(notifications, action) {
   }
 }
 const defaultStyle = {
-  transition: 'var(--time) ease',
+  transition: "var(--time) ease",
   opacity: 0,
-  transform: 'translateY(30px)'
-}
+  transform: "translateY(30px)",
+};
 
 const transitionStyles = {
-  entering:{transform:'translateY(30px)',opacity:0},
-  entered:{transform:'translateY(0px)',opacity:1},
-  exiting:{transform:'translateY(-30px)',opacity:0},
-  exited:{transform:'translateY(-30px)',opacity:0},
-}
+  entering: { transform: "translateY(30px)", opacity: 0 },
+  entered: { transform: "translateY(0px)", opacity: 1 },
+  exiting: { transform: "translateY(-30px)", opacity: 0 },
+  exited: { transform: "translateY(-30px)", opacity: 0 },
+};
 
 export function NotificationsProvider(props) {
   const [notifications, notificationDispatch] = useReducer(
     NotificationReducer,
-    [{message:'test',id:'5',type:'success'},{message:'Testtesttesttest',id:4,type:"error"}]
+    []
   );
 
   return (
     <NotificationContext.Provider value={{ notificationDispatch }}>
       <div className="notification-wrapper">
-        <TransitionGroup >
+        <TransitionGroup>
           {notifications.map((note) => {
             return (
               <Transition key={note.id} timeout={200}>
-                {state=><Notification
-                  style={transitionStyles[state]}
-                  defaultStyle={defaultStyle}
-                  dispatch={notificationDispatch}
-                  actions={NOTE_ACTIONS}
-                  {...note}
-                />}
+                {(state) => (
+                  <Notification
+                    style={transitionStyles[state]}
+                    defaultStyle={defaultStyle}
+                    dispatch={notificationDispatch}
+                    actions={NOTE_ACTIONS}
+                    {...note}
+                  />
+                )}
               </Transition>
-
             );
           })}
         </TransitionGroup>
