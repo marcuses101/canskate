@@ -7,7 +7,7 @@ import {
   SwitchTransition,
 } from "react-transition-group";
 
-export default function FundamentalArticle({ fundamental, badge, elements }) {
+export default function FundamentalArticle({ fundamental, badge, elements = [] }) {
   const duration = 250;
 
   const defaultStyle = {

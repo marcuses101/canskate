@@ -1,7 +1,7 @@
 import React from "react";
 import ReportRibbonComponent from "./ReportRibbonComponent";
 import dayjs from "dayjs";
-export default function ReportRibbonList({ ribbons, checkmarks, elements }) {
+export default function ReportRibbonList({ ribbons = [], checkmarks, elements }) {
   const reportRibbons = ribbons.map((ribbon) => {
     const ribbonCheckmarks = checkmarks.filter(
       (checkmark) => checkmark.ribbon_id === ribbon.id

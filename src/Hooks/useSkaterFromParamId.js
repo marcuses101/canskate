@@ -4,7 +4,7 @@ import Context from '../Context'
 
 export default function useSkaterFromParamId() {
   const {skater_id} = useParams();
-  const {skaters} = useContext(Context);
+  const {skaters = []} = useContext(Context);
   const skater = skaters.find(skater=>skater.id===parseInt(skater_id)) || {};
   return skater
 }

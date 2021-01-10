@@ -6,16 +6,16 @@ import { useToast } from "./useToast";
 
 export function useLogElement(skater_id, element_id) {
   const {
-    skaters,
-    elements,
-    checkmarks,
-    ribbons,
+    skaters = [],
+    elements = [],
+    checkmarks = [],
+    ribbons = [],
     skatersDispatch,
   } = useContext(Context);
   const toast = useToast();
   const skater = skaters.find((skater) => skater.id === skater_id);
-  const element = elements.find((element) => element.element_id === element_id);
-  const { checkmark_id, ribbon_id, badge } = element;
+  const element = elements.find((element) => element.element_id === element_id) || {};
+  const { checkmark_id = null, ribbon_id = null, badge = null} = element;
   return async function () {
     try {
       const elementRegex = new RegExp(element.checkmark_id + "\\d");

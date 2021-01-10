@@ -7,8 +7,8 @@ export default function ElementFilter(props) {
   const {
     toggleBadgeFilter,
     toggleFundamentalFilter,
-    badgeFilterState,
-    fundamentalFilterState,
+    badgeFilterState = {},
+    fundamentalFilterState = {},
   } = props;
   function handleBadgeClick(event) {
     const badge = event.target.textContent;
@@ -26,37 +26,37 @@ export default function ElementFilter(props) {
           onClick={handleBadgeClick}
           className={`one ${badgeFilterState[1] ? "active" : ""}`}
         >
-         <div className='badgeCircle'>1</div>
+          <div className="badgeCircle">1</div>
         </li>
         <li
           onClick={handleBadgeClick}
           className={`two ${badgeFilterState[2] ? "active" : ""}`}
         >
-          <div className='badgeCircle'>2</div>
+          <div className="badgeCircle">2</div>
         </li>
         <li
           onClick={handleBadgeClick}
           className={`three ${badgeFilterState[3] ? "active" : ""}`}
         >
-          <div className='badgeCircle'>3</div>
+          <div className="badgeCircle">3</div>
         </li>
         <li
           onClick={handleBadgeClick}
           className={`four ${badgeFilterState[4] ? "active" : ""}`}
         >
-          <div className='badgeCircle'>4</div>
+          <div className="badgeCircle">4</div>
         </li>
         <li
           onClick={handleBadgeClick}
           className={`five ${badgeFilterState[5] ? "active" : ""}`}
         >
-          <div className='badgeCircle'>5</div>
+          <div className="badgeCircle">5</div>
         </li>
         <li
           onClick={handleBadgeClick}
           className={`six ${badgeFilterState[6] ? "active" : ""}`}
         >
-          <div className='badgeCircle'>6</div>
+          <div className="badgeCircle">6</div>
         </li>
       </ul>
       <ul>

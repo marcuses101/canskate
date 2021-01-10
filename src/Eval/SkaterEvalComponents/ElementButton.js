@@ -5,7 +5,7 @@ import {Transition} from 'react-transition-group'
 import './ElementButton.css'
 
 
-export default function ElementButton({ element, style }) {
+export default function ElementButton({ element = {}, style }) {
   const skater = useSkaterFromParamId();
   const [confirmOpen, setConfirmOpen] = useState(false);
   const logElement = useLogElement(skater.id, element.element_id)

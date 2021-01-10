@@ -17,18 +17,18 @@ export default function GroupEval() {
       </>
     );
 
-  const groupSkaters = group.skaters.map((skaterId) =>
+  const groupSkaters = group.skaters?.map((skaterId) =>
     skaters.find((skater) => skater.id === skaterId)
   );
   return (
     <>
       {" "}
       <h2>
-        {session.day} {session.start_time.slice(0, 5)}
+        {session.day} {session.start_time?.slice(0, 5)}
       </h2>
       <h3
         className="groupHeader"
-        style={{ backgroundColor: `var(--${group.group_color.toLowerCase()})` }}
+        style={{ backgroundColor: `var(--${group.group_color?.toLowerCase()})` }}
       >
         {group.group_color} group
       </h3>

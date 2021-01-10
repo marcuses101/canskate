@@ -5,7 +5,7 @@ import Context from "../Context";
 import { useToast } from "../Hooks/useToast";
 import { CLUB_ACTIONS } from "../services/clubReducer";
 import "./AssignSkater.css"
-export default function AssignSkater({ skater,group_id, otherGroups}) {
+export default function AssignSkater({ skater = {},group_id, otherGroups}) {
   const toast = useToast();
   const [open, setOpen] = useState(false);
   const { clubDispatch } = useContext(Context);

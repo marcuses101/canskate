@@ -2,7 +2,7 @@ import React from "react";
 import "./ClubList.css";
 import { Link } from "react-router-dom";
 
-export default function ClubList({ clubList, onClick }) {
+export default function ClubList({ clubList = [], onClick }) {
   const clubListItems = clubList.map(({ name, id }) => (
     <li onClick={() => onClick(id)} key={id}>
       {name}

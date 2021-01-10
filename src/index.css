@@ -28,7 +28,8 @@
 
   --Balance: var(--green);
   --Control: var(--red);
-  --Agility: var(--blue)
+  --Agility: var(--blue);
+
 }
 
 body {
@@ -80,10 +81,19 @@ form input[type="submit"] {
   padding: .25rem .5rem;
 }
 
-form input[type="submit"]:hover {
-  cursor: pointer;
-  transform: scale(1.02);
-  background-color: var(--green-lighter);
+/* prevent sticky hover on mobile */
+@media (hover:hover) {
+  form input[type="submit"]:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+    background-color: var(--green-lighter);
+  }
+
+}
+
+form input[type="submit"]:active {
+  transform: scale(1);
+  background-color: rgba(0,0,0,0.2);
 }
 
 form .error-icon {

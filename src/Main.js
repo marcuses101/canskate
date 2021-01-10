@@ -18,7 +18,7 @@ import { clubAPI } from "./API/clubAPI";
 import { SKATER_ACTIONS } from "./services/skaterReducer";
 
 export default function Main({
-  loginState,
+  loginState = {},
   setLoginState,
   clubList,
   setClubList,

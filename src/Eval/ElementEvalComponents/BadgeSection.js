@@ -23,7 +23,7 @@ export default function BadgeSection({ badge, fundamentals, elements }) {
           {badge}
         </div>
       </header>
-      {fundamentals.map((fund) => (
+      {fundamentals?.map((fund) => (
         <ElementFundamentals
           key={`${badge}${fund}`}
           badge={badge}

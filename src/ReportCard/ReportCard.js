@@ -11,7 +11,7 @@ export default function ReportCard({ skater }) {
     return {
       badge_id: badge,
       date:
-        skater.badgeLog.find((entry) => {
+        skater?.badgeLog?.find((entry) => {
           return parseInt(entry.badge_id) === badge;
         })?.date_completed || null,
     };
