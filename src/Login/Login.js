@@ -7,7 +7,7 @@ export default function Login() {
   return (
     <div className="Login">
       <Welcome />
-      <h2>Login</h2>
+      <h2 className='header'>Login</h2>
       <Link to="/login">Login</Link>
       <Link to="/new-user">New user</Link>
     </div>

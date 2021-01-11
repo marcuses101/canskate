@@ -64,7 +64,7 @@ export default function EditSessionForm() {
   if(!session){
     return (
       <>
-  <h2>Session not found</h2><br/>
+  <h2 className='header'>Session not found</h2><br/>
       <Link to='/manage/session/edit'>Go back?</Link>
       </>
     )
@@ -133,7 +133,7 @@ export default function EditSessionForm() {
         })
       );
 
-      const [createGroupResponse, deleteGroupResponse] = await Promise.all([
+      const [createGroupResponse] = await Promise.all([
         createGroupPromise,
         deleteGroupPromise,
       ]);
@@ -201,7 +201,7 @@ export default function EditSessionForm() {
   return (
     <div className="SessionForm">
       <form onSubmit={handleSubmit}>
-        <h2>Edit Session</h2>
+        <h2 className='header'>Edit Session</h2><br/>
         <label htmlFor="day">Day: </label>
         <select
           id="day"

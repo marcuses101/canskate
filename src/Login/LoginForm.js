@@ -6,13 +6,13 @@ import { useToast } from "../Hooks/useToast";
 import { userAPI } from "../API/userAPI";
 import { useHistory } from "react-router-dom";
 
-export default function LoginForm({setLoginState}) {
-  const {push} = useHistory();
+export default function LoginForm({ setLoginState, setAppUsername }) {
+  const { push } = useHistory();
   const [username, setUsername] = useState("");
   const [usernameError, setUsernameError] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
-  const [sending,setSending] = useState(false)
+  const [sending, setSending] = useState(false);
   const toast = useToast();
 
   function validateForm() {
@@ -34,26 +34,28 @@ export default function LoginForm({setLoginState}) {
     e.preventDefault();
     if (!validateForm()) return;
     try {
-      setSending(true)
+      setSending(true);
       const jwt = await userAPI.submitLogin({ username, password });
       localStorage.setItem("jwt", JSON.stringify(jwt));
+      localStorage.setItem('username', JSON.stringify(username))
       toast({ message: "Login successful", type: "success" });
-      setSending(false)
-      setLoginState(state=>({...state,loggedIn:true}))
-      push('/');
+      setSending(false);
+      setLoginState((state) => ({ ...state, loggedIn: true }));
+      setAppUsername(username);
+      push("/");
     } catch (error) {
-      setSending(false)
-      toast({message:'Invalid login credentials',type:'error'})
+      setSending(false);
+      toast({ message: "Invalid login credentials", type: "error" });
       setUsernameError(true);
       setPasswordError(true);
-      console.error(error)
+      console.error(error);
     }
   }
 
   return (
     <div className="LoginForm">
       <form onSubmit={handleSubmit}>
-        <h2>Please enter your login info:</h2>
+        <h2 className="header">Please enter your login info:</h2>
         <TextInput
           label="Username"
           id="username"
@@ -74,7 +76,20 @@ export default function LoginForm({setLoginState}) {
             setPasswordError(false);
           }}
         />
-       {sending?<span style={{display:'flex',height:'34px',justifyContent:'center',alignItems:'center'}}>Awaiting server response</span>:<input type="submit" value="Submit" />}
+        {sending ? (
+          <span
+            style={{
+              display: "flex",
+              height: "34px",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            Awaiting server response
+          </span>
+        ) : (
+          <input type="submit" value="Submit" />
+        )}
       </form>
     </div>
   );

@@ -32,7 +32,7 @@ export default function AssignSkatersToGroups() {
   });
   return (
     <>
-      <h2>Assign Skaters to groups</h2>
+      <h2 className='header'>Assign Skaters to groups</h2>
       <ul className="AssignSkatersToGroups">
         {unassignedSkaters.length ? (
           <AssignGroup

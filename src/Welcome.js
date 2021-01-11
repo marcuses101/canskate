@@ -4,7 +4,7 @@ import "./Welcome.css";
 export default function Welcome() {
   return (
     <div className="Welcome">
-      <h2>What is it?</h2>
+      <h2 className="header">What is it?</h2>
       <p>
         This application is designed to make managing the Canskate program a breeze.
       </p>
@@ -22,7 +22,7 @@ export default function Welcome() {
         added to a list of items to distribute.{" "}
       </p>
 
-      
+
     </div>
   );
 }

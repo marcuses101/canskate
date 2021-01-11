@@ -11,7 +11,7 @@ export default function SkaterList() {
   if (!skaters.length) {
     return (
       <div className="SkaterList">
-        <h2>No skaters found</h2><br/>
+        <h2 className='header' style={{backgroundColor:'var(--red-light)'}}>No skaters found</h2><br/>
         <Link to='/manage/skater/add'>Add skater?</Link>
       </div>
     )
@@ -32,7 +32,7 @@ export default function SkaterList() {
   });
   return (
     <div className="SkaterList">
-      <h2>Choose a skater:</h2>
+      <h2 className='header'>Choose a skater:</h2>
       <div className="field">
         <input
           className="input"

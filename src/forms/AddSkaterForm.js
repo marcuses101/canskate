@@ -114,7 +114,7 @@ export default function SkaterForm() {
 
   return (
     <form className="SkaterForm" onSubmit={handleSubmit}>
-      <h2>New Skater</h2>
+      <h2 className='header'>New Skater</h2>
       <TextInput
         id="fullname"
         label="Full Name: "

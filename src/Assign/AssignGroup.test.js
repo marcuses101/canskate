@@ -1,10 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import {MemoryRouter} from 'react-router-dom'
-import AssignGroup from './AssignGroup'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import AssignGroup from './AssignGroup';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<MemoryRouter><AssignGroup /></MemoryRouter>, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<AssignGroup />, div);
+    ReactDOM.unmountComponentAtNode(div);
+  });
+  

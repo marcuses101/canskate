@@ -18,9 +18,6 @@ import SessionList from "./Routes/Components/SessionList";
 
       <ul className="links">
         <li><Link to={`${path}/skater`}>All Skaters</Link></li>
-        {/* <li>
-          <Link to={`${path}/session`}>Sessions</Link>
-        </li> */}
       </ul>
      </div>
        </Route>

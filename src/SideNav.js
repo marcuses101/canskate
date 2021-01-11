@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./SideNav.css";
 
-export default function SideNav({ open, closeNav, logout, clubLogout, clubLoaded }) {
+export default function SideNav({ open, closeNav, logout, clubLogout, clubLoaded, username }) {
   const sidenav = useRef(null);
 
   // close nav on click outside
@@ -34,7 +34,7 @@ export default function SideNav({ open, closeNav, logout, clubLogout, clubLoaded
           <Link to="/eval">Evaluate</Link>
         </li>
         <li onClick={closeNav}>
-          <Link to="/progress">Progress</Link>
+          <Link to="/progress/skater">Progress</Link>
         </li>
         <li onClick={closeNav}>
           <Link to="/distribution">Distribution</Link>
@@ -47,9 +47,9 @@ export default function SideNav({ open, closeNav, logout, clubLogout, clubLoaded
             {clubLoaded && <li><button onClick={clubLogout}>Change club</button></li>}
             <li><button onClick={logout}>Logout</button></li>
           </ul>
-
         </li>
       </ul>
+     <h5>{username}</h5>
     </nav>
   );
 }

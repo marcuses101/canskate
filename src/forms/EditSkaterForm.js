@@ -154,7 +154,7 @@ export default function EditSkaterForm() {
 
   return (
     <form className="SkaterForm" onSubmit={handleSubmit}>
-      <h2>Edit Skater</h2>
+      <h2 className='header'>Edit Skater</h2>
       <TextInput
         id="fullname"
         label="Full Name: "

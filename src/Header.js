@@ -1,15 +1,17 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import HeaderContent from "./Headers/HeaderContent";
 import SkaterEvalHeader from "./Headers/SkaterEvalHeader";
 import "./Header.css";
-
-export default function Header({ openNav, setOffset, loggedIn }) {
+import Context from "./Context";
+export default function Header({ openNav, loggedIn, clubLoaded }) {
+  const {
+    club: { name = "" },
+  } = useContext(Context);
   const header = useRef();
-
   const resize = new ResizeObserver(([entry]) => {
     // borderBoxSize object held in an array in Chrome, not in firefox?
-    const borderBoxSize = entry.borderBoxSize[0] || entry.borderBoxSize
+    const borderBoxSize = entry.borderBoxSize[0] || entry.borderBoxSize;
     const offset = borderBoxSize.blockSize;
     document.documentElement.style.setProperty(
       "--header-offset",
@@ -27,53 +29,54 @@ export default function Header({ openNav, setOffset, loggedIn }) {
 
   if (!loggedIn) {
     return (
-      <div ref={header} className='Header'>
-<HeaderContent
-  title="Canskate App"
-  hideMenu={true}
-/>
+      <div ref={header} className="Header">
+        <HeaderContent title="Canskate App" hideMenu={true} />
       </div>
-    )
+    );
+  }
+  console.log(clubLoaded)
+
+  if (!clubLoaded) {
+    return (
+      <div ref={header} className="Header">
+        <HeaderContent title="Canskate App" hideMenu={true} />
+      </div>
+    );
   }
 
   return (
     <div ref={header} className="Header">
       <Switch>
         <Route path="/eval/skater/:skater_id">
-          <SkaterEvalHeader openNav={openNav} />
+        <HeaderContent openNav={openNav} />
         </Route>
-        <Route
-          path={["/eval/element", "/eval/session/:session_id/group/:group_id"]}
-        >
+        <Route path='"/eval/session/:session_id/group/:group_id"'>
           <HeaderContent
-            title="Element Evaluation"
+            title="Group Evaluation"
             openNav={openNav}
             showFilter={true}
           />
         </Route>
-        <Route path='/eval'>
+        <Route
+          path="/eval/element"
+        >
           <HeaderContent
-            title="Evaluation"
+            title="Club Evaluation"
             openNav={openNav}
+            showFilter={true}
           />
         </Route>
-        <Route path='/manage/skater'>
-          <HeaderContent
-            title="Skater Management"
-            openNav={openNav}
-          />
+        <Route path="/eval">
+          <HeaderContent title="Evaluation" openNav={openNav} />
         </Route>
-        <Route path='/manage/session'>
-          <HeaderContent
-            title="Session Management"
-            openNav={openNav}
-          />
+        <Route path="/manage/skater">
+          <HeaderContent title="Skater Management" openNav={openNav} />
         </Route>
-        <Route path='/manage'>
-          <HeaderContent
-          title="Management"
-          openNav={openNav}
-          />
+        <Route path="/manage/session">
+          <HeaderContent title="Session Management" openNav={openNav} />
+        </Route>
+        <Route path="/manage">
+          <HeaderContent title="Management" openNav={openNav} />
         </Route>
         <Route path="/distribution">
           <HeaderContent
@@ -82,7 +85,10 @@ export default function Header({ openNav, setOffset, loggedIn }) {
             showFilter={true}
           />
         </Route>
-        <Route path='/progress'>
+        <Route path="/progress/skater/:skater_id">
+          <HeaderContent openNav={openNav} />
+        </Route>
+        <Route path="/progress">
           <HeaderContent
             title="Progress"
             openNav={openNav}
@@ -91,7 +97,7 @@ export default function Header({ openNav, setOffset, loggedIn }) {
         </Route>
         <Route path="/">
           <HeaderContent
-            title="Canskate App"
+            title={name || "Canskate App"}
             openNav={openNav}
             showFilter={false}
           />

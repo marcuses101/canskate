@@ -1,6 +1,6 @@
 import React from "react";
 import ElementEval from "./ElementEval";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { useGroupFromParamId } from "../Hooks/useGroupFromParamId";
 import { useClubSkaters } from "../Hooks/useClubSkaters";
 import { useSessionFromParamId } from "../Hooks/useSessionFromParamId";
@@ -12,7 +12,10 @@ export default function GroupEval() {
   if (!group || !session)
     return (
       <>
-        <h2>Group not found</h2><br/>
+        <h2 className="header" style={{ backgroundColor: "var(--red-light)" }}>
+          Group not found
+        </h2>
+        <br />
         <Link to="/">Return Home</Link>
       </>
     );
@@ -22,16 +25,15 @@ export default function GroupEval() {
   );
   return (
     <>
-      {" "}
-      <h2>
-        {session.day} {session.start_time?.slice(0, 5)}
-      </h2>
-      <h3
-        className="groupHeader"
-        style={{ backgroundColor: `var(--${group.group_color?.toLowerCase()})` }}
+      <h2
+        className="header"
+        style={{
+          backgroundColor: `var(--${group.group_color?.toLowerCase()})`,
+        }}
       >
-        {group.group_color} group
-      </h3>
+        {session.day} {session.start_time?.slice(0, 5)} {group.group_color}{" "}
+        group
+      </h2>
       <ElementEval groupSkaters={groupSkaters} />
     </>
   );

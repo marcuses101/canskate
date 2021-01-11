@@ -9,7 +9,9 @@ export default function SessionList() {
   if (!Object.values(sessions).length) {
     return (
       <div className="SessionList">
-        <h2>No sessions found</h2>
+        <h2 className="header" style={{ backgroundColor: "var(--red-light)" }}>
+          No sessions found
+        </h2>
         <br />
         <Link to="/manage/session/add">Add a session?</Link>
       </div>
@@ -17,7 +19,7 @@ export default function SessionList() {
   }
   return (
     <div className="SessionList">
-      <h2>Choose a session:</h2>
+      <h2 className='header'>Choose a session:</h2>
       <ul className="links">
         {Object.values(sessions).map((session) => {
           return (

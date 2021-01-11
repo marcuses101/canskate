@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import useSkaterFromParamId from "../Hooks/useSkaterFromParamId";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import BadgeSection from "./SkaterEvalComponents/BadgeSection";
 import ElementFilter from "./ElementFilter";
 import { FilterContainer } from "../FilterContainer";
@@ -33,20 +33,26 @@ const elementObjectShape = {
 
 export default function SkaterEval() {
   const { elements } = useContext(Context);
-  const { elementLog: completedElements = null, id = null} = useSkaterFromParamId();
+  const {
+    elementLog: completedElements = null,
+    id = null,
+  } = useSkaterFromParamId();
   const [fundamentalFilter, setFundamentalFilter] = useState(
     fundamentalOptions
-    );
-    const [badgeFilter, setBadgeFilter] = useState(badgeOptions);
+  );
+  const [badgeFilter, setBadgeFilter] = useState(badgeOptions);
 
-    if (!completedElements) {
-      return (
-        <>
-          <h2>Skater not found</h2><br></br>
-          <Link to='/eval/skater'>Go back?</Link>
-        </>
-      )
-    }
+  if (!completedElements) {
+    return (
+      <>
+        <h2 className="header" style={{ backgroundColor: "var(--red-light)" }}>
+          Skater not found
+        </h2>
+        <br></br>
+        <Link to="/eval/skater">Go back?</Link>
+      </>
+    );
+  }
   function toggleBadgeFilter(badge) {
     setBadgeFilter((badgesObj) => ({
       ...badgesObj,
@@ -87,26 +93,28 @@ export default function SkaterEval() {
     (acc, [key, value]) => (value ? [...acc, key] : acc),
     []
   );
-  return (<>
+  return (
+    <>
+    <h2 className="header">Evaluation</h2><br/>
       <Link to={`/progress/skater/${id}`}>Go to progress page</Link>
-    <div className="Eval">
-      <FilterContainer>
-        <ElementFilter
-          toggleBadgeFilter={toggleBadgeFilter}
-          toggleFundamentalFilter={toggleFundamentalFilter}
-          badgeFilterState={badgeFilter}
-          fundamentalFilterState={fundamentalFilter}
-        />
-      </FilterContainer>
-      {badges.map((badge) => (
-        <BadgeSection
-          key={badge}
-          badge={badge}
-          fundamentals={fundamentals}
-          elements={elementObject[badge]}
-        />
-      ))}
-    </div>
+      <div className="Eval">
+        <FilterContainer>
+          <ElementFilter
+            toggleBadgeFilter={toggleBadgeFilter}
+            toggleFundamentalFilter={toggleFundamentalFilter}
+            badgeFilterState={badgeFilter}
+            fundamentalFilterState={fundamentalFilter}
+          />
+        </FilterContainer>
+        {badges.map((badge) => (
+          <BadgeSection
+            key={badge}
+            badge={badge}
+            fundamentals={fundamentals}
+            elements={elementObject[badge]}
+          />
+        ))}
+      </div>
     </>
   );
 }

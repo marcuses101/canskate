@@ -16,6 +16,7 @@ export default function App() {
   const toast = useToast();
   const { push } = useHistory();
   const { pathname } = useLocation();
+  const [username,setUsername] = useState(JSON.parse(localStorage.getItem('username')) || '')
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [loginState, setLoginState] = useState({
     loggedIn: localStorage.getItem("jwt") ? true : false,
@@ -27,11 +28,17 @@ export default function App() {
   const [club, clubDispatch] = useReducer(clubReducer, {});
   const [skaters, skatersDispatch] = useReducer(skatersReducer, []);
 
-  // close filter on route change
+  // close filter on route change. change header color, scroll to top
   useEffect(() => {
+    window.scrollTo({ top: "0px", behavior: "auto" });
     setIsFilterOpen(false);
+    document.documentElement.style.setProperty(
+      "--header-color",
+      Math.random() > 0.5 ? "var(--blue-light)" : "var(--green)"
+    );
   }, [pathname]);
 
+  // wake up server
   useEffect(() => {
     (async () => await fetch(config.PING))();
   }, []);
@@ -53,6 +60,7 @@ export default function App() {
     clubDispatch({ type: CLUB_ACTIONS.LOGOUT });
     skatersDispatch({ type: SKATER_ACTIONS.LOGOUT });
     setClubList([]);
+    setUsername('');
     setLoginState({
       loggedIn: false,
       loading: false,
@@ -89,10 +97,12 @@ export default function App() {
     isFilterOpen,
     setIsFilterOpen,
   };
+
   return (
     <Context.Provider value={contextObj}>
       <div className="App">
         <SideNav
+          username={username}
           open={isNavOpen}
           closeNav={closeNav}
           logout={logout}
@@ -100,9 +110,14 @@ export default function App() {
           clubLoaded={loginState.clubLoaded}
         />
 
-        <Header loggedIn={loginState.loggedIn} openNav={openNav} />
+        <Header
+          loggedIn={loginState.loggedIn}
+          openNav={openNav}
+          clubLoaded={loginState.clubLoaded}
+        />
 
         <Main
+          setUsername={setUsername}
           loginState={loginState}
           setLoginState={setLoginState}
           clubList={clubList}

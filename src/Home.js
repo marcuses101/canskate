@@ -6,20 +6,20 @@ import { useSessions } from "./Hooks/useSessions"
    const sessions = useSessions();
     if (!Object.entries(sessions).length) return(
       <div className="Home">
-        <h2>Please start by creating a session</h2><br/>
+        <h2 className='header'>Please start by creating a session</h2><br/>
         <Link to='/manage/session/add'>Add Session</Link>
       </div>
     )
 
    return (
      <div className="Home">
-      <h2>What would you like to do?</h2>
+      <h2 className='header'>What would you like to do?</h2>
       <ul className="links">
         <li>
           <Link to="/eval">Evaluate</Link>
         </li>
         <li>
-          <Link to="/progress">View Progress</Link>
+          <Link to="/progress/skater">View Progress</Link>
         </li>
         <li>
           <Link to="/manage">Manage Sessions/Groups/Skaters</Link>

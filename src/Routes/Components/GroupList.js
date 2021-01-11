@@ -12,7 +12,7 @@ export default function GroupList() {
   if (!session) {
     return (
       <>
-        <h2>Session not found</h2><br/>
+        <h2 className='header' style={{backgroundColor:'var(--red-light)'}}>Session not found</h2><br/>
         <Link to='/'>Go home?</Link>
       </>
     )
@@ -20,7 +20,7 @@ export default function GroupList() {
   if (!groups.length)
     return (
       <div className="GroupEvalList">
-        <h4>No associated group</h4>
+        <h2 className='header' style={{backgroundColor:'var(--red-light)'}} >No session groups</h2>
        <ul className='links'><li><Link to={`/manage/session/edit/${session.id}`}>Add a group?</Link></li></ul>
       </div>
     );

@@ -19,16 +19,16 @@ export default function Eval() {
         <Route path={`${path}/session/:session_id`} component={GroupList}/>
         <Route path={`${path}/session`} component={SessionList} />
         <Route>
-          <h3>What would you like to evaluate?</h3>
+          <h2 className='header'>What would you like to evaluate?</h2>
           <ul className='links'>
             <li>
               <Link to="/eval/skater">Skater</Link>
             </li>
             <li>
-              <Link to="/eval/element">Elements</Link>
+              <Link to="/eval/element">Club</Link>
             </li>
             <li>
-              <Link to="/eval/session">Group </Link>
+              <Link to="/eval/session">Group</Link>
             </li>
           </ul>
         </Route>

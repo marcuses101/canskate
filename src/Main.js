@@ -22,6 +22,7 @@ export default function Main({
   setLoginState,
   clubList,
   setClubList,
+  setUsername
 }) {
   const { clubDispatch, skatersDispatch } = useContext(Context);
   // handle login/new user
@@ -39,10 +40,10 @@ export default function Main({
       <main className="Main">
         <Switch>
           <Route path="/login">
-            <LoginForm setLoginState={setLoginState} />
+            <LoginForm setLoginState={setLoginState} setAppUsername={setUsername}/>
           </Route>
           <Route path="/new-user">
-            <AddUserForm setLoginState={setLoginState} />
+            <AddUserForm setLoginState={setLoginState} setAppUsername={setUsername} />
           </Route>
           <Route path="/" component={Login} />
         </Switch>

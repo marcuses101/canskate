@@ -38,9 +38,6 @@ export default function SessionForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const group_id = Object.values(club.groups).reduce((id, group) => {
-      return group.id > id ? group.id : id;
-    }, 0);
     // validate inputs
     let valid = true;
     if (!day.value) {
@@ -73,7 +70,7 @@ export default function SessionForm() {
       day: day.value,
       start_time: startTime.value,
       duration: duration.value,
-      club_id: club.id
+      club_id: club.id,
     };
 
     let responseSession = {};
@@ -135,8 +132,9 @@ export default function SessionForm() {
   }
   return (
     <div className="SessionForm">
-      <h1>Hello Sessions</h1>
       <form onSubmit={handleSubmit}>
+        <h2 className="header">Add session</h2>
+        <br />
         <label htmlFor="day">Day: </label>
         <select
           id="day"

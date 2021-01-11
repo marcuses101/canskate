@@ -17,6 +17,7 @@
 .badgeCircle {
   border: 2px solid black;
   color:white;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.65);
   font-size: 1.5rem;
   font-weight: bolder;
   margin:1rem;
