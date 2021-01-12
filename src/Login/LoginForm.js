@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./LoginForm.css";
-import TextInput from "../forms/Components/TextInput";
-import PasswordInput from "../forms/Components/PasswordInput";
+import TextInput from '../FormComponents/TextInput'
+import PasswordInput from '../FormComponents/PasswordInput'
 import { useToast } from "../Hooks/useToast";
 import { userAPI } from "../API/userAPI";
 import { useHistory } from "react-router-dom";
@@ -88,7 +88,8 @@ export default function LoginForm({ setLoginState, setAppUsername }) {
             Awaiting server response
           </span>
         ) : (
-          <input type="submit" value="Submit" />
+         <> <input type="submit" value="Submit" />
+          <button type="button" onClick={()=>push('/')}  className='cancel'>Cancel</button></>
         )}
       </form>
     </div>

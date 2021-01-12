@@ -1,7 +1,7 @@
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useState, useReducer, useEffect, useRef } from "react";
 import config from "./config";
 import { useHistory, useLocation } from "react-router-dom";
-import SideNav from "./SideNav";
+import SideNav from "./SideNav/SideNav";
 import Header from "./Header";
 import Main from "./Main";
 import Context from "./Context";
@@ -16,7 +16,9 @@ export default function App() {
   const toast = useToast();
   const { push } = useHistory();
   const { pathname } = useLocation();
-  const [username,setUsername] = useState(JSON.parse(localStorage.getItem('username')) || '')
+  const [username, setUsername] = useState(
+    JSON.parse(localStorage.getItem("username")) || ""
+  );
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [loginState, setLoginState] = useState({
     loggedIn: localStorage.getItem("jwt") ? true : false,
@@ -28,9 +30,8 @@ export default function App() {
   const [club, clubDispatch] = useReducer(clubReducer, {});
   const [skaters, skatersDispatch] = useReducer(skatersReducer, []);
 
-  // close filter on route change. change header color, scroll to top
+  // close filter on route change. change header color
   useEffect(() => {
-    window.scrollTo({ top: "0px", behavior: "auto" });
     setIsFilterOpen(false);
     document.documentElement.style.setProperty(
       "--header-color",
@@ -60,7 +61,7 @@ export default function App() {
     clubDispatch({ type: CLUB_ACTIONS.LOGOUT });
     skatersDispatch({ type: SKATER_ACTIONS.LOGOUT });
     setClubList([]);
-    setUsername('');
+    setUsername("");
     setLoginState({
       loggedIn: false,
       loading: false,
@@ -109,6 +110,18 @@ export default function App() {
           clubLogout={clubLogout}
           clubLoaded={loginState.clubLoaded}
         />
+        {/* prevent clicking while sidenav open */}
+        {isNavOpen && (
+          <div
+            style={{
+              zIndex: "1",
+              width: "100vw",
+              height: "100vh",
+              position: "fixed",
+              top: "0",
+            }}
+          ></div>
+        )}
 
         <Header
           loggedIn={loginState.loggedIn}
@@ -117,6 +130,7 @@ export default function App() {
         />
 
         <Main
+
           setUsername={setUsername}
           loginState={loginState}
           setLoginState={setLoginState}

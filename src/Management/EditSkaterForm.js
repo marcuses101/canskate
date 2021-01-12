@@ -4,17 +4,20 @@ import { skaterAPI } from "../API/skaterAPI";
 import { skaterSessionAPI } from "../API/skaterSessionAPI";
 import dayjs from "dayjs";
 import Context from "../Context";
+import {Link} from 'react-router-dom'
 import useSkaterFromParamId from "../Hooks/useSkaterFromParamId";
 import { CLUB_ACTIONS } from "../services/clubReducer";
-import TextInput from "./Components/TextInput";
-import DateInput from "./Components/DateInput";
-import RadioSelector from "./Components/RadioSelector";
-import SessionSelector from "./Components/SessionSelector";
+import TextInput from "../FormComponents/TextInput";
+import DateInput from "../FormComponents/DateInput";
+import RadioSelector from "../FormComponents/RadioSelector";
+import SessionSelector from "../FormComponents/SessionSelector";
 import { useToast } from "../Hooks/useToast";
+import { useHistory } from "react-router-dom";
 
 export default function EditSkaterForm() {
   const toast = useToast();
   const skater = useSkaterFromParamId();
+  const { push } = useHistory();
   const {
     skatersDispatch,
     clubDispatch,
@@ -41,6 +44,16 @@ export default function EditSkaterForm() {
       .filter(Boolean),
     error: false,
   });
+
+  if (!Object.entries(skater).length) {
+    return (
+      <>
+        <h2 className="header">Skater not found</h2>
+        <br />
+        <Link to="/manage/skater/edit">Go back?</Link>
+      </>
+    );
+  }
 
   function addSession(sessionId) {
     setSelectedSessions((selectedSessions) => ({
@@ -154,7 +167,7 @@ export default function EditSkaterForm() {
 
   return (
     <form className="SkaterForm" onSubmit={handleSubmit}>
-      <h2 className='header'>Edit Skater</h2>
+      <h2 className="header">Edit Skater</h2>
       <TextInput
         id="fullname"
         label="Full Name: "
@@ -191,6 +204,13 @@ export default function EditSkaterForm() {
       />
 
       <input type="submit" value="Submit" />
+      <button
+        type="button"
+        className="cancel"
+        onClick={() => push("/manage/skater/edit")}
+      >
+        Cancel
+      </button>
     </form>
   );
 }

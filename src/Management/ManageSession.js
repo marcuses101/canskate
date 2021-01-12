@@ -1,9 +1,9 @@
 import React from "react";
 import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
-import AssignSkatersToGroups from "./Assign/AssignSkatersToGroups";
-import SessionList from "./Routes/Components/SessionList";
-import AddSessionForm from "./forms/AddSessionForm";
-import EditSessionForm from "./forms/EditSessionForm";
+import AssignSkatersToGroups from "../Assign/AssignSkatersToGroups";
+import SessionList from "../Routes/SessionList";
+import AddSessionForm from "./AddSessionForm";
+import EditSessionForm from "./EditSessionForm";
 
 export default function ManageSession() {
   const { path } = useRouteMatch();
@@ -20,6 +20,8 @@ export default function ManageSession() {
       <Route path={`${path}/assign`} component={SessionList} />
       <Route>
         <div className="ManageSkater">
+          <h2 className="header">What would you like to do?</h2>
+
           <ul className="links">
             <li>
               <Link to={`${path}/add`}>Add Session</Link>

@@ -4,12 +4,13 @@ import { skaterClubAPI } from "../API/skaterClubAPI";
 import { skaterSessionAPI } from "../API/skaterSessionAPI";
 import { SKATER_ACTIONS } from "../services/skaterReducer";
 import { CLUB_ACTIONS } from "../services/clubReducer";
-import TextInput from "./Components/TextInput";
-import DateInput from "./Components/DateInput";
-import RadioSelector from "./Components/RadioSelector";
-import SessionSelector from "./Components/SessionSelector";
+import TextInput from "../FormComponents/TextInput";
+import DateInput from "../FormComponents/DateInput";
+import RadioSelector from "../FormComponents/RadioSelector";
+import SessionSelector from "../FormComponents/SessionSelector";
 import Context from "../Context";
 import { useToast } from "../Hooks/useToast";
+import { useHistory } from "react-router-dom";
 
 export default function SkaterForm() {
   const {
@@ -17,7 +18,7 @@ export default function SkaterForm() {
     clubDispatch,
     club: { sessions, id: club_id },
   } = useContext(Context);
-
+  const {push} = useHistory()
   const toast = useToast();
 
   const [fullName, setFullName] = useState({ value: "", error: false });
@@ -148,6 +149,8 @@ export default function SkaterForm() {
         error={selectedSessions.error}
       />
       <input type="submit" value="Submit" />
+      <button type='button' className='cancel' onClick={()=>push('/manage/skater')}>Cancel</button>
+
     </form>
   );
 }

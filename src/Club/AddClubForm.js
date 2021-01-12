@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useToast } from "./Hooks/useToast";
-import TextInput from "./forms/Components/TextInput";
-import { clubAPI } from "./API/clubAPI";
+import { useToast } from "../Hooks/useToast";
+import TextInput from "../FormComponents/TextInput";
+import { clubAPI } from "../API/clubAPI";
 import { useHistory } from "react-router-dom";
 
 export default function AddClubForm({ setClubList }) {

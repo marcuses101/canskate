@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
-import { useSessionFromParamId } from "../../Hooks/useSessionFromParamId";
-import { useSessionGroups } from "../../Hooks/useSessionGroups";
+import { useSessionFromParamId } from "../Hooks/useSessionFromParamId";
+import { useSessionGroups } from "../Hooks/useSessionGroups";
 
 export default function GroupList() {
   const { url } = useRouteMatch();

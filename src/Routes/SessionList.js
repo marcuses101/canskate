@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
-import { useSessions } from "../../Hooks/useSessions";
+import { useSessions } from "../Hooks/useSessions";
 
 export default function SessionList() {
   const sessions = useSessions();

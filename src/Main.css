@@ -1,13 +1,16 @@
 .blur .Main {
- filter: saturate(25%) blur(1px);
+  filter: saturate(25%) blur(1px);
 }
 
 .Main {
-  margin: auto;
-  margin-top: calc(var(--header-offset) + var(--filter-offset) + 16px);
-
+  position: relative;
+  top: calc(var(--header-offset) + var(--filter-offset));
+  height: calc(100vh - var(--header-offset) - var(--filter-offset));
+  padding-top:16px;
+  overflow-y: auto;
 }
 
+
 .filter .Main {
-  transition: margin calc(var(--time) / 2) linear;
+  transition: top calc(var(--time) / 2) linear;
 }

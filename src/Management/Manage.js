@@ -15,7 +15,7 @@ export default function Manage() {
       </Route>
       <Route>
         <div className="Manage">
-          <h1>Manage Canskate</h1>
+          <h2 className='header'>Manage Canskate</h2>
           <ul className="links">
             <li>
               <Link to={`${path}/skater`}>Manage Skaters</Link>

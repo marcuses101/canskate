@@ -5,6 +5,7 @@ import Main from './Main'
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
+  HTMLElement.prototype.scrollTo = ()=>{};
   ReactDOM.render(<MemoryRouter><Main /></MemoryRouter>, div);
   ReactDOM.unmountComponentAtNode(div);
 });

@@ -1,8 +1,8 @@
 import React from "react"
 import {Link, Route, Switch, useRouteMatch} from 'react-router-dom'
-import SkaterList from "./Routes/Components/SkaterList";
-import AddSkaterForm from "./forms/AddSkaterForm";
-import EditSkaterForm from './forms/EditSkaterForm'
+import SkaterList from "../Routes/SkaterList";
+import AddSkaterForm from "./AddSkaterForm";
+import EditSkaterForm from './EditSkaterForm'
 
  export default function ManageSkater(){
    const {path}= useRouteMatch();
@@ -14,6 +14,7 @@ import EditSkaterForm from './forms/EditSkaterForm'
           <Route path={`${path}/edit`} component={SkaterList}/>
           <Route >
             <div className="ManageSkater">
+            <h2 className='header'>What would you like to do?</h2>
               <ul className="links">
                 <li>
                   <Link to={`${path}/add`}>Add Skater</Link>

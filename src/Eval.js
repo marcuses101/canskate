@@ -1,11 +1,11 @@
 import React from "react";
 import { Link, Route, Switch, useRouteMatch } from "react-router-dom";
-import SkaterEval from "./Eval/SkaterEval";
-import SkaterList from "./Routes/Components/SkaterList";
-import ElementEval from "./Eval/ElementEval";
-import SessionList from './Routes/Components/SessionList'
-import GroupList from './Routes/Components/GroupList'
-import GroupEval from './Eval/GroupEval'
+import SkaterEval from "./Evaluation/SkaterEval";
+import SkaterList from "./Routes/SkaterList";
+import ElementEval from "./Evaluation/ElementEval";
+import SessionList from './Routes/SessionList'
+import GroupList from './Routes/GroupList'
+import GroupEval from './Evaluation/GroupEval'
 
 export default function Eval() {
   const { path } = useRouteMatch();

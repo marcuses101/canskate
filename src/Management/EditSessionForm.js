@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { CLUB_ACTIONS } from "../services/clubReducer";
 import { sessionAPI } from "../API/sessionAPI";
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import { groupAPI } from "../API/groupAPI";
 import GroupItem from "./GroupItem";
 import Context from "../Context";
@@ -30,6 +30,7 @@ function setError(obj) {
 
 export default function EditSessionForm() {
   const toast = useToast();
+  const {push} = useHistory();
   const session = useSessionFromParamId();
   const sessionGroups = useSessionGroups(session?.id);
   const allGroups = useGroups();
@@ -61,7 +62,7 @@ export default function EditSessionForm() {
     </option>
   ));
 
-  if(!session){
+  if(!Object.entries(session).length){
     return (
       <>
   <h2 className='header'>Session not found</h2><br/>
@@ -275,6 +276,8 @@ export default function EditSessionForm() {
           ))}
         </ul>
         <input type="submit" value="Submit" />
+        <button type='button' onClick={()=>push('/manage/session')} className='cancel'>Cancel</button>
+
       </form>
     </div>
   );

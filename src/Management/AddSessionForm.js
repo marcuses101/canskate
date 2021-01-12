@@ -4,6 +4,7 @@ import { groupAPI } from "../API/groupAPI";
 import { CLUB_ACTIONS } from "../services/clubReducer";
 import Context from "../Context";
 import { useToast } from "../Hooks/useToast";
+import { useHistory } from "react-router-dom";
 
 const colorOptions = [
   "Red",
@@ -14,10 +15,12 @@ const colorOptions = [
   "Purple",
   "Turquoise",
 ];
+
 // fancy way to create an Array of weekdays
 const days = Array.from({ length: 7 }, (_, index) =>
   new Date(0, 0, index + 1).toLocaleDateString("en-US", { weekday: "long" })
 );
+
 const dayOptions = days.map((day) => (
   <option value={day} key={day}>
     {day}
@@ -26,6 +29,7 @@ const dayOptions = days.map((day) => (
 
 export default function SessionForm() {
   const toast = useToast();
+  const {push} = useHistory();
   const { club, clubDispatch } = useContext(Context);
   const [startTime, setStartTime] = useState({ value: "", error: false });
   const [day, setDay] = useState({ value: "", error: false });
@@ -215,6 +219,7 @@ export default function SessionForm() {
           ))}
         </ul>
         <input type="submit" value="Submit" />
+        <button type='button' onClick={()=>push('/manage/session')} className='cancel'>Cancel</button>
       </form>
     </div>
   );

@@ -10,6 +10,7 @@ class ResizeObserver {
 
 window.ResizeObserver = ResizeObserver;
 window.scrollTo = ()=>{}
+HTMLElement.prototype.scrollTo = ()=>{};
 
 it("renders without crashing", () => {
   const div = document.createElement("div");

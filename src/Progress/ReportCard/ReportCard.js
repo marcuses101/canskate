@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import dayjs from "dayjs";
-import Context from "../Context";
+import Context from "../../Context";
 import ReportBadgeComponent from "./ReportBadgeComponent";
 import './ReportCard.css'
 const badges = [1, 2, 3, 4, 5, 6];

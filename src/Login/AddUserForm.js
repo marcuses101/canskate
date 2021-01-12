@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import TextInput from "../forms/Components/TextInput";
-import PasswordInput from "../forms/Components/PasswordInput";
+import TextInput from "../FormComponents/TextInput";
+import PasswordInput from "../FormComponents/PasswordInput";
 import { useToast } from "../Hooks/useToast";
 import { userAPI } from "../API/userAPI";
 import "./AddUserForm.css";

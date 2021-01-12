@@ -1,7 +1,7 @@
 import React from "react";
 import ReportCard from "./ReportCard/ReportCard";
 import { Link } from "react-router-dom";
-import useSkaterFromParamId from "./Hooks/useSkaterFromParamId";
+import useSkaterFromParamId from "../Hooks/useSkaterFromParamId";
 
 export default function SkaterProgress() {
   const skater = useSkaterFromParamId();

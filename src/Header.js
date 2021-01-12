@@ -34,7 +34,6 @@ export default function Header({ openNav, loggedIn, clubLoaded }) {
       </div>
     );
   }
-  console.log(clubLoaded)
 
   if (!clubLoaded) {
     return (
@@ -48,7 +47,7 @@ export default function Header({ openNav, loggedIn, clubLoaded }) {
     <div ref={header} className="Header">
       <Switch>
         <Route path="/eval/skater/:skater_id">
-        <HeaderContent openNav={openNav} />
+        <HeaderContent openNav={openNav} showFilter={true}/>
         </Route>
         <Route path='"/eval/session/:session_id/group/:group_id"'>
           <HeaderContent

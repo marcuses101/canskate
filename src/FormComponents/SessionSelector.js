@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useSessions } from "../../Hooks/useSessions";
+import { useSessions } from "../Hooks/useSessions";
 
 export default function SessionSelector({
   selectedSessions = [],

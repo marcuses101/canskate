@@ -37,7 +37,7 @@ export default function SideNav({ open, closeNav, logout, clubLogout, clubLoaded
           <Link to="/progress/skater">Progress</Link>
         </li>
         <li onClick={closeNav}>
-          <Link to="/distribution">Distribution</Link>
+          <Link to="/distribution">Distribute</Link>
         </li>
         <li onClick={closeNav}>
           <Link to="/manage">Manage</Link>
@@ -49,7 +49,8 @@ export default function SideNav({ open, closeNav, logout, clubLogout, clubLoaded
           </ul>
         </li>
       </ul>
-     <h5>{username}</h5>
+      {/* delay username changing color while sidenav */}
+     <h5 style={{transitionDuration:'300ms'}}>{username}</h5>
     </nav>
   );
 }
