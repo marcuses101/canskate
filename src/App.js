@@ -2,7 +2,7 @@ import React, { useState, useReducer, useEffect, useRef } from "react";
 import config from "./config";
 import { useHistory, useLocation } from "react-router-dom";
 import SideNav from "./SideNav/SideNav";
-import Header from "./Header";
+import Header from "./Header/Header";
 import Main from "./Main";
 import Context from "./Context";
 import { clubAPI } from "./API/clubAPI";

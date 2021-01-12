@@ -3,7 +3,7 @@ import { Switch, Route, useLocation } from "react-router-dom";
 import Progress from "./Progress/Progress";
 import Manage from "./Management/Manage";
 import ClubList from "./Club/ClubList";
-import Eval from "./Eval";
+import Eval from "./Evaluation/Eval";
 import "./Main.css";
 import Distribution from "./Distribution/Distribution";
 import Loading from "./Loading";

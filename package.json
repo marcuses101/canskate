@@ -21,8 +21,9 @@
     "start:local": "env REACT_APP_SERVER_LOCATION=local npm start",
     "dev": "node ./server/index.js",
     "build": "react-scripts build",
-    "predeploy": "react-scripts build",
+    "predeploy": "env CI=true npm test && react-scripts build",
     "deploy": "vercel --prod",
+    "postdeploy":"google-chrome 'https://canskate.vercel.app'",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

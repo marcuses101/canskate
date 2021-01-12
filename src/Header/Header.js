@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useContext } from "react";
 import { Switch, Route } from "react-router-dom";
-import HeaderContent from "./Headers/HeaderContent";
-import SkaterEvalHeader from "./Headers/SkaterEvalHeader";
+import HeaderContent from "./HeaderContent";
 import "./Header.css";
-import Context from "./Context";
+import Context from "../Context";
 export default function Header({ openNav, loggedIn, clubLoaded }) {
   const {
     club: { name = "" },
