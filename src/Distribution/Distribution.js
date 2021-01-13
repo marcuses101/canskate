@@ -72,13 +72,11 @@ export default function Distribution() {
         <DistributionFilter setShowAll={setShowAll} showAll={showAll} />
       </FilterContainer>
 
-      <ul className="DistributionList">
-        <li key="header" className="DistributionItem">
-          <span>Name:</span>
-          <span>Badge/ Ribbon:</span>
-          <span>Date Completed:</span>
-          <span>Distribution:</span>
-        </li>
+      <section className="DistributionList">
+          <span><b>Name:</b></span>
+          <span><b>Badge/ Ribbon:</b></span>
+          <span><b>Date Completed:</b></span>
+          <span><b>Distribution:</b></span>
         {distributionList.map((log) => (
           <DistributionItem
             key={`${log.skater_id}${log.badge_id || ""}${log.ribbon_id || ""}`}
@@ -90,7 +88,7 @@ export default function Distribution() {
             distribution={() => distribution(log)}
           />
         ))}
-      </ul>
+      </section>
     </div>
   );
 }

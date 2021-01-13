@@ -1,3 +1,23 @@
-ul.DistributionList {
-margin-block-start: 0;
+.Distribution {
+  width: min(95%, 800px);
+  margin:auto;
+  padding: .5rem;
+  box-shadow:var(--box-shadow);
+  border-radius:var(--radius)
+}
+
+.DistributionList{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap:5px;
+  text-align:left;
+}
+
+.DistributionList > *:nth-child(-n+4) {
+  align-self: end;
+}
+
+.DistributionList >span {
+  display:flex;
+  align-items: center;
 }
