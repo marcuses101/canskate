@@ -9,6 +9,7 @@ import DistributionFilter from "./DistributionFilter";
 import { FilterContainer } from "../FilterComponents/FilterContainer";
 import Context from "../Context";
 import { useToast } from "../Hooks/useToast";
+import './Distribution.css'
 
 export default function Distribution() {
   const toast = useToast();
