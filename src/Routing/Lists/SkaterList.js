@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
-import { useClubSkaters } from "../Hooks/useClubSkaters";
+import { useClubSkaters } from "../../Hooks/useClubSkaters";
 import "./SkaterList.css";
 
 export default function SkaterList() {
@@ -13,7 +13,7 @@ export default function SkaterList() {
   if (!skaters.length) {
     return (
       <div className="SkaterList">
-        <h2 className="header" style={{ backgroundColor: "var(--red-light)" }}>
+        <h2 className="heading" style={{ backgroundColor: "var(--red-light)" }}>
           No skaters found
         </h2>
         <br />
@@ -37,7 +37,7 @@ export default function SkaterList() {
   });
   return (
     <div className="SkaterList">
-      <h2 className="header">Choose a skater:</h2>
+      <h2 className="heading">Choose a skater:</h2>
       <div className="field">
         <input
           className="input"

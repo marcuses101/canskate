@@ -1,19 +1,19 @@
 import React from "react"
 import {Link} from 'react-router-dom'
-import { useSessions } from "./Hooks/useSessions"
+import { useSessions } from "../Hooks/useSessions"
 
  export default function Home(){
    const sessions = useSessions();
     if (!Object.entries(sessions).length) return(
       <div className="Home">
-        <h2 className='header'>Please start by creating a session</h2><br/>
+        <h2 className='heading'>Please start by creating a session</h2><br/>
         <Link to='/manage/session/add'>Add Session</Link>
       </div>
     )
 
    return (
      <div className="Home">
-      <h2 className='header'>What would you like to do?</h2>
+      <h2 className='heading'>What would you like to do?</h2>
       <ul className="links">
         <li>
           <Link to="/eval">Evaluate</Link>

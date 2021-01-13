@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useContext} from "react"
-import Context from './Context'
+import Context from '../Context'
 
  export default function Resize(props){
   const filter = useRef(null);

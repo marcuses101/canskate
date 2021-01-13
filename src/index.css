@@ -32,6 +32,7 @@
   --Agility: var(--blue);
 
   --header-color: var(--blue-light);
+
 }
 
 /* scrollbar fix */
@@ -49,14 +50,13 @@ body {
   overflow-y: hidden;
 }
 
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-h1{
- font-size: 1.9rem;
+h1 {
+  font-size: 1.9rem;
 }
 h1,
 h2,
@@ -67,8 +67,9 @@ h6 {
   margin: 0;
 }
 
-h2.header,
-h3.header,h5 {
+h2.heading,
+h3.heading,
+h5.heading {
   width: min(400px, 95%);
   background-color: var(--header-color);
   padding: 1rem;
@@ -77,8 +78,14 @@ h3.header,h5 {
   color: white;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.65);
 }
-h5 {
-  padding:.5rem;
+
+.heading.error {
+  background-color: var(--red-light);
+}
+
+h5,
+h5.heading {
+  padding: 0.5rem;
 }
 
 ul {
@@ -107,9 +114,10 @@ form select {
   margin: 0.25rem auto;
 }
 
-form input[type="submit"], button.cancel {
+form input[type="submit"],
+button.cancel {
   font-size: 1rem;
-  margin: auto .5rem;
+  margin: auto 0.5rem;
   box-shadow: var(--box-shadow);
   background-color: rgba(0, 0, 0, 0);
   overflow: hidden;
@@ -117,7 +125,6 @@ form input[type="submit"], button.cancel {
   border: none;
   padding: 0.25rem 0.5rem;
 }
-
 
 /* prevent sticky hover on mobile */
 @media (hover: hover) {
@@ -127,14 +134,13 @@ form input[type="submit"], button.cancel {
     background-color: var(--green-lighter);
   }
 
-  button:hover{
+  button:hover {
     cursor: pointer;
-
   }
 
   button.cancel:hover {
     transform: scale(1.02);
-    background-color: lightgrey
+    background-color: lightgrey;
   }
 }
 

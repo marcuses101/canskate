@@ -1,31 +1,18 @@
 import React from "react";
-import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
-import ManageSkater from "./ManageSkater";
-import ManageSession from "./ManageSession";
+import { Link} from "react-router-dom";
 
 export default function Manage() {
-  const { path } = useRouteMatch();
   return (
-    <Switch>
-      <Route path={`${path}/skater`}>
-        <ManageSkater />
-      </Route>
-      <Route path={`${path}/session`}>
-        <ManageSession />
-      </Route>
-      <Route>
-        <div className="Manage">
-          <h2 className='header'>Manage Canskate</h2>
-          <ul className="links">
-            <li>
-              <Link to={`${path}/skater`}>Manage Skaters</Link>
-            </li>
-            <li>
-              <Link to={`${path}/session`}>Manage Sessions</Link>
-            </li>
-          </ul>
-        </div>
-      </Route>
-    </Switch>
+    <div className="Manage">
+      <h2 className="heading">What would you like to manage?</h2>
+      <ul className="links">
+        <li>
+          <Link to={`/manage/skater`}>Manage Skaters</Link>
+        </li>
+        <li>
+          <Link to={`/manage/session`}>Manage Sessions</Link>
+        </li>
+      </ul>
+    </div>
   );
 }

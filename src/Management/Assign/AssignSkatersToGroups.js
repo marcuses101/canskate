@@ -1,9 +1,9 @@
 import React from "react";
 import AssignGroup from "./AssignGroup";
-import { useClubSkaters } from "../Hooks/useClubSkaters";
+import { useClubSkaters } from "../../Hooks/useClubSkaters";
 import { Link } from "react-router-dom";
-import { useSessionFromParamId } from "../Hooks/useSessionFromParamId";
-import { useSessionGroups } from "../Hooks/useSessionGroups";
+import { useSessionFromParamId } from "../../Hooks/useSessionFromParamId";
+import { useSessionGroups } from "../../Hooks/useSessionGroups";
 
 export default function AssignSkatersToGroups() {
   const session = useSessionFromParamId();
@@ -32,7 +32,7 @@ export default function AssignSkatersToGroups() {
   });
   return (
     <>
-      <h2 className='header'>Assign Skaters to groups</h2>
+      <h2 className='heading'>Assign Skaters to groups</h2>
       <ul className="AssignSkatersToGroups">
         {unassignedSkaters.length ? (
           <AssignGroup

@@ -55,7 +55,7 @@ export default function LoginForm({ setLoginState, setAppUsername }) {
   return (
     <div className="LoginForm">
       <form onSubmit={handleSubmit}>
-        <h2 className="header">Please enter your login info:</h2>
+        <h2 className="heading">Please enter your login info:</h2>
         <TextInput
           label="Username"
           id="username"

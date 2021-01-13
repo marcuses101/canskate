@@ -19,6 +19,8 @@
 }
 
 .ElementDropdown ul {
+  margin-block-start: 0;
+  margin-block-end:0;
   max-height: 33vh;
   overflow-y: scroll;
 }

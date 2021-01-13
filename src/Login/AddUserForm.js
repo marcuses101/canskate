@@ -62,7 +62,7 @@ export default function AddUserForm({ setLoginState , setAppUsername }) {
   return (
     <div className="AddUserForm">
       <form onSubmit={handleSubmit}>
-        <h2 className="header">Create New User</h2>
+        <h2 className="heading">Create New User</h2>
         <TextInput
           label="Username"
           max='15'

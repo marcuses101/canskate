@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import BadgeSection from "./ElementEvalComponents/BadgeSection";
 import ElementFilter from "./ElementFilter";
-import { FilterContainer } from "../FilterContainer";
+import { FilterContainer } from "../FilterComponents/FilterContainer";
 import Context from "../Context";
 import "./Eval.css";
 import { useClubSkaters } from "../Hooks/useClubSkaters";

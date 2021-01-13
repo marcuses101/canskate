@@ -12,7 +12,7 @@ export default function GroupEval() {
   if (!group || !session)
     return (
       <>
-        <h2 className="header" style={{ backgroundColor: "var(--red-light)" }}>
+        <h2 className="heading" style={{ backgroundColor: "var(--red-light)" }}>
           Group not found
         </h2>
         <br />
@@ -26,7 +26,7 @@ export default function GroupEval() {
   return (
     <>
       <h2
-        className="header"
+        className="heading"
         style={{
           backgroundColor: `var(--${group.group_color?.toLowerCase()})`,
         }}

@@ -12,16 +12,17 @@ import DateInput from "../FormComponents/DateInput";
 import RadioSelector from "../FormComponents/RadioSelector";
 import SessionSelector from "../FormComponents/SessionSelector";
 import { useToast } from "../Hooks/useToast";
+import {useSessions} from '../Hooks/useSessions'
 import { useHistory } from "react-router-dom";
 
 export default function EditSkaterForm() {
   const toast = useToast();
   const skater = useSkaterFromParamId();
   const { push } = useHistory();
+  const sessions = useSessions();
   const {
     skatersDispatch,
     clubDispatch,
-    club: { sessions },
   } = useContext(Context);
   const [fullName, setFullName] = useState({
     value: skater.fullname,
@@ -48,7 +49,7 @@ export default function EditSkaterForm() {
   if (!Object.entries(skater).length) {
     return (
       <>
-        <h2 className="header">Skater not found</h2>
+        <h2 className="heading">Skater not found</h2>
         <br />
         <Link to="/manage/skater/edit">Go back?</Link>
       </>
@@ -167,7 +168,7 @@ export default function EditSkaterForm() {
 
   return (
     <form className="SkaterForm" onSubmit={handleSubmit}>
-      <h2 className="header">Edit Skater</h2>
+      <h2 className="heading">Edit Skater</h2>
       <TextInput
         id="fullname"
         label="Full Name: "

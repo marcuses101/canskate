@@ -1,9 +1,9 @@
-import React, { useState, useReducer, useEffect, useRef } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import config from "./config";
 import { useHistory, useLocation } from "react-router-dom";
 import SideNav from "./SideNav/SideNav";
 import Header from "./Header/Header";
-import Main from "./Main";
+import Main from "./Main/Main";
 import Context from "./Context";
 import { clubAPI } from "./API/clubAPI";
 import { skatersReducer, SKATER_ACTIONS } from "./services/skaterReducer";
@@ -70,6 +70,7 @@ export default function App() {
     toast({ message: "Logout successful", type: "success" });
     push("/");
   }
+
   function clubLogout() {
     clubDispatch({ type: CLUB_ACTIONS.LOGOUT });
     skatersDispatch({ type: SKATER_ACTIONS.LOGOUT });
@@ -78,6 +79,18 @@ export default function App() {
       loading: false,
       clubLoaded: false,
     });
+  }
+
+  async function loadClub(id) {
+    setLoginState((state) => ({ ...state, loading: true }));
+    const clubObject = await clubAPI.getClubById(id);
+    const { skatersWithLogs } = clubObject;
+    clubDispatch({ type: CLUB_ACTIONS.LOAD_CLUB, payload: clubObject });
+    skatersDispatch({
+      type: SKATER_ACTIONS.LOAD_SKATERS,
+      payload: skatersWithLogs,
+    });
+    setLoginState((state) => ({ ...state, loading: false, clubLoaded: true }));
   }
 
   function closeNav() {
@@ -110,7 +123,7 @@ export default function App() {
           clubLogout={clubLogout}
           clubLoaded={loginState.clubLoaded}
         />
-        {/* prevent clicking while sidenav open */}
+        {/* prevent clicking/scrolling while sidenav open */}
         {isNavOpen && (
           <div
             style={{
@@ -130,12 +143,12 @@ export default function App() {
         />
 
         <Main
-
           setUsername={setUsername}
           loginState={loginState}
           setLoginState={setLoginState}
           clubList={clubList}
           setClubList={setClubList}
+          loadClub={loadClub}
         />
       </div>
     </Context.Provider>

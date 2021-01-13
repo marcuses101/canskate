@@ -6,7 +6,7 @@ import "./Distribution.css";
 import DistributionItem from "./DistributionItem";
 import { useRibbonById } from "../Hooks/useRibbonById";
 import DistributionFilter from "./DistributionFilter";
-import { FilterContainer } from "../FilterContainer";
+import { FilterContainer } from "../FilterComponents/FilterContainer";
 import Context from "../Context";
 import { useToast } from "../Hooks/useToast";
 

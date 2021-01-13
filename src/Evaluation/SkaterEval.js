@@ -3,7 +3,7 @@ import useSkaterFromParamId from "../Hooks/useSkaterFromParamId";
 import { Link } from "react-router-dom";
 import BadgeSection from "./SkaterEvalComponents/BadgeSection";
 import ElementFilter from "./ElementFilter";
-import { FilterContainer } from "../FilterContainer";
+import { FilterContainer } from "../FilterComponents/FilterContainer";
 import Context from "../Context";
 import "./Eval.css";
 
@@ -45,7 +45,7 @@ export default function SkaterEval() {
   if (!completedElements) {
     return (
       <>
-        <h2 className="header" style={{ backgroundColor: "var(--red-light)" }}>
+        <h2 className="heading" style={{ backgroundColor: "var(--red-light)" }}>
           Skater not found
         </h2>
         <br></br>
@@ -95,7 +95,7 @@ export default function SkaterEval() {
   );
   return (
     <>
-    <h2 className="header">Evaluation</h2><br/>
+    <h2 className="heading">Evaluation</h2><br/>
       <Link to={`/progress/skater/${id}`}>Go to progress page</Link>
       <div className="Eval">
         <FilterContainer>

@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
-import {skaterGroupAPI} from '../API/skaterGroupAPI';
+import {skaterGroupAPI} from '../../API/skaterGroupAPI';
 import {useParams} from 'react-router-dom'
-import Context from "../Context";
-import { useToast } from "../Hooks/useToast";
-import { CLUB_ACTIONS } from "../services/clubReducer";
+import Context from "../../Context";
+import { useToast } from "../../Hooks/useToast";
+import { CLUB_ACTIONS } from "../../services/clubReducer";
 import "./AssignSkater.css"
 export default function AssignSkater({ skater = {},group_id, otherGroups}) {
   const toast = useToast();

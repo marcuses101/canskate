@@ -8,14 +8,16 @@ export default function SkaterDropdown({ element }) {
     <div className="ElementDropdown">
       <header className='ElementDropdownHeader' onClick={() => setOpen((bool) => !bool)}>
         <div>{element?.element}</div>
-        <div>{element?.skaters?.length}</div>
+        <div><i className="fas fa-user-alt"></i> {element?.skaters?.length}</div>
       </header>
       {open && (
+        <>
+        <h5>Select name to mark element as complete</h5>
         <ul>
           {element?.skaters.map((skater) => (
             <SkaterButton key={skater.id} skater={skater} elementId={element.element_id}/>
           ))}
-        </ul>
+        </ul></>
       )}
     </div>
   );

@@ -8,7 +8,7 @@ export default function SkaterProgress() {
   if (!skater.id) {
     return (
       <>
-        <h2 className='header' style={{backgroundColor:'var(--red-light)'}}>Skater not found</h2><br/>
+        <h2 className='heading' style={{backgroundColor:'var(--red-light)'}}>Skater not found</h2><br/>
         <Link to='/progress/skater'>Go Back?</Link>
       </>
     );
@@ -16,7 +16,7 @@ export default function SkaterProgress() {
 
   return (
     <div className="SkaterProgress">
-      <h2 className='header'>Progress</h2>
+      <h2 className='heading'>Progress</h2>
       <ul className="links">
         <li>
           <Link to={`/eval/skater/${skater.id}`}>Go to Evaluation</Link>

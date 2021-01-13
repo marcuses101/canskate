@@ -59,7 +59,7 @@ export default function FundamentalArticle({ fundamental, badge, elements = [] }
                 style={{
                   ...defaultStyle,
                   ...transitionStyles[state],
-                  height: "80px",
+                  height: "84px",
                   display:'flex',
                   alignItems:'center',
                   justifyContent: 'center'

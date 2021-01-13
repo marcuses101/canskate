@@ -2,7 +2,14 @@ import React, { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./SideNav.css";
 
-export default function SideNav({ open, closeNav, logout, clubLogout, clubLoaded, username }) {
+export default function SideNav({
+  open,
+  closeNav,
+  logout,
+  clubLogout,
+  clubLoaded,
+  username,
+}) {
   const sidenav = useRef(null);
 
   // close nav on click outside
@@ -44,13 +51,21 @@ export default function SideNav({ open, closeNav, logout, clubLogout, clubLoaded
         </li>
         <li onClick={closeNav}>
           <ul>
-            {clubLoaded && <li><button onClick={clubLogout}>Change club</button></li>}
-            <li><button onClick={logout}>Logout</button></li>
+            {clubLoaded && (
+              <li>
+                <button onClick={clubLogout}>Change club</button>
+              </li>
+            )}
+            <li>
+              <button onClick={logout}>Logout</button>
+            </li>
           </ul>
         </li>
       </ul>
       {/* delay username changing color while sidenav */}
-     <h5 style={{transitionDuration:'300ms'}}>{username}</h5>
+      <h5 className="heading" style={{ transitionDuration: "300ms" }}>
+        {username}
+      </h5>
     </nav>
   );
 }

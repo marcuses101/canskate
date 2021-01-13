@@ -4,7 +4,7 @@ import "./Welcome.css";
 export default function Welcome() {
   return (
     <div className="Welcome">
-      <h2 className="header">What is it?</h2>
+      <h2 className="heading">What is it?</h2>
       <p>
         This application is designed to make managing the CanSkate program a breeze.
       </p>

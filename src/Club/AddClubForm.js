@@ -34,7 +34,7 @@ export default function AddClubForm({ setClubList }) {
   return (
     <section className="AddClubForm">
       <form onSubmit={handleSubmit}>
-        <h2 className='header'>Create Club</h2>
+        <h2 className='heading'>Create Club</h2>
         <TextInput
           label="Club name:"
           id="clubname"

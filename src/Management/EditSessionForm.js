@@ -65,7 +65,7 @@ export default function EditSessionForm() {
   if(!Object.entries(session).length){
     return (
       <>
-  <h2 className='header'>Session not found</h2><br/>
+  <h2 className='heading'>Session not found</h2><br/>
       <Link to='/manage/session/edit'>Go back?</Link>
       </>
     )
@@ -202,7 +202,7 @@ export default function EditSessionForm() {
   return (
     <div className="SessionForm">
       <form onSubmit={handleSubmit}>
-        <h2 className='header'>Edit Session</h2><br/>
+        <h2 className='heading'>Edit Session</h2><br/>
         <label htmlFor="day">Day: </label>
         <select
           id="day"
