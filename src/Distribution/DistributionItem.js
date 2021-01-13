@@ -13,4 +13,3 @@ import './DistributionItem.css'
      </li>
    )
  }
-
