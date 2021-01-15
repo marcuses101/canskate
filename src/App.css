@@ -2,7 +2,8 @@
   text-align: center;
 }
 
-a {
+
+a, button.link {
   box-sizing: border-box;
   text-decoration: none;
   padding: .5rem;
@@ -13,7 +14,7 @@ a {
   padding: .5rem;
 }
 
-a{
+a, button.link{
   color: rgb(44, 44, 44);
   box-shadow: var(--box-shadow);
   margin: auto;
@@ -22,11 +23,17 @@ a{
   max-width: 300px;
 }
 
-a:hover{
+button.link{
+  font-size: 1rem;
+  border: none;
+  margin: 1rem auto;
+}
+
+a:hover,button.link:hover{
   transform: scale(1.015)
 }
 
-a:active {
+a:active, button.link:active {
   transform: scale(1);
   background-color: rgba(0,0,0,0.1);
 }

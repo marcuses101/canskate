@@ -17,7 +17,9 @@ export default function LoginRouter({ setLoginState, setUsername }) {
           setAppUsername={setUsername}
         />
       </Route>
-      <Route exact path="/" component={Login} />
+      <Route exact path="/">
+        <Login setLoginState={setLoginState} setAppUsername={setUsername} />
+      </Route>
       <Route>
         <PageNotFound url="/" />
       </Route>

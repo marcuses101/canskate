@@ -34,21 +34,25 @@ export default function SideNav({
   return (
     <nav className={`SideNav ${open ? "open" : "closed"}`} ref={sidenav}>
       <ul className="links">
-        <li onClick={closeNav}>
-          <Link to="/">Home</Link>
-        </li>
-        <li onClick={closeNav}>
-          <Link to="/eval">Evaluate</Link>
-        </li>
-        <li onClick={closeNav}>
-          <Link to="/progress/skater">Progress</Link>
-        </li>
-        <li onClick={closeNav}>
-          <Link to="/distribution">Distribute</Link>
-        </li>
-        <li onClick={closeNav}>
-          <Link to="/manage">Manage</Link>
-        </li>
+        {clubLoaded && (
+          <>
+            <li onClick={closeNav}>
+              <Link to="/">Home</Link>
+            </li>
+            <li onClick={closeNav}>
+              <Link to="/eval">Evaluate</Link>
+            </li>
+            <li onClick={closeNav}>
+              <Link to="/progress/skater">Progress</Link>
+            </li>
+            <li onClick={closeNav}>
+              <Link to="/distribution">Distribute</Link>
+            </li>
+            <li onClick={closeNav}>
+              <Link to="/manage">Manage</Link>
+            </li>
+          </>
+        )}
         <li onClick={closeNav}>
           <ul>
             {clubLoaded && (

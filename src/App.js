@@ -25,6 +25,7 @@ export default function App() {
     loading: false,
     clubLoaded: false,
   });
+  const [isDemo, setIsDemo] = useState(false)
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [clubList, setClubList] = useState([]);
   const [club, clubDispatch] = useReducer(clubReducer, {});

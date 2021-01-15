@@ -37,7 +37,7 @@ export default function Header({ openNav, loggedIn, clubLoaded }) {
   if (!clubLoaded) {
     return (
       <div ref={header} className="Header">
-        <HeaderContent title="Canskate App" hideMenu={true} />
+        <HeaderContent title="Canskate App" hideMenu={false} openNav={openNav}/>
       </div>
     );
   }
