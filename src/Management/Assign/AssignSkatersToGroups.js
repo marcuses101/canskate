@@ -4,6 +4,7 @@ import { useClubSkaters } from "../../Hooks/useClubSkaters";
 import { Link } from "react-router-dom";
 import { useSessionFromParamId } from "../../Hooks/useSessionFromParamId";
 import { useSessionGroups } from "../../Hooks/useSessionGroups";
+import './AssignSkatersToGroups.css'
 
 export default function AssignSkatersToGroups() {
   const session = useSessionFromParamId();
@@ -32,9 +33,9 @@ export default function AssignSkatersToGroups() {
   });
   return (
     <>
-      <h2 className='heading'>Assign Skaters to groups</h2>
-      <ul className="AssignSkatersToGroups">
-        {unassignedSkaters.length ? (
+      <h2 className="heading">Assign Skaters to groups</h2>
+      <section className='groupArticles'>
+        {!!unassignedSkaters.length && (
           <AssignGroup
             key="unassigned"
             text="black"
@@ -42,7 +43,7 @@ export default function AssignSkatersToGroups() {
             skaters={unassignedSkaters}
             otherGroups={groups}
           />
-        ) : null}
+        )}
         {groups.length ? (
           groupComponents
         ) : (
@@ -51,7 +52,7 @@ export default function AssignSkatersToGroups() {
             <Link to={`/manage/session/edit/${session.id}`}>Add a group?</Link>
           </>
         )}
-      </ul>
+      </section>
     </>
   );
 }

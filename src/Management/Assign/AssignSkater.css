@@ -4,3 +4,32 @@
 .otherGroups li{
   flex:1;
 }
+.otherGroups li:hover{
+  cursor: pointer;
+  transform: scale(1.01);
+  font-weight: bold;
+}
+
+.AssignSkater{
+  border-radius: var(--radius);
+  box-shadow: var(--box-shadow);
+  margin:.5rem;
+}
+
+.AssignSkater:hover {
+  transform: scale(1.01);
+
+}
+.AssignSkater .skater:hover{
+  cursor: pointer;
+}
+
+.AssignSkater .skater{
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  align-items: center;
+}
+.otherGroups li{
+  border-radius: var(--radius);
+  margin:.25rem;
+}

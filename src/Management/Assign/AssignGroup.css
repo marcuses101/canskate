@@ -1,38 +1,15 @@
-.AssignSkatersToGroups{
-  max-width: 600px;
-  margin: auto;
-}
-
-.AssignGroup {
-  min-height: 4rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin: .5rem;
+article.AssignGroup{
+  margin:0.5rem;
+  padding:1rem;
   border-radius: var(--radius);
+  min-width:300px;
   box-shadow: var(--box-shadow);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
-.AssignGroup:hover{
-  cursor:pointer;
-  transform: scale(1.01);
-}
-
-.groupName {
-  padding: 1rem;
-}
-
-.AssignGroup ul {
-  width: 80%;
-  background-color: rgba(0,0,0,0.1);
-  margin:auto;
-}
-
-
-
-.AssignGroup li:hover {
-  cursor: pointer;
-  background-color: rgba(0,0,0,0.1);
+.AssignGroup h3 {
+  border-radius: var(--radius);
+  padding:1rem;
+  text-shadow: var(--text-shadow);
+  display: flex;;
+  justify-content: space-between;
 }

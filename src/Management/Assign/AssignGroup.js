@@ -5,24 +5,20 @@ import "./AssignGroup.css";
 export default function AssignGroup({
   name = "",
   group_id,
-  skaters,
+  skaters = [],
   otherGroups,
   text,
 }) {
-  const [open, setOpen] = useState(false);
   return (
-    <li
-      style={{ background: `var(--${name.toLowerCase()})` }}
+    <article
       className="AssignGroup"
     >
-      <div
-        style={{ color: text }}
+      <h3
+        style={{ color: text, background: `var(--${name.toLowerCase()})` }}
         className="groupName"
-        onClick={() => setOpen((bool) => !bool)}
       >
-        {name}
-      </div>
-      {open && (
+        {name} Group<span><i className="fas fa-user-alt"></i> {skaters.length}</span>
+      </h3>
         <ul>
           {skaters.map((skater) => (
             <AssignSkater
@@ -33,7 +29,6 @@ export default function AssignGroup({
             />
           ))}
         </ul>
-      )}
-    </li>
+    </article>
   );
 }
