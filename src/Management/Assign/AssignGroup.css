@@ -13,3 +13,8 @@ article.AssignGroup{
   display: flex;;
   justify-content: space-between;
 }
+
+.un.AssignGroup h3{
+  text-shadow: none;
+  box-shadow: var(--box-shadow);
+}

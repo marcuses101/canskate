@@ -38,6 +38,7 @@ export default function AssignSkatersToGroups() {
         {!!unassignedSkaters.length && (
           <AssignGroup
             key="unassigned"
+            className='un'
             text="black"
             name="Unassigned Skaters"
             skaters={unassignedSkaters}
