@@ -6,7 +6,18 @@ There are A LOT of things to track when organizing a Skate Canada CanSkate Progr
 
 ## How to use
 
-More info to come as the project progresses.
+### Login
+
+Chose whether to try out the demo account, create a new account or login with a pre-existing account.  
+![](./gifs/demo-login.gif)
+
+If choosing to create a new account, or login with a pre-existing account fill out the form in order to proceed.
+
+### Clubs
+
+Next you will have the option to either select a pre-existing club to manage, or to create a new club.
+
+If you choose to create a new club enter the name of the club and submit.
 
 ## Tech
 - React.js

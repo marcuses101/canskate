@@ -15,7 +15,7 @@ export default function ManagementRouter() {
   return (
     <Switch>
       <Route
-        path={`manage/assign/:session_id`}
+        path={`/manage/session/assign/:session_id`}
         component={AssignSkatersToGroups}
       />
       {/* Manage Skater Routes */}
