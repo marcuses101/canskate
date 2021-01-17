@@ -10,8 +10,8 @@ export default function Header({ openNav, loggedIn, clubLoaded }) {
   const header = useRef();
   const resize = new ResizeObserver(([entry]) => {
     // borderBoxSize object held in an array in Chrome, not in firefox?
-    const borderBoxSize = entry.borderBoxSize[0] || entry.borderBoxSize;
-    const offset = borderBoxSize.blockSize;
+    console.log(entry)
+    const offset = entry?.borderBoxSize?.[0]?.blockSize || entry.borderBoxSize?.blockSize || entry.contentRect.height ;
     document.documentElement.style.setProperty(
       "--header-offset",
       `${offset}px`
@@ -48,7 +48,7 @@ export default function Header({ openNav, loggedIn, clubLoaded }) {
         <Route path="/eval/skater/:skater_id">
         <HeaderContent openNav={openNav} showFilter={true}/>
         </Route>
-        <Route path='"/eval/session/:session_id/group/:group_id"'>
+        <Route path='/eval/session/:session_id/group/:group_id'>
           <HeaderContent
             title="Group Evaluation"
             openNav={openNav}
