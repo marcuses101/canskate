@@ -20,6 +20,7 @@
 .SideNav ul {
   display: flex;
   flex-direction: column;
+  overflow: auto;
   margin: 0;
   padding-inline-start: 0;
   padding: 1rem 0;
@@ -31,10 +32,14 @@
   padding: 0.5rem;
 }
 
+.SideNav a{
+  padding: .5rem;
+}
+
 .SideNav li button {
   font-size: 1rem;
   box-shadow: var(--box-shadow);
-  padding: 1rem;
+  padding: .5rem;
   border-radius: var(--radius);
   border-style: none;
   width: 100%;
