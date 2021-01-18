@@ -27,7 +27,7 @@ function NotificationReducer(notifications, action) {
   }
 }
 const defaultStyle = {
-  transition: "var(--time) ease",
+  transition: "transform var(--time) ease, opacity var(--time) ease",
   opacity: 0,
   transform: "translateY(30px)",
 };
