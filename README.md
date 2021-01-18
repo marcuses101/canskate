@@ -2,7 +2,7 @@
 
 ## Description
 
-There are A LOT of things to track when organizing a Skate Canada CanSkate Program. Sessions, groups, skaters, badges, catagories, dates, etc. This web app aims to automate as many of the repetitive tasks as possible, allowing coaches to focus on what really matters; helping their students improve.
+There are A LOT of things to track when organizing a Skate Canada CanSkate Program. Sessions, groups, skaters, badges, catagories, dates, etc. This web app aims to automate as many of the repetitive tasks as possible, allowing coaches to focus on what really matters: helping their students improve.
 
 ## How to use
 
@@ -10,7 +10,7 @@ There are A LOT of things to track when organizing a Skate Canada CanSkate Progr
 
 ### **Login**
 
-Chose whether to try out the demo account, create a new account or login with a pre-existing account.  
+Choose whether to try out the demo account, create a new account or login with a pre-existing account.  
 ![Demo Login Gif](./gifs/demo-login.gif)  
 **Demo Login**
 
@@ -20,13 +20,14 @@ Chose whether to try out the demo account, create a new account or login with a 
 
 Next you will have the option to either select a pre-existing club to manage, or to create a new club.
 
-If you choose to create a new club enter the name of the club, submit then choose your newly created club from the list.
+If you choose to create a new club enter the name of the club, submit, then select your newly created club from the list.
 
 ---
 
 ### **Sessions**
 
-The fist thing to do once you've created your new club is to add a session. Navigate from the Side Nav menu to **Manage>Manage Sessions>Add Session**. If you are setting up the club for the first time there will be a link directly to **Add Session**. Fill in the necessary info and submit to create the session. To edit details of the session navigate to **Manage>Manage Sessions>Add Session**.
+The first thing to do once you've created your new club is to add a session. Navigate from the Side menu to **Manage>Manage Sessions>Add Session**. If you are setting up the club for the first time there will be a link directly to **Add Session**. Fill in the necessary info and submit to create the session. To edit details of the session navigate to **Manage>Manage Sessions>Add Session**.  
+![Add Session](./gifs/add-session.gif)
 
 ---
 
@@ -40,7 +41,7 @@ Next you will need to add your skaters. Navigate to **Manage>Manage Skaters>Add 
 
 ### **Assign Skaters to Groups**
 
-To add skater to a group navigate to **Manage>Manage Sessions>Assign Skaters to Groups**. Click on the skater you would like to assign, then click on the group you'd like to assign them to.  
+To add a skater to a group navigate to **Manage>Manage Sessions>Assign Skaters to Groups**. Click on the skater you would like to assign, then click on the group you'd like to assign them to.  
 ![](./gifs/assign-skater.gif)  
 **Assign Skater**
 
@@ -49,7 +50,7 @@ To add skater to a group navigate to **Manage>Manage Sessions>Assign Skaters to 
 ### **Evaluate by skater**
 
 Navigate to **Evaluate>Skater** then choose the individual you'd like to evaluate from the list.
-This view shows all of the elements the skater has yet to complete. There are filter options for the badge and fundamental area (Balance, Control, Agility). Click on the **Progress** link near the top of the page to view elements, ribbons and badges already completed, with their date of completion. Clicking on the elements marks them as complete. If the skater completed the elements necessary for a ribbon or badge it is also logged as complete, and is added to the Distribution list.  
+This view shows all of the elements the skater has yet to complete. There are filter options for the badge and fundamental areas (Balance, Control, Agility). Click on the **Progress** link near the top of the page to view elements, ribbons and badges that have already been completed, with their date of completion. Clicking on the elements marks them as complete. If the skater completed the elements necessary for a ribbon or badge it is also logged as complete, and is added to the Distribution list.  
 ![Evaluate skater](./gifs/eval-skater.gif)  
 **Evaluate Skater**
 
@@ -71,22 +72,22 @@ Navigate to **Evaluate>Group** then select the session then the group you want t
 
 ### **Progress**
 
-Navigate to **Progress**. Chose a skater to view their progress page. Displays the date when the element was completed.
+Navigate to **Progress**. Choose a skater to view their progress page. Displays the date when the element was completed.
 
 ---
 
 ### **Distribution**
 
-Displays a list of completed badges and ribbons. Optionally filter by whether the item has yet to be distributed. Clicking the distribute button marks logs the date the ribbon or badge was handed out.  
-![Distribution gif](./gifs/distribute.gif)
-**Distribution**
+Displays a list of completed badges and ribbons. Optionally filter by whether the item has yet to be distributed. Clicking the distribute button logs the date the ribbon or badge was handed out.  
+![Distribution gif](./gifs/distribute.gif)  
+**Distribute ribbon or badge**
 
 ---
 
 ## Tech
 
 - React.js
-- Node/ Express servers
+- Node/Express servers
 - Postgres database
 
 ---
