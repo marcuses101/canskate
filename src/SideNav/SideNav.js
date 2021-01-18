@@ -54,7 +54,7 @@ export default function SideNav({
           </>
         )}
         <li onClick={closeNav}>
-          <ul>
+          <ul id='bottom-links'>
             {clubLoaded && (
               <li>
                 <button onClick={clubLogout}>Change club</button>
@@ -63,13 +63,14 @@ export default function SideNav({
             <li>
               <button onClick={logout}>Logout</button>
             </li>
+        <li>
+          <h5 className="heading" style={{ transitionDuration: "300ms" }}> {username}</h5>
+        </li>
           </ul>
         </li>
       </ul>
       {/* delay username changing color while sidenav */}
-      <h5 className="heading" style={{ transitionDuration: "300ms" }}>
-        {username}
-      </h5>
+
     </nav>
   );
 }

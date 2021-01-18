@@ -4,27 +4,27 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 5;
   height: 100vh;
-  min-width: 20vw;
-  max-width: 37vw;
+  width: min(213px,66vw);
   border: 2px solid black;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
-  transition: left 200ms ease;
+  transition: left 100ms ease;
 }
 
 .SideNav.closed {
-  left: -40vw;
+  left: calc(0px - min(213px,66vw));
   box-shadow: none;
 }
 
 .SideNav ul {
   display: flex;
   flex-direction: column;
+  margin: 0;
   padding-inline-start: 0;
-  margin-bottom: 0;
+  padding: 1rem 0;
   list-style: none;
-  height: 90%;
+  height: 100%;
 }
 
 .SideNav ul li {
@@ -38,6 +38,10 @@
   border-radius: var(--radius);
   border-style: none;
   width: 100%;
+}
+
+#bottom-links{
+  padding:0;
 }
 
 .SideNav li button:hover {

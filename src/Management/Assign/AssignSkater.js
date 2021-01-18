@@ -58,7 +58,7 @@ export default function AssignSkater({ skater = {}, group_id, otherGroups }) {
         <ul className="otherGroups">
           {otherGroups.map((group) => (
             <li
-              style={{ background: group.group_color }}
+              style={{ background: `var(--${group.group_color.toLowerCase()}` }}
               key={"" + skater.id + group.id}
               onClick={() => {
                 groupTransfer(

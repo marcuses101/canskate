@@ -9,8 +9,7 @@ export default function Header({ openNav, loggedIn, clubLoaded }) {
   } = useContext(Context);
   const header = useRef();
   const resize = new ResizeObserver(([entry]) => {
-    // borderBoxSize object held in an array in Chrome, not in firefox?
-    console.log(entry)
+    // different ResizeObserver implementations across browsers
     const offset = entry?.borderBoxSize?.[0]?.blockSize || entry.borderBoxSize?.blockSize || entry.contentRect.height ;
     document.documentElement.style.setProperty(
       "--header-offset",
