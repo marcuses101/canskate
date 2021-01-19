@@ -34,12 +34,6 @@
   justify-content: center;
 }
 
-.Header .filter h4 {
-  margin: 0;
-}
-.Header h2 {
-  margin: auto;
-}
 .Header .menu:hover,
 .Header .filter:hover {
   background-color: rgba(0, 0, 0, 0.1);

@@ -1,23 +1,23 @@
 .Distribution {
   width: min(95%, 800px);
-  margin:auto;
-  padding: .5rem;
-  box-shadow:var(--box-shadow);
-  border-radius:var(--radius)
+  margin: auto;
+  padding: 0.5rem;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--radius);
 }
 
-.DistributionList{
-  display:grid;
+.DistributionList {
+  display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap:5px;
-  text-align:left;
+  gap: 5px;
+  text-align: left;
 }
-
-.DistributionList > *:nth-child(-n+4) {
+/* Align first row to end */
+.DistributionList > *:nth-child(-n + 4) {
   align-self: end;
 }
 
-.DistributionList >span {
-  display:flex;
+.DistributionList > span {
+  display: flex;
   align-items: center;
 }

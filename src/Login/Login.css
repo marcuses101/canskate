@@ -1,3 +1,16 @@
-.Login a {
-  margin: .5rem auto;
+.Login {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.Login article {
+  box-shadow: var(--box-shadow);
+  padding: 1rem;
+  border-radius: var(--radius);
+  margin: 0.5rem;
+  width: min(500px, 99vw);
+}
+
+.Login button.link {
+  margin: 0 auto;
 }

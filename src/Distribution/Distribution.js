@@ -9,7 +9,7 @@ import DistributionFilter from "./DistributionFilter";
 import { FilterContainer } from "../FilterComponents/FilterContainer";
 import Context from "../Context";
 import { useToast } from "../Hooks/useToast";
-import './Distribution.css'
+import "./Distribution.css";
 
 export default function Distribution() {
   const toast = useToast();
@@ -73,10 +73,18 @@ export default function Distribution() {
       </FilterContainer>
 
       <section className="DistributionList">
-          <span><b>Name:</b></span>
-          <span><b>Badge/ Ribbon:</b></span>
-          <span><b>Date Completed:</b></span>
-          <span><b>Distribution:</b></span>
+        <span>
+          <b>Name:</b>
+        </span>
+        <span>
+          <b>Badge/ Ribbon:</b>
+        </span>
+        <span>
+          <b>Date Completed:</b>
+        </span>
+        <span>
+          <b>Distribution:</b>
+        </span>
         {distributionList.map((log) => (
           <DistributionItem
             key={`${log.skater_id}${log.badge_id || ""}${log.ribbon_id || ""}`}

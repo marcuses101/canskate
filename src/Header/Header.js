@@ -3,14 +3,17 @@ import { Switch, Route } from "react-router-dom";
 import HeaderContent from "./HeaderContent";
 import "./Header.css";
 import Context from "../Context";
-export default function Header({ openNav, loggedIn, clubLoaded }) {
+export default function Header({ loggedIn, clubLoaded }) {
   const {
     club: { name = "" },
   } = useContext(Context);
   const header = useRef();
   const resize = new ResizeObserver(([entry]) => {
     // different ResizeObserver implementations across browsers
-    const offset = entry?.borderBoxSize?.[0]?.blockSize || entry.borderBoxSize?.blockSize || entry.contentRect.height ;
+    const offset =
+      entry?.borderBoxSize?.[0]?.blockSize ||
+      entry.borderBoxSize?.blockSize ||
+      entry.contentRect.height;
     document.documentElement.style.setProperty(
       "--header-offset",
       `${offset}px`
@@ -36,7 +39,7 @@ export default function Header({ openNav, loggedIn, clubLoaded }) {
   if (!clubLoaded) {
     return (
       <div ref={header} className="Header">
-        <HeaderContent title="Canskate App" hideMenu={false} openNav={openNav}/>
+        <HeaderContent title="Canskate App" hideMenu={false} />
       </div>
     );
   }
@@ -45,59 +48,37 @@ export default function Header({ openNav, loggedIn, clubLoaded }) {
     <div ref={header} className="Header">
       <Switch>
         <Route path="/eval/skater/:skater_id">
-        <HeaderContent openNav={openNav} showFilter={true}/>
+          <HeaderContent showFilter={true} />
         </Route>
-        <Route path='/eval/session/:session_id/group/:group_id'>
-          <HeaderContent
-            title="Group Evaluation"
-            openNav={openNav}
-            showFilter={true}
-          />
+        <Route path="/eval/session/:session_id/group/:group_id">
+          <HeaderContent title="Group Evaluation" showFilter={true} />
         </Route>
-        <Route
-          path="/eval/element"
-        >
-          <HeaderContent
-            title="Club Evaluation"
-            openNav={openNav}
-            showFilter={true}
-          />
+        <Route path="/eval/element">
+          <HeaderContent title="Club Evaluation" showFilter={true} />
         </Route>
         <Route path="/eval">
-          <HeaderContent title="Evaluation" openNav={openNav} />
+          <HeaderContent title="Evaluation" />
         </Route>
         <Route path="/manage/skater">
-          <HeaderContent title="Skater Management" openNav={openNav} />
+          <HeaderContent title="Skater Management" />
         </Route>
         <Route path="/manage/session">
-          <HeaderContent title="Session Management" openNav={openNav} />
+          <HeaderContent title="Session Management" />
         </Route>
         <Route path="/manage">
-          <HeaderContent title="Management" openNav={openNav} />
+          <HeaderContent title="Management" />
         </Route>
         <Route path="/distribution">
-          <HeaderContent
-            title="Distribution"
-            openNav={openNav}
-            showFilter={true}
-          />
+          <HeaderContent title="Distribution" showFilter={true} />
         </Route>
         <Route path="/progress/skater/:skater_id">
-          <HeaderContent openNav={openNav} />
+          <HeaderContent />
         </Route>
         <Route path="/progress">
-          <HeaderContent
-            title="Progress"
-            openNav={openNav}
-            showFilter={false}
-          />
+          <HeaderContent title="Progress" showFilter={false} />
         </Route>
         <Route path="/">
-          <HeaderContent
-            title={name || "Canskate App"}
-            openNav={openNav}
-            showFilter={false}
-          />
+          <HeaderContent title={name || "Canskate App"} showFilter={false} />
         </Route>
       </Switch>
     </div>

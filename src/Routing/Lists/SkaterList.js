@@ -13,9 +13,7 @@ export default function SkaterList() {
   if (!skaters.length) {
     return (
       <div className="SkaterList">
-        <h2 className="heading" style={{ backgroundColor: "var(--red-light)" }}>
-          No skaters found
-        </h2>
+        <h2 className="heading error">No skaters found</h2>
         <br />
         <Link to="/manage/skater/add">Add skater?</Link>
       </div>

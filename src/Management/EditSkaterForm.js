@@ -4,7 +4,7 @@ import { skaterAPI } from "../API/skaterAPI";
 import { skaterSessionAPI } from "../API/skaterSessionAPI";
 import dayjs from "dayjs";
 import Context from "../Context";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import useSkaterFromParamId from "../Hooks/useSkaterFromParamId";
 import { CLUB_ACTIONS } from "../services/clubReducer";
 import TextInput from "../FormComponents/TextInput";
@@ -12,18 +12,16 @@ import DateInput from "../FormComponents/DateInput";
 import RadioSelector from "../FormComponents/RadioSelector";
 import SessionSelector from "../FormComponents/SessionSelector";
 import { useToast } from "../Hooks/useToast";
-import {useSessions} from '../Hooks/useSessions'
+import { useSessions } from "../Hooks/useSessions";
 import { useHistory } from "react-router-dom";
+import "./Form.css";
 
 export default function EditSkaterForm() {
   const toast = useToast();
   const skater = useSkaterFromParamId();
   const { push } = useHistory();
   const sessions = useSessions();
-  const {
-    skatersDispatch,
-    clubDispatch,
-  } = useContext(Context);
+  const { skatersDispatch, clubDispatch } = useContext(Context);
   const [fullName, setFullName] = useState({
     value: skater.fullname,
     error: false,
@@ -49,8 +47,7 @@ export default function EditSkaterForm() {
   if (!Object.entries(skater).length) {
     return (
       <>
-        <h2 className="heading">Skater not found</h2>
-        <br />
+        <h2 className="heading error">Skater not found</h2>
         <Link to="/manage/skater/edit">Go back?</Link>
       </>
     );
@@ -167,51 +164,55 @@ export default function EditSkaterForm() {
   }
 
   return (
-    <form className="SkaterForm" onSubmit={handleSubmit}>
-      <h2 className="heading">Edit Skater</h2>
-      <TextInput
-        id="fullname"
-        label="Full Name: "
-        value={fullName.value}
-        error={fullName.error}
-        onChange={(e) => setFullName({ error: false, value: e.target.value })}
-      />
-      <DateInput
-        id="birthdate"
-        label="Birthdate: "
-        value={birthdate.value}
-        error={birthdate.error}
-        onChange={(e) => setBirthdate({ error: false, value: e.target.value })}
-      />
-      <RadioSelector
-        name="gender"
-        options={[
-          { value: "Male", label: "Male" },
-          { value: "Female", label: "Female" },
-        ]}
-        error={gender.error}
-        propValue={gender.value}
-        onChange={(e) =>
-          setGender(() => ({ error: false, value: e.target.value }))
-        }
-      />
-      <SessionSelector
-        selectedSessions={selectedSessions.value}
-        addSession={addSession}
-        removeSession={removeSession}
-        setActionRemove={setSessionActionRemove}
-        setActionNull={setSessionActionNull}
-        error={selectedSessions.error}
-      />
+    <section className="Form">
+      <form onSubmit={handleSubmit}>
+        <h2 className="heading">Edit Skater</h2>
+        <TextInput
+          id="fullname"
+          label="Full Name: "
+          value={fullName.value}
+          error={fullName.error}
+          onChange={(e) => setFullName({ error: false, value: e.target.value })}
+        />
+        <DateInput
+          id="birthdate"
+          label="Birthdate: "
+          value={birthdate.value}
+          error={birthdate.error}
+          onChange={(e) =>
+            setBirthdate({ error: false, value: e.target.value })
+          }
+        />
+        <RadioSelector
+          name="gender"
+          options={[
+            { value: "Male", label: "Male" },
+            { value: "Female", label: "Female" },
+          ]}
+          error={gender.error}
+          propValue={gender.value}
+          onChange={(e) =>
+            setGender(() => ({ error: false, value: e.target.value }))
+          }
+        />
+        <SessionSelector
+          selectedSessions={selectedSessions.value}
+          addSession={addSession}
+          removeSession={removeSession}
+          setActionRemove={setSessionActionRemove}
+          setActionNull={setSessionActionNull}
+          error={selectedSessions.error}
+        />
 
-      <input type="submit" value="Submit" />
-      <button
-        type="button"
-        className="cancel"
-        onClick={() => push("/manage/skater/edit")}
-      >
-        Cancel
-      </button>
-    </form>
+        <input type="submit" value="Submit" />
+        <button
+          type="button"
+          className="cancel"
+          onClick={() => push("/manage/skater/edit")}
+        >
+          Cancel
+        </button>
+      </form>
+    </section>
   );
 }

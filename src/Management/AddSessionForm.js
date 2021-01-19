@@ -5,6 +5,7 @@ import { CLUB_ACTIONS } from "../services/clubReducer";
 import Context from "../Context";
 import { useToast } from "../Hooks/useToast";
 import { useHistory } from "react-router-dom";
+import "./Form.css";
 
 const colorOptions = [
   "Red",
@@ -29,7 +30,7 @@ const dayOptions = days.map((day) => (
 
 export default function SessionForm() {
   const toast = useToast();
-  const {push} = useHistory();
+  const { push } = useHistory();
   const { club, clubDispatch } = useContext(Context);
   const [startTime, setStartTime] = useState({ value: "", error: false });
   const [day, setDay] = useState({ value: "", error: false });
@@ -135,10 +136,9 @@ export default function SessionForm() {
     });
   }
   return (
-    <div className="SessionForm">
+    <section className="Form">
       <form onSubmit={handleSubmit}>
         <h2 className="heading">Add session</h2>
-        <br />
         <label htmlFor="day">Day: </label>
         <select
           id="day"
@@ -219,8 +219,14 @@ export default function SessionForm() {
           ))}
         </ul>
         <input type="submit" value="Submit" />
-        <button type='button' onClick={()=>push('/manage/session')} className='cancel'>Cancel</button>
+        <button
+          type="button"
+          onClick={() => push("/manage/session")}
+          className="cancel"
+        >
+          Cancel
+        </button>
       </form>
-    </div>
+    </section>
   );
 }

@@ -4,14 +4,13 @@
 
 .Main {
   position: relative;
-
   top: calc(var(--header-offset) + var(--filter-offset));
   height: calc(100vh - var(--header-offset) - var(--filter-offset));
-  padding-top:16px;
+  padding-top: 16px;
   overflow-y: auto;
 }
 
-
+/* animate top on pages that use filter */
 .filter .Main {
   transition: top calc(var(--time) / 2) linear;
 }

@@ -1,7 +1,7 @@
 import React from "react";
-import './GroupItem.css'
+import "./GroupItem.css";
 
-export default function GroupItem({ color, action, setAction}) {
+export default function GroupItem({ color, action, setAction }) {
   if (action === "create") {
     return (
       <li className="GroupItem">
@@ -14,15 +14,22 @@ export default function GroupItem({ color, action, setAction}) {
   }
 
   if (action === "delete") {
-    return <li className="GroupItem">
-      Remove {color} group <button type='button' onClick={setAction}>Cancel</button>
-    </li>;
+    return (
+      <li className="GroupItem">
+        Remove {color} group{" "}
+        <button type="button" onClick={setAction}>
+          Cancel
+        </button>
+      </li>
+    );
   }
 
   return (
     <li className="GroupItem">
       <span>{color} </span>
-      <button type='button' onClick={setAction}>X</button>
+      <button type="button" onClick={setAction}>
+        X
+      </button>
     </li>
   );
 }

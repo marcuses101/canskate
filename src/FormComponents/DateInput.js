@@ -1,5 +1,4 @@
 import React from "react";
-import "./DateInput.css";
 
 export default function DateInput({ id, label, value, error, onChange }) {
   return (

@@ -1,16 +1,13 @@
 import React, { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useClubLogout } from "../Hooks/useClubLogout";
+import { useLogout } from "../Hooks/useLogout";
 import "./SideNav.css";
 
-export default function SideNav({
-  open,
-  closeNav,
-  logout,
-  clubLogout,
-  clubLoaded,
-  username,
-}) {
+export default function SideNav({ open, closeNav, clubLoaded, username }) {
   const sidenav = useRef(null);
+  const logout = useLogout();
+  const clubLogout = useClubLogout();
 
   // close nav on click outside
   useEffect(() => {
@@ -34,6 +31,7 @@ export default function SideNav({
   return (
     <nav className={`SideNav ${open ? "open" : "closed"}`} ref={sidenav}>
       <ul className="links">
+        {/* hide links if club isn't loaded */}
         {clubLoaded && (
           <>
             <li onClick={closeNav}>
@@ -54,7 +52,7 @@ export default function SideNav({
           </>
         )}
         <li onClick={closeNav}>
-          <ul id='bottom-links'>
+          <ul id="bottom-links">
             {clubLoaded && (
               <li>
                 <button onClick={clubLogout}>Change club</button>
@@ -63,14 +61,16 @@ export default function SideNav({
             <li>
               <button onClick={logout}>Logout</button>
             </li>
-        <li>
-          <h5 className="heading" style={{ transitionDuration: "300ms" }}> {username}</h5>
-        </li>
+            <li>
+              {/* delay username changing color while sidenav is open*/}
+              <h5 className="heading" style={{ transitionDuration: "300ms" }}>
+                {" "}
+                {username}
+              </h5>
+            </li>
           </ul>
         </li>
       </ul>
-      {/* delay username changing color while sidenav */}
-
     </nav>
   );
 }

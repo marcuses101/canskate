@@ -6,7 +6,7 @@ export default function Progress() {
     <div className="Progress">
       <ul className="links">
         <li>
-          <Link to={`progres/skater`}>All Skaters</Link>
+          <Link to={`progress/skater`}>All Skaters</Link>
         </li>
       </ul>
     </div>

@@ -11,6 +11,7 @@ import SessionSelector from "../FormComponents/SessionSelector";
 import Context from "../Context";
 import { useToast } from "../Hooks/useToast";
 import { useHistory } from "react-router-dom";
+import "./Form.css";
 
 export default function SkaterForm() {
   const {
@@ -18,7 +19,7 @@ export default function SkaterForm() {
     clubDispatch,
     club: { sessions, id: club_id },
   } = useContext(Context);
-  const {push} = useHistory()
+  const { push } = useHistory();
   const toast = useToast();
 
   const [fullName, setFullName] = useState({ value: "", error: false });
@@ -114,43 +115,52 @@ export default function SkaterForm() {
   }
 
   return (
-    <form className="SkaterForm" onSubmit={handleSubmit}>
-      <h2 className='heading'>New Skater</h2>
-      <TextInput
-        id="fullname"
-        label="Full Name: "
-        value={fullName.value}
-        error={fullName.error}
-        onChange={(e) => setFullName({ error: false, value: e.target.value })}
-      />
-      <DateInput
-        id="birthdate"
-        label="Birthdate: "
-        value={birthdate.value}
-        error={birthdate.error}
-        onChange={(e) => setBirthdate({ error: false, value: e.target.value })}
-      />
-      <RadioSelector
-        name="gender"
-        options={[
-          { value: "Male", label: "Male" },
-          { value: "Female", label: "Female" },
-        ]}
-        error={gender.error}
-        propValue={gender.value}
-        onChange={(e) =>
-          setGender(() => ({ error: false, value: e.target.value }))
-        }
-      />
-      <SessionSelector
-        selectedSessions={selectedSessions.value}
-        addSession={addSession}
-        removeSession={removeSession}
-        error={selectedSessions.error}
-      />
-      <input type="submit" value="Submit" />
-      <button type='button' className='cancel' onClick={()=>push('/manage/skater')}>Cancel</button>
-
-    </form>
+    <section className="Form">
+      <form onSubmit={handleSubmit}>
+        <h2 className="heading">New Skater</h2>
+        <TextInput
+          id="fullname"
+          label="Full Name: "
+          value={fullName.value}
+          error={fullName.error}
+          onChange={(e) => setFullName({ error: false, value: e.target.value })}
+        />
+        <DateInput
+          id="birthdate"
+          label="Birthdate: "
+          value={birthdate.value}
+          error={birthdate.error}
+          onChange={(e) =>
+            setBirthdate({ error: false, value: e.target.value })
+          }
+        />
+        <RadioSelector
+          name="gender"
+          options={[
+            { value: "Male", label: "Male" },
+            { value: "Female", label: "Female" },
+          ]}
+          error={gender.error}
+          propValue={gender.value}
+          onChange={(e) =>
+            setGender(() => ({ error: false, value: e.target.value }))
+          }
+        />
+        <SessionSelector
+          selectedSessions={selectedSessions.value}
+          addSession={addSession}
+          removeSession={removeSession}
+          error={selectedSessions.error}
+        />
+        <input type="submit" value="Submit" />
+        <button
+          type="button"
+          className="cancel"
+          onClick={() => push("/manage/skater")}
+        >
+          Cancel
+        </button>
+      </form>
+    </section>
   );
 }

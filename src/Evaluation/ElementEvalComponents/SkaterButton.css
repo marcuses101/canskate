@@ -1,10 +1,10 @@
 .SkaterButton {
-  margin: .25rem;
-  box-shadow: 0 0 2px rgba(0,0,0,0.5);
-  padding: .25rem;
+  margin: 0.25rem;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  padding: 0.25rem;
 }
-.SkaterButton:hover{
-  cursor:pointer;
+.SkaterButton:hover {
+  cursor: pointer;
   transform: scale(1.01);
   background-color: var(--green-lighter);
 }

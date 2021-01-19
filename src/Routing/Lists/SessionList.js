@@ -19,7 +19,7 @@ export default function SessionList() {
   }
   return (
     <div className="SessionList">
-      <h2 className='heading'>Choose a session:</h2>
+      <h2 className="heading">Choose a session:</h2>
       <ul className="links">
         {Object.values(sessions).map((session) => {
           return (

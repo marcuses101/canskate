@@ -1,9 +1,9 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import Welcome from "../Main/Welcome";
-import "./Login.css";
+import Welcome from "./Welcome";
 import { userAPI } from "../API/userAPI";
 import { useToast } from "../Hooks/useToast";
+import "./Login.css";
 
 export default function Login({ setLoginState, setAppUsername }) {
   const toast = useToast();
@@ -27,14 +27,24 @@ export default function Login({ setLoginState, setAppUsername }) {
     }
   }
   return (
-    <div className="Login">
+    <section className="Login">
       <Welcome />
-      <button className="link" onClick={demoLogin}>
-        Try a demo
-      </button>
-      <h2 className="heading">Login</h2>
-      <Link to="/login">Login</Link>
-      <Link to="/new-user">New user</Link>
-    </div>
+      <article className="loginLinks">
+        <h2 className="heading">Login</h2>
+        <ul className="links">
+          <li>
+            <button className="link" onClick={demoLogin}>
+              Try a demo
+            </button>
+          </li>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+          <li>
+            <Link to="/new-user">New user</Link>
+          </li>
+        </ul>
+      </article>
+    </section>
   );
 }

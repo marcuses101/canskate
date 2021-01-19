@@ -1,15 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { MemoryRouter } from "react-router-dom";
-import SkaterEval from "./SkaterEval";
+import Welcome from "./Welcome";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
-  ReactDOM.render(
-    <MemoryRouter>
-      <SkaterEval />
-    </MemoryRouter>,
-    div
-  );
+  ReactDOM.render(<Welcome />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

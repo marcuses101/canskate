@@ -1,19 +1,19 @@
 .SideNav {
   box-sizing: border-box;
-  background-color:white;
+  background-color: white;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 5;
   height: 100vh;
-  width: min(213px,66vw);
+  width: min(213px, 66vw);
   border: 2px solid black;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
   transition: left 100ms ease;
 }
 
 .SideNav.closed {
-  left: calc(0px - min(213px,66vw));
+  left: calc(0px - min(213px, 66vw));
   box-shadow: none;
 }
 
@@ -32,21 +32,21 @@
   padding: 0.5rem;
 }
 
-.SideNav a{
-  padding: .5rem;
+.SideNav a {
+  padding: 0.5rem;
 }
 
 .SideNav li button {
   font-size: 1rem;
   box-shadow: var(--box-shadow);
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: var(--radius);
   border-style: none;
   width: 100%;
 }
 
-#bottom-links{
-  padding:0;
+#bottom-links {
+  padding: 0;
 }
 
 .SideNav li button:hover {
@@ -54,7 +54,7 @@
   transform: scale(1.01);
 }
 
+/* position logout and club change at the bottom of the sidenav */
 .SideNav ul li:last-child {
   margin-top: auto;
-  /* hide logout button for now */
 }

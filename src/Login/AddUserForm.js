@@ -6,7 +6,7 @@ import { userAPI } from "../API/userAPI";
 import "./AddUserForm.css";
 import { useHistory } from "react-router-dom";
 
-export default function AddUserForm({ setLoginState , setAppUsername }) {
+export default function AddUserForm({ setLoginState, setAppUsername }) {
   const { push } = useHistory();
   const [username, setUsername] = useState("");
   const [usernameError, setUsernameError] = useState(false);
@@ -47,12 +47,12 @@ export default function AddUserForm({ setLoginState , setAppUsername }) {
     e.preventDefault();
     if (!validateForm()) return;
     try {
-      await userAPI.addUser({ username, password});
+      await userAPI.addUser({ username, password });
       const jwt = await userAPI.submitLogin({ username, password });
       localStorage.setItem("jwt", JSON.stringify(jwt));
-      localStorage.setItem('username', JSON.stringify(username))
+      localStorage.setItem("username", JSON.stringify(username));
       setLoginState((state) => ({ ...state, loggedIn: true }));
-      setAppUsername('username')
+      setAppUsername("username");
       push("/");
     } catch (error) {
       console.error(error);
@@ -65,7 +65,7 @@ export default function AddUserForm({ setLoginState , setAppUsername }) {
         <h2 className="heading">Create New User</h2>
         <TextInput
           label="Username"
-          max='15'
+          max="15"
           id="username"
           value={username}
           error={usernameError}
@@ -95,7 +95,9 @@ export default function AddUserForm({ setLoginState , setAppUsername }) {
           }}
         />
         <input type="submit" value="Create New User" />
-        <button className='cancel' onClick={()=>push('/')}>Cancel</button>
+        <button className="cancel" onClick={() => push("/")}>
+          Cancel
+        </button>
       </form>
     </div>
   );

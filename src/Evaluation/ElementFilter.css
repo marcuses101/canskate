@@ -1,4 +1,4 @@
-.filterOptions{
+.filterOptions {
   background-color: white;
 }
 
@@ -17,8 +17,8 @@
   text-align: center;
 }
 
-.filterOptions ul.badgeOption li{
-  padding: .25rem;
+.filterOptions ul.badgeOption li {
+  padding: 0.25rem;
 }
 .filterOptions .badgeCircle {
   margin: 0;
@@ -28,7 +28,7 @@
 }
 
 .filterOptions .badgeCircle {
-  color: black
+  color: black;
 }
 
 .filterOptions .active .badgeCircle {
@@ -39,41 +39,47 @@
   background-color: var(--badge-one);
   font-weight: bold;
 }
-.filterOptions .two.active .badgeCircle{
+.filterOptions .two.active .badgeCircle {
   background-color: var(--badge-two);
   font-weight: bold;
 }
-.filterOptions .three.active .badgeCircle{
+.filterOptions .three.active .badgeCircle {
   background-color: var(--badge-three);
   font-weight: bold;
 }
 
-.filterOptions .four.active .badgeCircle{
+.filterOptions .four.active .badgeCircle {
   background-color: var(--badge-four);
   font-weight: bold;
 }
-.filterOptions .five.active .badgeCircle{
+.filterOptions .five.active .badgeCircle {
   background-color: var(--badge-five);
   font-weight: bold;
 }
-.filterOptions .six.active .badgeCircle{
+.filterOptions .six.active .badgeCircle {
   background-color: var(--badge-six);
   font-weight: bold;
 }
 
-.filterOptions .balance{
-  background-color: var(--green-light);
+.filterOptions .balance {
+  background-color: var(--Balance);
   font-weight: bold;
+  color: white;
+  text-shadow: var(--text-shadow);
 }
-.filterOptions .control{
-  background-color: var(--red);
+.filterOptions .control {
+  background-color: var(--Control);
   font-weight: bold;
+  color: white;
+  text-shadow: var(--text-shadow);
 }
-.filterOptions .agility{
-  background-color: var(--blue-light);
+.filterOptions .agility {
+  background-color: var(--Agility);
   font-weight: bold;
+  color: white;
+  text-shadow: var(--text-shadow);
 }
-.filterOptions ul li:hover{
+.filterOptions ul li:hover {
   filter: brightness(125%);
   cursor: pointer;
 }

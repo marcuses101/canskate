@@ -11,11 +11,7 @@ const numberWords = {
   6: "six",
 };
 
-export default function BadgeSection({
-  badge,
-  fundamentals = [],
-  elements,
-}) {
+export default function BadgeSection({ badge, fundamentals = [], elements }) {
   return (
     <section className="BadgeSection">
       <header className="BadgeSectionHeader">

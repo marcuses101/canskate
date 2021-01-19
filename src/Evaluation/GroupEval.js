@@ -12,10 +12,7 @@ export default function GroupEval() {
   if (!group || !session)
     return (
       <>
-        <h2 className="heading" style={{ backgroundColor: "var(--red-light)" }}>
-          Group not found
-        </h2>
-        <br />
+        <h2 className="heading error">Group not found</h2>
         <Link to="/">Return Home</Link>
       </>
     );

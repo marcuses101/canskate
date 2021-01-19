@@ -1,10 +1,11 @@
-import {useContext} from 'react'
-import Context from '../Context'
+import { useContext } from "react";
+import Context from "../Context";
 
-export function useRibbonById (){
-  const {ribbons} = useContext(Context);
+export function useRibbonById() {
+  const { ribbons } = useContext(Context);
   return function (ribbonId) {
-  return  ribbons.find(ribbon=>{
-     return  ribbon.id===ribbonId})
-  }
+    return ribbons.find((ribbon) => {
+      return ribbon.id === ribbonId;
+    });
+  };
 }

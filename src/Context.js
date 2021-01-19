@@ -1,16 +1,19 @@
-import React from 'react'
+import React from "react";
 
 const Context = React.createContext({
   club: {},
-  clubDispatch(){},
-  elements:[],
-  checkmarks:[],
-  badges:[],
-  ribbons:[],
-  SKATER_ACTIONS:{},
-  skatersDispatch(){},
-  setIsFilterOpen(){},
+  clubDispatch() {},
+  elements: [],
+  checkmarks: [],
+  badges: [],
+  ribbons: [],
+  skatersDispatch() {},
+  setIsFilterOpen() {},
   isFilterOpen: false,
-})
+  setIsNavOpen() {},
+  setLoginState() {},
+  setClubList() {},
+  setUsername() {},
+});
 
 export default Context;

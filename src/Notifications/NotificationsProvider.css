@@ -3,21 +3,21 @@
   bottom: 3em;
   left: 0;
   right: 0;
-  z-index: 5
+  z-index: 5;
 }
 
 .notification-item {
   width: fit-content;
   margin-top: 1rem;
-  margin-left:auto;
-  margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 5px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
   overflow-x: hidden;
 }
 
-.blur .notification-item{
-  filter: blur(1px) saturate(25%)
+.blur .notification-item {
+  filter: blur(1px) saturate(25%);
 }
 
 .notification-item p {
@@ -50,4 +50,3 @@
   color: white;
   background-color: var(--red);
 }
-

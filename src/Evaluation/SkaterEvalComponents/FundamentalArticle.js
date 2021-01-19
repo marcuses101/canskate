@@ -7,7 +7,11 @@ import {
   SwitchTransition,
 } from "react-transition-group";
 
-export default function FundamentalArticle({ fundamental, badge, elements = [] }) {
+export default function FundamentalArticle({
+  fundamental,
+  badge,
+  elements = [],
+}) {
   const duration = 250;
 
   const defaultStyle = {
@@ -25,7 +29,10 @@ export default function FundamentalArticle({ fundamental, badge, elements = [] }
 
   return (
     <article className="FundamentalArticle">
-      <header className='ribbonHeader' style={{ backgroundColor: `var(--${fundamental})` }}>
+      <header
+        className="ribbonHeader"
+        style={{ backgroundColor: `var(--${fundamental})` }}
+      >
         <h4>{`${fundamental} ${badge}`}</h4>
       </header>
       <SwitchTransition>
@@ -60,9 +67,9 @@ export default function FundamentalArticle({ fundamental, badge, elements = [] }
                   ...defaultStyle,
                   ...transitionStyles[state],
                   height: "84px",
-                  display:'flex',
-                  alignItems:'center',
-                  justifyContent: 'center'
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
                 All ribbon elements complete!

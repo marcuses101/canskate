@@ -1,6 +1,7 @@
 .GroupItem {
   margin: auto;
   text-align: center;
+  margin: 0.25rem auto;
   max-width: 50%;
   display: flex;
   justify-content: space-between;

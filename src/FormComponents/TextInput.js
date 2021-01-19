@@ -4,7 +4,7 @@ import "./TextInput.css";
 export default function TextInput({ id, label, max, value, error, onChange }) {
   return (
     <>
-      <div className={`TextInput ${error && "error"}`}>
+      <div className={`TextInput`}>
         <label className={value && "scale"} htmlFor={id}>
           {label}
         </label>

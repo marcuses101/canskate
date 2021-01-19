@@ -8,7 +8,7 @@
   top: 1rem;
 }
 
-.TextInput .error-icon{
+.TextInput .error-icon {
   padding-left: 1rem;
 }
 
@@ -44,8 +44,8 @@
   transform: translateY(0.7rem);
   transition: transform 400ms;
 }
-.TextInput:focus-within label, .TextInput .scale
- {
+.TextInput:focus-within label,
+.TextInput .scale {
   transform: scale(0.8) translateY(-1.5rem);
 }
 
@@ -67,7 +67,7 @@
 }
 
 .TextInput.error::after {
-  background-color:var(--red)
+  background-color: var(--red);
 }
 
 .TextInput:focus-within {

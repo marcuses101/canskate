@@ -1,5 +1,5 @@
 import React from "react";
-import ElementFundamentals from './ElementFundamentals'
+import ElementFundamentals from "./ElementFundamentals";
 import "./BadgeSection.css";
 
 const numberWords = {
@@ -14,7 +14,7 @@ const numberWords = {
 export default function BadgeSection({ badge, fundamentals, elements }) {
   return (
     <section className="BadgeSection">
-      <header className='BadgeSectionHeader'>
+      <header className="BadgeSectionHeader">
         <h3>Badge </h3>
         <div
           className="badgeCircle"

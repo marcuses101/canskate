@@ -15,7 +15,7 @@ export default function ManageSession() {
           <Link to={`${path}/edit`}>Edit Session</Link>
         </li>
         <li>
-          <Link to={`${path}/assign`}>Assign Skaters to groups</Link>
+          <Link to={`${path}/assign`}>Assign Skaters to Groups</Link>
         </li>
       </ul>
     </div>

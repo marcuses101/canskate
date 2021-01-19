@@ -9,12 +9,12 @@ export default function FundamentalArticle({
 }) {
   return (
     <article className="ElementFundamentals">
-      <header
+      <h4
         className="ribbonHeader"
         style={{ backgroundColor: `var(--${fundamental})` }}
       >
-        <h4>{`${fundamental} ${badge}`}</h4>
-      </header>
+        {`${fundamental} ${badge}`}
+      </h4>
 
       {elements.length ? (
         elements.map((element) => (

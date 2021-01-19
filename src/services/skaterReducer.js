@@ -8,7 +8,7 @@ const SKATER_ACTIONS = {
   COMPLETE_CHECKMARK: "complete_checkmark",
   COMPLETE_RIBBON: "complete_ribbon",
   COMPLETE_BADGE: "complete_badge",
-  LOGOUT: 'logout'
+  LOGOUT: "logout",
 };
 
 function skatersReducer(state, action) {
@@ -17,7 +17,7 @@ function skatersReducer(state, action) {
       return action.payload;
     }
     case SKATER_ACTIONS.LOGOUT: {
-      return []
+      return [];
     }
 
     case SKATER_ACTIONS.ADD_SKATER: {

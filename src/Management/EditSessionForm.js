@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { CLUB_ACTIONS } from "../services/clubReducer";
 import { sessionAPI } from "../API/sessionAPI";
-import {Link, useHistory} from 'react-router-dom'
+import { Link, useHistory } from "react-router-dom";
 import { groupAPI } from "../API/groupAPI";
 import GroupItem from "./GroupItem";
 import Context from "../Context";
@@ -9,6 +9,7 @@ import { useSessionFromParamId } from "../Hooks/useSessionFromParamId";
 import { useSessionGroups } from "../Hooks/useSessionGroups";
 import { useGroups } from "../Hooks/useGroups";
 import { useToast } from "../Hooks/useToast";
+import "./Form.css";
 
 const colorOptions = [
   "Red",
@@ -30,7 +31,7 @@ function setError(obj) {
 
 export default function EditSessionForm() {
   const toast = useToast();
-  const {push} = useHistory();
+  const { push } = useHistory();
   const session = useSessionFromParamId();
   const sessionGroups = useSessionGroups(session?.id);
   const allGroups = useGroups();
@@ -53,22 +54,23 @@ export default function EditSessionForm() {
       0
     ) + 1
   );
-  const groupColors = groups.value.map((group) => group.group_color);
   const { clubDispatch } = useContext(Context);
 
+  const groupColors = groups.value.map((group) => group.group_color);
   const dayOptions = days.map((day) => (
     <option value={day} key={day}>
       {day}
     </option>
   ));
 
-  if(!Object.entries(session).length){
+  if (!Object.entries(session).length) {
     return (
       <>
-  <h2 className='heading'>Session not found</h2><br/>
-      <Link to='/manage/session/edit'>Go back?</Link>
+        <h2 className="heading">Session not found</h2>
+        <br />
+        <Link to="/manage/session/edit">Go back?</Link>
       </>
-    )
+    );
   }
 
   async function handleSubmit(e) {
@@ -200,9 +202,9 @@ export default function EditSessionForm() {
   }
 
   return (
-    <div className="SessionForm">
+    <section className="Form">
       <form onSubmit={handleSubmit}>
-        <h2 className='heading'>Edit Session</h2><br/>
+        <h2 className="heading">Edit Session</h2>
         <label htmlFor="day">Day: </label>
         <select
           id="day"
@@ -247,7 +249,7 @@ export default function EditSessionForm() {
           <i className="fas fa-exclamation-triangle error-icon"></i>
         )}
         <br />
-        <label htmlFor="group">Add a group</label>
+        <label htmlFor="group">Add a group </label>
         <select name="group" id="group" onChange={handleSelect}>
           {[
             <option key="" value={null}>
@@ -276,9 +278,14 @@ export default function EditSessionForm() {
           ))}
         </ul>
         <input type="submit" value="Submit" />
-        <button type='button' onClick={()=>push('/manage/session')} className='cancel'>Cancel</button>
-
+        <button
+          type="button"
+          onClick={() => push("/manage/session")}
+          className="cancel"
+        >
+          Cancel
+        </button>
       </form>
-    </div>
+    </section>
   );
 }

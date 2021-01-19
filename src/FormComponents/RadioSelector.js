@@ -1,5 +1,5 @@
 import React from "react";
-import './RadioSelector.css'
+import "./RadioSelector.css";
 
 export default function RadioSelector({
   name,
@@ -10,10 +10,11 @@ export default function RadioSelector({
 }) {
   return (
     <div className="RadioSelector">
-      <div className="inputs">
+      <fieldset className="inputs">
+        <legend>Gender:</legend>
         {options?.map(({ value, label }) => {
           return (
-            <div className='radioOption' key={value}>
+            <div className="radioOption" key={value}>
               <label htmlFor={value}>{label}</label>
               <input
                 type="radio"
@@ -26,8 +27,8 @@ export default function RadioSelector({
             </div>
           );
         })}
-      </div>
-        {error && <i className="fas fa-exclamation-triangle error-icon"></i>}
+      </fieldset>
+      {error && <i className="fas fa-exclamation-triangle error-icon"></i>}
     </div>
   );
 }

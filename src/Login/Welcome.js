@@ -1,12 +1,12 @@
 import React from "react";
-import "./Welcome.css";
 
 export default function Welcome() {
   return (
-    <div className="Welcome">
+    <article className="Welcome">
       <h2 className="heading">What is it?</h2>
       <p>
-        This application is designed to make managing the CanSkate program a breeze.
+        This application is designed to make managing the CanSkate program a
+        breeze.
       </p>
       <p>
         The main feature is the evaluation tool. You can evaluate by skater, by
@@ -21,6 +21,6 @@ export default function Welcome() {
         skater's individual progress sheet is updated, and the ribbon/badge is
         added to a list of items to distribute.{" "}
       </p>
-    </div>
+    </article>
   );
 }

@@ -30,10 +30,12 @@ const elementObjectShape = {
   6: { Balance: [], Control: [], Agility: [] },
 };
 
-export default function ElementEval({groupSkaters}) {
+export default function ElementEval({ groupSkaters }) {
   const { elements } = useContext(Context);
   const clubSkaters = useClubSkaters();
-  const skaters = (groupSkaters || clubSkaters).sort((a,b)=>a.fullname>b.fullname?1:-1);
+  const skaters = (groupSkaters || clubSkaters).sort((a, b) =>
+    a.fullname > b.fullname ? 1 : -1
+  );
   const [fundamentalFilter, setFundamentalFilter] = useState(
     fundamentalOptions
   );
@@ -53,12 +55,8 @@ export default function ElementEval({groupSkaters}) {
     }));
   }
 
-
   const elementObject = elements.reduce((obj, element) => {
-    if (
-      !fundamentalFilter[element.fundamental] ||
-      !badgeFilter[element.badge]
-    )
+    if (!fundamentalFilter[element.fundamental] || !badgeFilter[element.badge])
       return obj;
     return {
       ...obj,
@@ -66,7 +64,15 @@ export default function ElementEval({groupSkaters}) {
         ...obj[element.badge],
         [element.fundamental]: [
           ...obj[element.badge][element.fundamental],
-          {...element,skaters: skaters.filter(skater=>!skater.elementLog.find(log=>log.element_id===element.element_id))},
+          {
+            ...element,
+            skaters: skaters.filter(
+              (skater) =>
+                !skater?.elementLog.find(
+                  (log) => log.element_id === element.element_id
+                )
+            ),
+          },
         ],
       },
     };

@@ -1,14 +1,16 @@
-.FilterContainer >  *{
-  width:100%;
-  position:fixed;
+.FilterContainer > * {
+  width: 100%;
+  position: fixed;
   top: var(--header-offset);
-  z-index:1;
+  z-index: 1;
 }
-.blur .FilterContainer > * > *{
-  filter: blur(1px) saturate(25%)
+.blur .FilterContainer > * > * {
+  filter: blur(1px) saturate(25%);
 }
+
+/* react-transition-group CSS classes */
 .FilterContainer > .slide-enter {
-  top: -22px
+  top: -69px;
 }
 
 .FilterContainer > .slide-enter-active {

@@ -1,13 +1,13 @@
 .DistributionItem {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  padding: .25rem;
-  gap:10px;
+  padding: 0.25rem;
+  gap: 10px;
   text-align: left;
 }
-.DistributionItem:first-child{
+.DistributionItem:first-child {
   align-items: end;
-  padding-bottom: .5rem;
-  font-weight:bold;
-  margin-bottom: .5rem;
+  padding-bottom: 0.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }

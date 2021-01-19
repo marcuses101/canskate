@@ -14,24 +14,21 @@
   align-items: center;
   flex: 1;
 }
-.DistributionFilter span:first-child{
-  border-right: 2px solid black
+.DistributionFilter span:first-child {
+  border-right: 2px solid black;
 }
 
-.DistributionFilter span{
+.DistributionFilter span {
   background-color: rgb(216, 215, 215);
-  transition: 100ms ease
+  transition: 100ms ease;
 }
 
 .DistributionFilter span.active {
   background-color: var(--green-light);
-  font-weight:bolder;
+  font-weight: bolder;
 }
 
 .DistributionFilter span:hover {
-  cursor:pointer;
+  cursor: pointer;
   filter: brightness(125%) saturate(125%);
 }
-
-
-

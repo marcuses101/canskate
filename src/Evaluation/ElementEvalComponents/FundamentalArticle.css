@@ -1,11 +1,7 @@
-.ElementFundamentals {
-  overflow: hidden;
-}
-
 .ElementFundamentals .ribbonHeader {
-  width:50%;
+  width: 50%;
   color: white;
-  font-size:1.2rem;
+  font-size: 1.2rem;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.65);
   height: 3rem;
 }

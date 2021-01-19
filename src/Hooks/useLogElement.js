@@ -4,6 +4,8 @@ import Context from "../Context";
 import { SKATER_ACTIONS } from "../services/skaterReducer";
 import { useToast } from "./useToast";
 
+// logs an element as complete.
+// Checks requirements for checkmark, ribbon, and badge and logs as complete if necessary.
 export function useLogElement(skater_id, element_id) {
   const {
     skaters = [],
@@ -14,8 +16,9 @@ export function useLogElement(skater_id, element_id) {
   } = useContext(Context);
   const toast = useToast();
   const skater = skaters.find((skater) => skater.id === skater_id);
-  const element = elements.find((element) => element.element_id === element_id) || {};
-  const { checkmark_id = null, ribbon_id = null, badge = null} = element;
+  const element =
+    elements.find((element) => element.element_id === element_id) || {};
+  const { checkmark_id = null, ribbon_id = null, badge = null } = element;
   return async function () {
     try {
       const elementRegex = new RegExp(element.checkmark_id + "\\d");

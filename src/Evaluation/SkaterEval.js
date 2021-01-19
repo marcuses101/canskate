@@ -45,10 +45,7 @@ export default function SkaterEval() {
   if (!completedElements) {
     return (
       <>
-        <h2 className="heading" style={{ backgroundColor: "var(--red-light)" }}>
-          Skater not found
-        </h2>
-        <br></br>
+        <h2 className="heading error">Skater not found</h2>
         <Link to="/eval/skater">Go back?</Link>
       </>
     );
@@ -95,7 +92,7 @@ export default function SkaterEval() {
   );
   return (
     <>
-    <h2 className="heading">Evaluation</h2><br/>
+      <h2 className="heading">Evaluation</h2>
       <Link to={`/progress/skater/${id}`}>Go to progress page</Link>
       <div className="Eval">
         <FilterContainer>

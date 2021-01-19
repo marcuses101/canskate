@@ -1,24 +1,23 @@
-import React, {useEffect, useRef, useContext} from "react"
-import Context from '../Context'
+import React, { useLayoutEffect, useRef, useContext } from "react";
+import Context from "../Context";
 
- export default function Resize(props){
+export default function Resize(props) {
   const filter = useRef(null);
   const { isFilterOpen } = useContext(Context);
 
-  useEffect(()=>{
+  useLayoutEffect(() => {
     if (isFilterOpen && filter.current) {
       const offset = filter.current.offsetHeight;
       document.documentElement.style.setProperty(
-              "--filter-offset",
-              `${offset}px`
-            );
+        "--filter-offset",
+        `${offset}px`
+      );
     }
-  },[isFilterOpen])
+  }, [isFilterOpen]);
 
-
-   return (
-     <div ref={filter} className="Resize">
+  return (
+    <div ref={filter} className="Resize">
       {props.children}
-     </div>
-   )
- }
+    </div>
+  );
+}

@@ -8,7 +8,7 @@ export const skaterGroupAPI = {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({skater_id, group_id}),
+      body: JSON.stringify({ skater_id, group_id }),
     });
     if (!response.ok) throw new Error(response.statusText);
     const responseData = await response.json();
@@ -20,7 +20,7 @@ export const skaterGroupAPI = {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({skater_id, group_id, new_group_id}),
+      body: JSON.stringify({ skater_id, group_id, new_group_id }),
     });
     if (!response.ok) throw new Error(response.statusText);
     const responseData = await response.json();
