@@ -43,6 +43,7 @@ export default function AddClubForm({ setClubList }) {
           onChange={(e) => setName(e.target.value)}
         />
         <input type="submit" value="Create Club" />
+        <button type="button" className='cancel' onClick={()=>push('/')}>Cancel</button>
       </form>
     </section>
   );
