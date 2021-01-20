@@ -3,6 +3,6 @@
   flex-wrap: wrap;
   justify-content: center;
 }
-.ReportCard > div {
+.ReportCard > article {
   max-width: 600px;
 }

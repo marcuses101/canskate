@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import dayjs from "dayjs";
 import Context from "../../Context";
-import ReportBadgeComponent from "./ReportBadgeComponent";
-import './ReportCard.css'
+import ReportBadge from "./ReportBadge";
+import "./ReportCard.css";
 const badges = [1, 2, 3, 4, 5, 6];
 
 export default function ReportCard({ skater }) {
@@ -20,8 +20,8 @@ export default function ReportCard({ skater }) {
     return {
       ...ribbon,
       date:
-        skater.ribbonLog.find((entry) => entry.ribbon_id === ribbon.id)?.date_completed ||
-        null,
+        skater.ribbonLog.find((entry) => entry.ribbon_id === ribbon.id)
+          ?.date_completed || null,
     };
   });
 
@@ -45,9 +45,8 @@ export default function ReportCard({ skater }) {
   });
 
   const reportBadges = skaterBadges.map((badge) => {
-
     return (
-      <ReportBadgeComponent
+      <ReportBadge
         key={badge.badge_id}
         badge={badge.badge_id}
         date={badge.date ? dayjs(badge.date).format("DD/MM/YYYY") : null}
