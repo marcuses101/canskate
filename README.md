@@ -29,7 +29,7 @@ If you choose to create a new club enter the name of the club, submit, then sele
 
 ### **Sessions**
 
-The first thing to do once you've created your new club is to add a session. Navigate from the Side menu to **Manage>Manage Sessions>Add Session**. If you are setting up the club for the first time there will be a link directly to **Add Session**. Fill in the necessary info and submit to create the session. To edit details of the session navigate to **Manage>Manage Sessions>Add Session**.  
+The first thing to do once you've created your new club is to add a session. Navigate from the side menu to **Manage>Manage Sessions>Add Session**. If you are setting up the club for the first time there will be a link directly to **Add Session**. Fill in the necessary info and submit to create the session. To edit details of the session navigate to **Manage>Manage Sessions>Add Session**.  
 ![Add Session](./gifs/add-session.gif)
 
 ---
@@ -52,8 +52,7 @@ To add a skater to a group navigate to **Manage>Manage Sessions>Assign Skaters t
 
 ### **Evaluate by skater**
 
-Navigate to **Evaluate>Skater** then choose the individual you'd like to evaluate from the list.
-This view shows all of the elements the skater has yet to complete. There are filter options for the badge and fundamental areas (Balance, Control, Agility). Click on the **Progress** link near the top of the page to view elements, ribbons and badges that have already been completed, with their date of completion. Clicking on the elements marks them as complete. If the skater completed the elements necessary for a ribbon or badge it is also logged as complete, and is added to the Distribution list.  
+Navigate to **Evaluate>Skater** then choose the individual you'd like to evaluate from the list. You have the option to filter skaters by name. This view shows all of the elements the skater has yet to complete. There are filter options for the badge and fundamental areas (Balance, Control, Agility). Click on the **Progress** link near the top of the page to view elements, ribbons and badges that have already been completed, with their date of completion. Clicking on the elements marks them as complete. If the skater completed the elements necessary for a ribbon or badge it is also logged as complete, and is added to the Distribution list.  
 ![Evaluate skater](./gifs/eval-skater.gif)  
 **Evaluate Skater**
 
@@ -75,7 +74,7 @@ Navigate to **Evaluate>Group** then select the session then the group you want t
 
 ### **Progress**
 
-Navigate to **Progress**. Choose a skater to view their progress page. Displays the date when the element was completed.
+Navigate to **Progress**. Choose a skater to view their progress page. This page show what elements, ribbons, and badges the skater has completed as well as the date of completion.
 
 ---
 
