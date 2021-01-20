@@ -1,6 +1,6 @@
 # CanSkate App
 
-<a href="https://canskate.vercel.app" target="_blank">Live App</a>
+<a href="https://canskate.vercel.app" target="_blank">Live App</a>  
 <a href="https://github.com/marcuses101/canskate-server" target="_blank">Server Repo</a>
 
 ## Description
