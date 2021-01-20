@@ -107,7 +107,7 @@ ul {
 form {
   margin: 1rem auto;
   padding: 1rem 1rem 2rem 1rem;
-  width: 500px;
+  width: min(500px,99%);
   border-radius: var(--radius);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
