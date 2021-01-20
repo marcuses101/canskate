@@ -1,8 +1,11 @@
 # CanSkate App
 
+[Live App](https://canskate.vercel.app)  
+[Server Repo](https://github.com/marcuses101/canskate-server)  
+
 ## Description
 
-There are A LOT of things to track when organizing a Skate Canada CanSkate Program. Sessions, groups, skaters, badges, catagories, dates, etc. This web app aims to automate as many of the repetitive tasks as possible, allowing coaches to focus on what really matters: helping their students improve.
+There are A LOT of things to track when organizing a [Skate Canada CanSkate Program](https://skatecanada.ca/learn-to-skate/canskate/). Sessions, groups, skaters, badges, catagories, dates, etc. This web app aims to automate as many of the repetitive tasks as possible, allowing coaches to focus on what really matters: helping their students improve.
 
 ## How to use
 
@@ -86,9 +89,10 @@ Displays a list of completed badges and ribbons. Optionally filter by whether th
 
 ## Tech
 
+- HTML
+- CSS
+- JavaScript
 - React.js
-- Node/Express servers
-- Postgres database
 
 ---
 
