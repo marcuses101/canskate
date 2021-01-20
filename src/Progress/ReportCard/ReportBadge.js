@@ -15,7 +15,6 @@ export default function ReportBadge({ badge, date, ribbons, ...rest }) {
   const badgeRibbons = ribbons?.filter((ribbon) => {
     return ribbon.stage === badge;
   });
-  console.log({ date });
   return (
     <article className="ReportBadge">
       <header>
