@@ -5,7 +5,7 @@
 
 ## Description
 
-There are A LOT of things to track when organizing a [Skate Canada CanSkate Program](https://skatecanada.ca/learn-to-skate/canskate/). Sessions, groups, skaters, badges, catagories, dates, etc. This web app aims to automate as many of the repetitive tasks as possible, allowing coaches to focus on what really matters: helping their students improve.
+There are A LOT of things to track when organizing a [Skate Canada CanSkate Program](https://skatecanada.ca/learn-to-skate/canskate/). Sessions, groups, skaters, badges, categories, dates, etc. This web app aims to automate as many of the repetitive tasks as possible, allowing coaches to focus on what really matters: helping their students improve.
 
 ## How to use
 
