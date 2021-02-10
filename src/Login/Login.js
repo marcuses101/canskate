@@ -9,6 +9,7 @@ export default function Login({ setLoginState, setAppUsername }) {
   const toast = useToast();
   const { push } = useHistory();
   async function demoLogin() {
+    toast({ message: "Logging in", type: "success" });
     try {
       const username = "demo";
       const jwt = await userAPI.submitLogin({
